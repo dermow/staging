@@ -1,0 +1,27 @@
+title: der-mow.de
+author:
+  name: dermow
+  email: s.seibold@posteo.de
+
+show_excerpts: true # set to true to show excerpts on the homepage
+google_analytics: false
+
+disqus:
+  shortname: der-mow
+  url: https://der-mow.de
+
+minima:
+  date_format: "%b %-d, %Y"
+
+  # generate social links in footer
+  social_links:
+    twitter: jekyllrb
+    github: jekyll
+
+# Build settings
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
