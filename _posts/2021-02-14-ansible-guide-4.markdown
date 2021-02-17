@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #004 - Playbooks, Tasks und Handler"
-date:   2021-02-14 16:01:42 +0100
+date:   2021-02-17 10:01:42 +0100
 categories: Ansible
 ---
 
