@@ -551,7 +551,7 @@ Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart 
 
 Im nächsten Teil möchte ich euch zeigen, wie man Werte in Variablen verpackt, und diese an verschiedenen Stellen definieren kann und versuche gleichzeitig euch noch ein paar weitere nützliche Module vorzustellen.
 
-Aus eigener Erfahrung kann ich euch dringend empfehlen, das alles einfach selbst auszuprobieren und zu versuchen, das Gelernte auf eigenen Anwendungsfälle zu übertragen. So lernt es sich am besten :)
+Aus eigener Erfahrung kann ich euch dringend empfehlen, das alles einfach selbst auszuprobieren und zu versuchen, das Gelernte auf eigene Anwendungsfälle zu übertragen. So lernt es sich am besten :)
 
 Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
 
