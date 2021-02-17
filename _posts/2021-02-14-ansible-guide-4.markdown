@@ -5,7 +5,7 @@ date:   2021-02-17 10:01:42 +0100
 categories: Ansible
 ---
 
-Wilkommen zurück, in diesem Teil werden wir einige wichtige Bestandteile von Ansible näher kennenlernen. 
+Wilkommen zurück zur Ansible Starter-Guide. In diesem Teil des Tutorials will ich versuchen, euch den Umgang mit Tasks und Playbooks näher zu bringen. Auch möchte ich euch zeigen, was Handler sind und wie wir diese einsetzen.
 
 ## Playbooks
 
