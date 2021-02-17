@@ -360,7 +360,7 @@ Alternativ könnt ihr die IP natürlich auch über den Browser eurer Wahl aufruf
 
 ## Handler
 
-Wir haben jetzt also unseren Webserver und eine Datenbank installiert. Weiter haben wir eigenen Inhalt auf unsere Webserver ausgeliefert. Zum Abschluss möchte ich euch noch zeigen, wie wir auch die Apache Konfigurationsdatei über Ansible verwalten können. Dabei wollen wir den Webserver bei Änderungen an dieser (und nur dann!) neu starten. Dafür gibt es Handler.
+Wir haben jetzt also unseren Webserver und eine Datenbank installiert. Weiter haben wir eigenen Inhalt an unsere Webserver ausgeliefert. Zum Abschluss möchte ich euch noch zeigen, wie wir auch die Apache Konfigurationsdatei über Ansible verwalten können. Dabei wollen wir den Webserver bei Änderungen an dieser (und nur dann!) neu starten. Dafür gibt es Handler.
 
 Wir legen uns die Apache-Konfiguration also wieder auf dem Ansible-Controller ab. Dafür habe ich mir von einem der Test-Hosts einfach den Inhalt von /etc/apache2/apache2.conf kopiert und die Kommentarzeilen etwas reduziert, um das Ganze etwas übersichtlicher zu machen.
 
@@ -549,7 +549,7 @@ Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart 
 
 ## Das wars schon wieder!
 
-Im nächsten Teil möchte ich euch zeigen, wie man Werte in Variablen verpackt, und diese an verschiedenen Stellen definieren kann und versuche gleichzeitig euch noch ein paar weitere nützliche Module vorzustellen.
+Im nächsten Teil möchte ich euch zeigen, wie man Werte in Variablen verpackt, und an welchen verschiedenen Stellen man diese definieren kann. Dabei stelle ich euch direkt noch einige weitere nützliche Module vor!
 
 Aus eigener Erfahrung kann ich euch dringend empfehlen, das alles einfach selbst auszuprobieren und zu versuchen, das Gelernte auf eigene Anwendungsfälle zu übertragen. So lernt es sich am besten :)
 
