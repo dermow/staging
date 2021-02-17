@@ -9,7 +9,7 @@ Wilkommen zurück zur Ansible Starter-Guide. In diesem Teil des Tutorials will i
 
 ## Playbooks
 
-Mit Playbooks können wir Tasks wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen um damit unsere Webserver zu verwalten.
+Mit Playbooks können wir Tasks wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen, um damit unsere Webserver zu verwalten.
 
 Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels zu lernen:
 
@@ -32,13 +32,12 @@ Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels
 
 ```
 
-Gehen wir das ganze Zeile für Zeile durch. 
 
 ## Taskname (Zeile 1)
 Im Feld "name" in Zeile 1 kann ein beschreibender Name für den Play vergeben werden. Dieser Parameter ist optional, ich empfehle aber jeden Play möglichst sinnvoll zu benennen.
 
 ## Zieldefinition (Zeile 2)
-In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsyteme für diesen Play. Hier haben wir mehrere Möglichkeiten:
+In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsysteme für diesen Play. Hier haben wir mehrere Möglichkeiten:
 
 #### Gruppe(n)
 
@@ -92,20 +91,20 @@ Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
         state: present
 ```
 
-Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B einzelne Host oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns') Dazu aber in einem späteren Artikeln mehr.
+Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B. einzelne Host oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns') Dazu aber in einem späteren Artikel mehr.
 
 
 ## Tasks (Zeile 3)
 
-Hier beginnt die Liste der einzelnen Task für diesen Play.
+Hier beginnt die Liste der einzelnen Tasks für diesen Play.
 
 ## Task-Struktur (Zeile 4)
 
-Hiermit kommen wir zur Struktur eines Tasks. Achtet hier auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern die zum Task gehören, und Parametern die zum Modul gehören.
+Hiermit kommen wir zur Struktur eines Tasks. Achtet hier auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern, die zum Task gehören, und Parametern, die zum Modul gehören.
 
-Das Feld "name" (Zeile 4) ist wie auch beim Play optional aber dringend empfohlen, da es auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen um ein Paket zu installieren. Alles was jetzt eine Einrückung weiter steht ist ein Parameter auf Modul-Ebene, gilt also für das Modul und nicht für den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
+Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohlen, da es auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen, um ein Paket zu installieren. Alles was jetzt eine Einrückung weiter steht ist ein Parameter auf Modul-Ebene, gilt also für das Modul und nicht für den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
 
-Zur einfacheren Übersicht, paste ich unser Beispiel-Playbook hier noch einmal:
+Zur einfacheren Übersicht, füge ich unser Beispiel-Playbook hier noch einmal ein:
 
 ```yaml
 1 - name: webserver install 
@@ -127,19 +126,19 @@ Zur einfacheren Übersicht, paste ich unser Beispiel-Playbook hier noch einmal:
 
 ```
 
-Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das Modul apt (Zeile 5). Für das apt-Modul definieren wir widerum 3 Parameter (Zeile 6-8). 
+Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das Modul apt (Zeile 5). Für das apt-Modul definieren wir wiederum 3 Parameter (Zeile 6-8). 
 * **name**: Name des zu installierenden Pakets
 * **state**: Ziel-Zustand. present = installiert, absent = deinstalliert, latest = aktuellste Version
 * **update_cache**: erzwingt das vorherige Erneuern des Paket-Zwischenspeichers
 
 In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Achtet auf die Einrückung). Mit "become: true" geben wir im Prinzip an, dass für die Ausführung dieses Tasks Superuser-Rechte benötigt werden. Diesen Parameter werden wir sehr häufig brauchen, ich werde dem Thema daher einen eigenen Teil in dieser Reihe widmen.
 
-Die selbe Struktur hat der 2. Task ab Zeile 11. Wir deklarieren erneut einen Task und verbeben hier den Namen "enable and start apache2 systemd service", rufen hier das Modul "systemd" auf, mit dem wir (...Trommelwirbel...) systemd Dienste verwalten können.
+Dieselbe Struktur hat der 2. Task ab Zeile 11. Wir deklarieren erneut einen Task und vergeben hier den Namen "enable and start apache2 systemd service", rufen hier das Modul "systemd" auf, mit dem wir (...Trommelwirbel...) systemd-Dienste verwalten können.
 Für das Modul legen wir 3 Parameter fest (Zeile 13-15).
 
 *  **name**:    Name des zu verwaltenden Services
 *  **enabled**: Legt fest, ob der Service aktiviert werden soll. Aktivierte Services werden beim System-Boot automatisch gestartet.
-*  **state**:   Gibt den gewünschten Zielzustand des Services an. In umserem Fall also "started".
+*  **state**:   Gibt den gewünschten Zielzustand des Services an. In unserem Fall also "started".
 
 
 ### Hinweis zu Modul-Parametern
@@ -165,7 +164,7 @@ ansible-guide-2 ansible_ssh_user=ansible ansible_host=192.168.0.12
 ansible-guide-3 ansible_ssh_user=ansible ansible_host=192.168.0.13
 ```
 
-Aufteilen möchte ich das ganze nun in zwei Playbooks. Je nach eigenen Preferenzen und Anwendungsfall, könnten wir auch zwei Plays innerhalb eines Playbooks definieren.
+Aufteilen möchte ich das ganze nun in zwei Playbooks. Je nach eigenen Präferenzen und Anwendungsfall, könnten wir auch zwei Plays innerhalb eines Playbooks definieren.
 
 #### webservers.yml
 ``` yaml
@@ -361,7 +360,7 @@ Alternativ könnt ihr die IP natürlich auch über den Browser eurer Wahl aufruf
 
 Wir haben jetzt also unseren Webserver und eine Datenbank installiert. Weiter haben wir eigenen Inhalt auf unsere Webserver ausgeliefert. Zum Abschluss möchte ich euch noch zeigen, wie wir auch die Apache Konfigurationsdatei über Ansible verwalten können. Dabei wollen wir den Webserver bei Änderungen an dieser (und nur dann!) neu starten. Dafür gibt es Handler.
 
-Wir legen uns die Apache-Konfiguration also wieder auf dem Ansible-Controller ab. Dafür hab ich mir von einem der Test-Hosts einfach den Inhalt von /etc/apache2/apache2.conf kopiert und die Kommentarzeilen etwas reduziert um das Ganze etwas übersichtlicher zu machen.
+Wir legen uns die Apache-Konfiguration also wieder auf dem Ansible-Controller ab. Dafür habe ich mir von einem der Test-Hosts einfach den Inhalt von /etc/apache2/apache2.conf kopiert und die Kommentarzeilen etwas reduziert um das Ganze etwas übersichtlicher zu machen.
 
 Die Datei legen wir wieder in unserem Unterordner "files" ab:
 
@@ -455,7 +454,7 @@ Wie erweitern unser Playbook um einen weiteren Task:
       become: true
 ```
 
-Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf. Die wichtigsten Zeilen hab ich mit Kommentaren versehen:
+Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf. Die wichtigsten Zeilen habe ich mit Kommentaren versehen:
 
 ### webservers.yml
 ``` yaml
@@ -496,7 +495,7 @@ Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf w
       become: true
 ```
 
-Wir haben nun eine weitere Liste, auf der gleichen Ebene wie "tasks", angelegt. Diese beinhaltet unsere Handler-Definitionen. Ein Handler hat exakt den selben Aufbau wie ein Task, wird beim Aufruf des Playbooks aber nicht automatisch ausgeführt. Das passiert nur wenn mindestens zwei Dinge gegeben sind:
+Wir haben nun eine weitere Liste, auf der gleichen Ebene wie "tasks", angelegt. Diese beinhaltet unsere Handler-Definitionen. Ein Handler hat exakt denselben Aufbau wie ein Task, wird beim Aufruf des Playbooks aber nicht automatisch ausgeführt. Das passiert nur wenn mindestens zwei Dinge gegeben sind:
 
 1) Ein Task hat den Namen unseres Handlers - hier "restart-apache" - im Parameter "notify" definiert.
 2) Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler ausgeführt.
@@ -542,7 +541,7 @@ ansible-guide-2                  : ok=6    changed=2    unreachable=0    failed=
 Die apache2.conf wird nun also ebenfall per Ansible verwaltet und der Dienst bei Bedarf neu gestartet! Probiert das gerne noch ein paar Mal aus, indem ihr einige Parameter in der Konfiguration ändert und das Playbook ausführt.
 
 ## Wichtiger Hinweis zu Handlern
-Wie in der Ausgabe oben zu sehen, werden Handler immer am Ende des Plays ausgeführt und nicht direkt nach dem aufrufenden Task. Das stellt sicher, dass z.B der Apache Restart nur einmal ausgeführt wird, auch wenn mehrere Tasks Änderungen vornehmen und den Handler aufrufen.
+Wie in der Ausgabe oben zu sehen, werden Handler immer am Ende des Plays ausgeführt und nicht direkt nach dem aufrufenden Task. Das stellt sicher, dass z.B. der Apache Restart nur einmal ausgeführt wird, auch wenn mehrere Tasks Änderungen vornehmen und den Handler aufrufen.
 
 Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart als Task definieren.
 
