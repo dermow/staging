@@ -151,7 +151,7 @@ Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind
 
 ## Beispiel
 
-Lasst uns das Gelernte nun auf unser Beispiel-Szenario übertragen. Nehmen wir an unsere ersten beiden Hosts sollen Webserver werden, der dritte wird Datenbank-Host. 
+Lasst uns das Gelernte nun auf unser Beispiel-Szenario übertragen. Nehmen wir an, unsere ersten beiden Hosts sollen Webserver werden, der dritte wird Datenbank-Host. 
 
 Wir passen unsere inventory.txt also entsprechend an:
 
