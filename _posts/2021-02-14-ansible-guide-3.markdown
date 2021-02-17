@@ -102,8 +102,8 @@ Dann erstellen wir uns unter ~/ansible-guide/inventory.txt eine Datei mit dem fo
 ```ini
 [guide]
 ansible-guide-1 ansible_ssh_user=ansible ansible_host=192.168.0.11
-ansible-guide-1 ansible_ssh_user=ansible ansible_host=192.168.0.12
-ansible-guide-1 ansible_ssh_user=ansible ansible_host=192.168.0.13
+ansible-guide-2 ansible_ssh_user=ansible ansible_host=192.168.0.12
+ansible-guide-3 ansible_ssh_user=ansible ansible_host=192.168.0.13
 ```
 Wir haben in diesem Fall ein Inventory mit einer Gruppe "guide" angelegt. In dieser befinden sich unsere 3 Test-Hosts. Mit "ansible_ssh_user=ansible" geben wir den User an, der für die SSH-Verbindung genutzt werden soll. 
 
