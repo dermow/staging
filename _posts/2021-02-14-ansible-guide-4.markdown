@@ -548,9 +548,11 @@ Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart 
 
 ## Das wars schon wieder!
 
-Das war bisher der längste Teil des Tutorials und ihr braucht sicher Zeit, das Gelernte erstmal zu verarbeiten und am besten einfach selbst mit weiteren Beispielen auszuprobieren. Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
+Im nächsten Teil möchte ich euch zeigen, wie man Werte in Variablen verpackt, und diese an verschiedenen Stellen definieren kann und versuche gleichzeitig euch noch ein paar weitere nützliche Module vorzustellen.
 
-Im nächsten Teil möchte ich euch ein paar weitere, sehr nützliche Module vorstellen.
+Aus eigener Erfahrung kann ich euch dringend empfehlen, das alles einfach selbst auszuprobieren und zu versuchen, das Gelernte auf eigenen Anwendungsfälle zu übertragen. So lernt es sich am besten :)
+
+Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
 
 Ich wünsche euch viel Spaß beim selbst ausprobieren!
 
