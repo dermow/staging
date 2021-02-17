@@ -9,7 +9,7 @@ Wilkommen zurück zur Ansible Starter-Guide. In diesem Teil des Tutorials will i
 
 ## Playbooks
 
-Mit Playbooks können wir Tasks wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen um unseren Webserver damit hochzuziehen.
+Mit Playbooks können wir Tasks wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen um damit unsere Webserver zu verwalten.
 
 Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels zu lernen:
 
@@ -34,10 +34,10 @@ Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels
 
 Gehen wir das ganze Zeile für Zeile durch. 
 
-## Zeile 1 - Name
-Im Feld "name" in Zeile 1 kann ein beschreibender Name für den Play vergeben werden. Dieser Parameter ist optional, ich empfehle aber jeden Play zu benennen.
+## Taskname (Zeile 1)
+Im Feld "name" in Zeile 1 kann ein beschreibender Name für den Play vergeben werden. Dieser Parameter ist optional, ich empfehle aber jeden Play möglichst sinnvoll zu benennen.
 
-## Zeile 2 - Zieldefinition
+## Zieldefinition (Zeile 2)
 In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsyteme für diesen Play. Hier haben wir mehrere Möglichkeiten:
 
 #### Gruppe(n)
@@ -95,15 +95,15 @@ Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
 Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B einzelne Host oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns') Dazu aber in einem späteren Artikeln mehr.
 
 
-## Zeile 3 - Tasks
+## Tasks (Zeile 3)
 
 Hier beginnt die Liste der einzelnen Task für diesen Play.
 
-## Ab Zeile 4 - Task-Struktur
+## Task-Struktur (Zeile 4)
 
-Hiermit kommen wir zur Struktur eines Tasks. Achtet hier auf die Einrückung der einzelnen Elemente. Wir unterscheiden hier zwischen Parametern die zum Task gehören, und Parametern die zum Modul gehören.
+Hiermit kommen wir zur Struktur eines Tasks. Achtet hier auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern die zum Task gehören, und Parametern die zum Modul gehören.
 
-Das Feld "name" (Zeile 4) ist wie auch beim Play optional aber dringend empfohlen, da es auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen um ein Paket zu installieren. Alles was jetzt eine Einrückung weiter steht ist ein Parameter auf Modul-Ebene, gilt also für das Modul und nicht für den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. Mit der Zeit prägt man sich das aber ganz gut ein! 
+Das Feld "name" (Zeile 4) ist wie auch beim Play optional aber dringend empfohlen, da es auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen um ein Paket zu installieren. Alles was jetzt eine Einrückung weiter steht ist ein Parameter auf Modul-Ebene, gilt also für das Modul und nicht für den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
 
 Zur einfacheren Übersicht, paste ich unser Beispiel-Playbook hier noch einmal:
 
@@ -128,15 +128,21 @@ Zur einfacheren Übersicht, paste ich unser Beispiel-Playbook hier noch einmal:
 ```
 
 Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das Modul apt (Zeile 5). Für das apt-Modul definieren wir widerum 3 Parameter (Zeile 6-8). 
-* name = Name des zu installierenden Pakets
-* state = Ziel-Zustand. present = installiert, absent = deinstalliert, latest = aktuellste Version
-* update_cache = erzwingt das vorherige Erneuern des Paket-Zwischenspeichers
+* **name**: Name des zu installierenden Pakets
+* **state**: Ziel-Zustand. present = installiert, absent = deinstalliert, latest = aktuellste Version
+* **update_cache**: erzwingt das vorherige Erneuern des Paket-Zwischenspeichers
 
-In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Achtet auf die Einrückung). Mit "become" geben wir im Prinzip an, dass für die Ausführung dieses Tasks Superuser-Rechte benötigt werden. Diesen Parameter werden wir sehr häufig brauchen, ich werde dem Thema daher einen eigenen Teil in dieser Reihe widmen.
+In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Achtet auf die Einrückung). Mit "become: true" geben wir im Prinzip an, dass für die Ausführung dieses Tasks Superuser-Rechte benötigt werden. Diesen Parameter werden wir sehr häufig brauchen, ich werde dem Thema daher einen eigenen Teil in dieser Reihe widmen.
 
-Die selbe Struktur hat der 2. Task ab Zeile 11. Wir deklarieren erneut einen Task und verbeben hier den Namen "enable and start apache2 systemd service", rufen hier das Modul "systemd" auf, mit dem wir (Trommelwirbel) systemd Dienste verwalten können.
+Die selbe Struktur hat der 2. Task ab Zeile 11. Wir deklarieren erneut einen Task und verbeben hier den Namen "enable and start apache2 systemd service", rufen hier das Modul "systemd" auf, mit dem wir (...Trommelwirbel...) systemd Dienste verwalten können.
 Für das Modul legen wir 3 Parameter fest (Zeile 13-15).
 
+*  **name**:    Name des zu verwaltenden Services
+*  **enabled**: Legt fest, ob der Service aktiviert werden soll. Aktivierte Services werden beim System-Boot automatisch gestartet.
+*  **state**:   Gibt den gewünschten Zielzustand des Services an. In umserem Fall also "started".
+
+
+### Hinweis zu Modul-Parametern
 Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind und einige die zwingend angegeben werden müssen. Hier hilft uns aber die Ansible-Dokumentation sehr zuverlässig weiter. Für unser Beispiel finden wir die Informationen auf diesen Seiten:
 
 [Doku zum Modul apt](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
@@ -144,7 +150,11 @@ Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind
 
 ## Beispiel
 
-Lasst uns das Gelernte nun auf unser Beispiel-Szenario übertragen. Nehmen wir an unsere ersten beiden Hosts sollen Webserver werden, der dritte wird Datenbank-Host:
+Lasst uns das Gelernte nun auf unser Beispiel-Szenario übertragen. Nehmen wir an unsere ersten beiden Hosts sollen Webserver werden, der dritte wird Datenbank-Host. 
+
+Wir passen unsere inventory.txt also entsprechend an:
+
+#### ~/ansible-guide/inventory.txt
 
 ```ini
 [webservers]
@@ -157,7 +167,7 @@ ansible-guide-3 ansible_ssh_user=ansible ansible_host=192.168.0.13
 
 Aufteilen möchte ich das ganze nun in zwei Playbooks. Je nach eigenen Preferenzen und Anwendungsfall, könnten wir auch zwei Plays innerhalb eines Playbooks definieren.
 
-### webservers.yml
+#### webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -180,7 +190,7 @@ Aufteilen möchte ich das ganze nun in zwei Playbooks. Je nach eigenen Preferenz
 Folgendermaßen können wir das Playbook nun ausführen:
 ```bash
 cd ~/ansible-guide
-ansible-playbook -i inventory.txt playbook.yml
+ansible-playbook -i inventory.txt webservers.yml
 ```
 
 ```
@@ -204,12 +214,12 @@ ansible-guide-1                  : ok=3    changed=1    unreachable=0    failed=
 ansible-guide-2                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 
 ```
-Interessant ist hier, dass der Task "start and enable apache2" den Status "ok" liefert und nicht wie erwartet "changed". Dies kommt daher, dass das Aktivieren und starten des Services bereits im Installationspaket definiert ist. Für Ansible gibt es in dem Moment also kein Todo.
+Interessant ist hier, dass der Task "start and enable apache2" den Status "ok" liefert und nicht wie erwartet "changed". Dies kommt daher, dass das Aktivieren und Starten des Services bereits im Installationspaket definiert ist. Für Ansible gibt es in dem Moment also kein Todo.
 
 Nun können wir noch kurz testen, ob unsere Installation auch funktioniert hat, indem wir eine der IP-Adressen in den Browser eingeben. Wir müssten jetzt die Standard-Seite des Apache Webservers zu sehen bekommen.
 
 
-### database.yml
+#### database.yml
 ``` yaml
 - name: database setup
   hosts: db
@@ -269,9 +279,9 @@ Die Datei sieht dann so aus:
 <h1>Meine eigene index.html!</h1>
 ```
 
-Nun erweitern wir unser Playbook "webserver.yml" um einen Task:
+Nun erweitern wir unser Playbook "webservers.yml" um einen Task:
 
-### webservers.yml
+#### webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -297,7 +307,7 @@ Nun erweitern wir unser Playbook "webserver.yml" um einen Task:
       become: true
 ```
 
-Wir machen uns hier das Ansible-Modul "copy" zu nutze. Mit diesem können Dateien vom Ansible-Controller auf die Zielsystem kopiert werden. Dem Modul geben wir 2 Parameter mit:
+Wir machen uns hier das Ansible-Modul "copy" zu nutze. Mit diesem können Dateien vom Ansible-Controller auf die Zielsysteme kopiert werden. Dem Modul geben wir 2 Parameter mit:
 
 * **src**: Pfad zur Quelldatei auf dem Ansible-Controller
 * **dest**: Zielpfad auf den Remote-Hosts
@@ -307,11 +317,11 @@ Auch teilen wir Ansible mit "become: true" wieder mit, dass für diesen Vorgang 
 Wir führen das aktualisierte Playbook nun also aus:
 
 ```bash
-ansible-playbook -i inventory.txt webserver.yml
+ansible-playbook -i inventory.txt webservers.yml
 ```
 
 ```
-LAY [webserver setup] *******************************************************************************************************************************************************************************************************************************************************************
+PLAY [webserver setup] *******************************************************************************************************************************************************************************************************************************************************************
 
 TASK [Gathering Facts] *******************************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1]
@@ -335,7 +345,7 @@ ansible-guide-2                  : ok=4    changed=1    unreachable=0    failed=
 
 ```
 
-Das ganze können wir mit curl testen:
+Das Resultat können wir mit curl sehen:
 
 ```bash
 apt install -y curl
@@ -445,7 +455,7 @@ Wie erweitern unser Playbook um einen weiteren Task:
       become: true
 ```
 
-Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf:
+Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf. Die wichtigsten Zeilen hab ich mit Kommentaren versehen:
 
 ### webservers.yml
 ``` yaml
@@ -489,7 +499,7 @@ Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf w
 Wir haben nun eine weitere Liste, auf der gleichen Ebene wie "tasks", angelegt. Diese beinhaltet unsere Handler-Definitionen. Ein Handler hat exakt den selben Aufbau wie ein Task, wird beim Aufruf des Playbooks aber nicht automatisch ausgeführt. Das passiert nur wenn mindestens zwei Dinge gegeben sind:
 
 1) Ein Task hat den Namen unseres Handlers - hier "restart-apache" - im Parameter "notify" definiert.
-2) Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler nämlich ausgeführt.
+2) Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler ausgeführt.
 
 Wir führen das Playbook nun also erneut aus:
 
@@ -529,16 +539,18 @@ ansible-guide-1                  : ok=6    changed=2    unreachable=0    failed=
 ansible-guide-2                  : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Die apache2.conf wird nun also ebenfall per Ansible verwaltet und der Dienst bei Bedarf neu gestartet!
+Die apache2.conf wird nun also ebenfall per Ansible verwaltet und der Dienst bei Bedarf neu gestartet! Probiert das gerne noch ein paar Mal aus, indem ihr einige Parameter in der Konfiguration ändert und das Playbook ausführt.
 
 ## Wichtiger Hinweis zu Handlern
-Wie in der Ausgabe oben zu sehen, werden Handler immer am Ende des Plays ausgeführt und nicht direkt nach dem aufrufenden Task. Das stellt sicher, dass z.B der Apache Restart nur einmal ausgeführt wird, auch wenn z.B mehrere Tasks Änderungen vornehmen und den Handler aufrufen.
+Wie in der Ausgabe oben zu sehen, werden Handler immer am Ende des Plays ausgeführt und nicht direkt nach dem aufrufenden Task. Das stellt sicher, dass z.B der Apache Restart nur einmal ausgeführt wird, auch wenn mehrere Tasks Änderungen vornehmen und den Handler aufrufen.
 
 Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart als Task definieren.
 
 ## Das wars schon wieder!
 
-So das war bisher der längste Teil des Tutorials und ihr braucht sicher Zeit, das Gelernte erstmal zu verarbeiten und am besten einfach selbst mit weiteren Beispielen auszuprobieren. Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
+Das war bisher der längste Teil des Tutorials und ihr braucht sicher Zeit, das Gelernte erstmal zu verarbeiten und am besten einfach selbst mit weiteren Beispielen auszuprobieren. Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
+
+Im nächsten Teil möchte ich euch ein paar weitere, sehr nützliche Module vorstellen.
 
 Ich wünsche euch viel Spaß beim selbst ausprobieren!
 
