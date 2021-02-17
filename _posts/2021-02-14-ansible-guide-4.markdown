@@ -250,3 +250,298 @@ ok: [ansible-guide-3]
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-3                 : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
+
+## Eigene index.html ausrollen
+
+Wir haben jetzt per Ansible eine Standard-Installation des Apache2 und MySQL durchgeführt. Im nächsten Schritt möchte ich euch zeigen, wie wir z.B eine eigene index.html Datei ausrollen können.
+
+Dazu legen wir und die Datei zunächst lokal auf dem Ansible-Controller an:
+
+``` bash
+cd ~/ansible-guide
+mkdir files
+echo "<h1>Meine eigene index.html!</h1>" > files/index.html 
+```
+
+Die Datei sieht dann so aus:
+
+```html
+<h1>Meine eigene index.html!</h1>
+```
+
+Nun erweitern wir unser Playbook "webserver.yml" um einen Task:
+
+### webservers.yml
+``` yaml
+- name: webserver setup
+  hosts: webservers
+  tasks:
+    - name: Apache2 Setup
+      apt:
+        name: apache2
+        state: present
+        update_cache: true
+      become: true
+
+    - name: start and enable apache2
+      systemd:
+        name: apache2
+        state: started
+        enabled: true
+      become: true
+
+    - name: copy index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      become: true
+```
+
+Wir machen uns hier das Ansible-Modul "copy" zu nutze. Mit diesem können Dateien vom Ansible-Controller auf die Zielsystem kopiert werden. Dem Modul geben wir 2 Parameter mit:
+
+* **src**: Pfad zur Quelldatei auf dem Ansible-Controller
+* **dest**: Zielpfad auf den Remote-Hosts
+
+Auch teilen wir Ansible mit "become: true" wieder mit, dass für diesen Vorgang Rootrechte benötigt werden.
+
+Wir führen das aktualisierte Playbook nun also aus:
+
+```bash
+ansible-playbook -i inventory.txt webserver.yml
+```
+
+```
+LAY [webserver setup] *******************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [Apache2 Setup] *********************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [start and enable apache2] **********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [copy index.html] *******************************************************************************************************************************************************************************************************************************************************************
+changed: [ansible-guide-1]
+changed: [ansible-guide-2]
+
+PLAY RECAP *******************************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ansible-guide-2                  : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+
+Das ganze können wir mit curl testen:
+
+```bash
+apt install -y curl
+curl http://192.168.0.11
+```
+```
+<h1>Meine eigene index.html!</h1>
+```
+
+Alternativ könnt ihr die IP natürlich auch über den Browser eurer Wahl aufrufen!
+
+## Handler
+
+Wir haben jetzt also unseren Webserver und eine Datenbank installiert. Weiter haben wir eigenen Inhalt auf unsere Webserver ausgeliefert. Zum Abschluss möchte ich euch noch zeigen, wie wir auch die Apache Konfigurationsdatei über Ansible verwalten können. Dabei wollen wir den Webserver bei Änderungen an dieser (und nur dann!) neu starten. Dafür gibt es Handler.
+
+Wir legen uns die Apache-Konfiguration also wieder auf dem Ansible-Controller ab. Dafür hab ich mir von einem der Test-Hosts einfach den Inhalt von /etc/apache2/apache2.conf kopiert und die Kommentarzeilen etwas reduziert um das Ganze etwas übersichtlicher zu machen.
+
+Die Datei legen wir wieder in unserem Unterordner "files" ab:
+
+##### files/apache2.conf
+
+```
+DefaultRuntimeDir ${APACHE_RUN_DIR}
+PidFile ${APACHE_PID_FILE}
+
+Timeout 300
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 5
+User ${APACHE_RUN_USER}
+Group ${APACHE_RUN_GROUP}
+
+HostnameLookups Off
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+LogLevel warn
+
+IncludeOptional mods-enabled/*.load
+IncludeOptional mods-enabled/*.conf
+
+Include ports.conf
+
+<Directory />
+	Options FollowSymLinks
+	AllowOverride None
+	Require all denied
+</Directory>
+
+<Directory /usr/share>
+	AllowOverride None
+	Require all granted
+</Directory>
+
+<Directory /var/www/>
+	Options Indexes FollowSymLinks
+	AllowOverride None
+	Require all granted
+</Directory>
+
+AccessFileName .htaccess
+
+<FilesMatch "^\.ht">
+	Require all denied
+</FilesMatch>
+
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+IncludeOptional conf-enabled/*.conf
+IncludeOptional sites-enabled/*.conf
+```
+
+Wie erweitern unser Playbook um einen weiteren Task:
+
+### webservers.yml
+``` yaml
+- name: webserver setup
+  hosts: webservers
+  tasks:
+    - name: Apache2 Setup
+      apt:
+        name: apache2
+        state: present
+        update_cache: true
+      become: true
+
+    - name: start and enable apache2
+      systemd:
+        name: apache2
+        state: started
+        enabled: true
+      become: true
+
+    - name: copy index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      become: true
+
+    - name: copy apache2.conf
+      copy:
+        src: files/apache2.conf
+        dest: /etc/apache2/apache2.conf
+      become: true
+```
+
+Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf:
+
+### webservers.yml
+``` yaml
+- name: webserver setup
+  hosts: webservers
+  handlers:                                  # <--- Liste mit Handlern
+    - name: restart-apache                   # <--- Handler-Definition
+      systemd:
+        name: apache2
+        state: restarted
+      become: trure
+  tasks:
+    - name: Apache2 Setup
+      apt:
+        name: apache2
+        state: present
+        update_cache: true
+      become: true
+
+    - name: start and enable apache2
+      systemd:
+        name: apache2
+        state: started
+        enabled: true
+      become: true
+
+    - name: copy index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      become: true
+
+    - name: copy apache2.conf
+      copy:
+        src: files/apache2.conf
+        dest: /etc/apache2/apache2.conf
+      notify: restart-apache                 #<-- Benachrichtigung des Handlers
+      become: true
+```
+
+Wir haben nun eine weitere Liste, auf der gleichen Ebene wie "tasks", angelegt. Diese beinhaltet unsere Handler-Definitionen. Ein Handler hat exakt den selben Aufbau wie ein Task, wird beim Aufruf des Playbooks aber nicht automatisch ausgeführt. Das passiert nur wenn mindestens zwei Dinge gegeben sind:
+
+1) Ein Task hat den Namen unseres Handlers - hier "restart-apache" - im Parameter "notify" definiert.
+2) Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler nämlich ausgeführt.
+
+Wir führen das Playbook nun also erneut aus:
+
+```bash
+ansible-playbook -i inventory.txt webserver.yml
+```
+
+```
+PLAY [webserver setup] *******************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [Apache2 Setup] *********************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [start and enable apache2] **********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [copy index.html] *******************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [copy apache2.conf] *****************************************************************************************************************************************************************************************************************************************************************
+changed: [ansible-guide-1]
+changed: [ansible-guide-2]
+
+RUNNING HANDLER [restart-apache] *********************************************************************************************************************************************************************************************************************************************************
+changed: [ansible-guide-1]
+changed: [ansible-guide-2]
+
+PLAY RECAP *******************************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+ansible-guide-2                  : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+```
+
+Die apache2.conf wird nun also ebenfall per Ansible verwaltet und der Dienst bei Bedarf neu gestartet!
+
+## Wichtiger Hinweis zu Handlern
+Wie in der Ausgabe oben zu sehen, werden Handler immer am Ende des Plays ausgeführt und nicht direkt nach dem aufrufenden Task. Das stellt sicher, dass z.B der Apache Restart nur einmal ausgeführt wird, auch wenn z.B mehrere Tasks Änderungen vornehmen und den Handler aufrufen.
+
+Möchte man explizit einen Restart an dieser Stelle haben, muss man den Restart als Task definieren.
+
+## Das wars schon wieder!
+
+So das war bisher der längste Teil des Tutorials und ihr braucht sicher Zeit, das Gelernte erstmal zu verarbeiten und am besten einfach selbst mit weiteren Beispielen auszuprobieren. Wie immer freue ich mich über Feedback und Verbesserungsvorschläge. Gerne hier in der Kommentarfunktion, aber auch per E-Mail an: <a href='mailto:blog.mow@gmail.com'>blog.mow@gmail.com
+
+Ich wünsche euch viel Spaß beim selbst ausprobieren!
+
+Der Mow
+
+
