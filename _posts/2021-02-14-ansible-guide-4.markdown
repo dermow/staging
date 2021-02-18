@@ -44,7 +44,7 @@ In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsysteme für diesen Play.
 Wir können eine oder mehrere Gruppen aus unserem Inventory als Ziel definieren:
 
 ```yaml
-- name: Play der auf eine Gruppe ausgeführt wird
+- name: Play, der auf eine Gruppe ausgeführt wird
   hosts: Gruppe1
   tasks:
     - name: Beispieltask1
@@ -54,7 +54,7 @@ Wir können eine oder mehrere Gruppen aus unserem Inventory als Ziel definieren:
 ```
 
 ```yaml
-- name: Play der auf mehrere Gruppen ausgeführt wird
+- name: Play, der auf mehrere Gruppen ausgeführt wird
   hosts: 
     - Gruppe1
     - Gruppe2
@@ -70,7 +70,7 @@ Wir können eine oder mehrere Gruppen aus unserem Inventory als Ziel definieren:
 Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
 
 ```yaml
-- name: Play der auf einem Host ausgeführt wird
+- name: Play, der auf einem Host ausgeführt wird
   hosts: webserver1
   tasks:
     - name: Beispieltask1
@@ -80,7 +80,7 @@ Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
 ```
 
 ```yaml
-- name: Play der auf mehreren Hosts ausgeführt wird
+- name: Play, der auf mehreren Hosts ausgeführt wird
   hosts: 
     - webserver1
     - webserver2
@@ -100,9 +100,11 @@ Hier beginnt die Liste der einzelnen Tasks für diesen Play.
 
 ## Task-Struktur (Zeile 4)
 
-Hiermit kommen wir zur Struktur eines Tasks. Achtet hier auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern, die zum Task gehören, und Parametern, die zum Modul gehören.
+Hiermit kommen wir zur Struktur eines Tasks. Achtet auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern, die zum Task gehören, und Parametern, die zum Modul gehören.
 
-Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohlen, da es auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen, um ein Paket zu installieren. Alles, was jetzt eine Einrückung weiter steht ist ein Parameter auf Modul-Ebene, gilt also für das Modul und nicht für den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
+Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohlen, da es später auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen, um ein Paket zu installieren. Alles, was jetzt eine Einrückungsebene weiter steht ist ein Parameter auf Modul-Ebene, bezieht sich also auf das Modul und nicht auf den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
+
+Task-Parameter beeinflussen das Verhalten des Tasks und können für jeden Task definiert werden. Für jeden Task kann man z.B. einen Namen definieren. Modul-Parameter dagegen, sind speziell für das jeweilige Modul. z.B. muss für das Modul "copy", welches Dateien vom Controller zu den Zielen kopiert ein Quell- und Zielpfad definiert werden.
 
 Zur einfacheren Übersicht füge ich unser Beispiel-Playbook hier noch einmal ein:
 
