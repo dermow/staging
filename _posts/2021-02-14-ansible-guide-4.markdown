@@ -504,8 +504,8 @@ Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf w
 
 Wir haben nun eine weitere Liste, auf der gleichen Ebene wie "tasks", angelegt. Diese beinhaltet unsere Handler-Definitionen. Ein Handler hat exakt denselben Aufbau wie ein Task, wird beim Aufruf des Playbooks aber nicht automatisch ausgeführt. Das passiert nur, wenn mindestens zwei Dinge gegeben sind:
 
-1) Ein Task hat den Namen unseres Handlers - hier "restart-apache" - im Parameter "notify" definiert.
-2) Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler ausgeführt.
+1. Ein Task hat den Namen unseres Handlers - hier "restart-apache" - im Parameter "notify" definiert.
+2. Mindestens ein Task, der Punkt 1 erfüllt liefert den Status "changed" zurück. Nur dann werden Handler ausgeführt.
 
 Wir führen das Playbook nun also erneut aus:
 
