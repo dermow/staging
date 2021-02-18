@@ -32,6 +32,7 @@ Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels
 
 ```
 
+In den folgenden Zeilen möchte ich dieses Beispiel-Playbook mit euch durchgehen:
 
 #### Taskname
 ```yaml
@@ -137,7 +138,7 @@ Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohl
 
 Task-Parameter sind Parameter, die den Task selbst beeinflussen, also für jeden Task definierbar sind. Modul-Parameter dagegen unterscheiden sich für jedes Modul. Zum Beispiel benötigt das Copy Modul Angaben zu Quell- und Zielpfad, das Modul "apt" dagegen den Namen des zu installierenden Pakets. 
 
-Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das Modul apt (Zeile 5). Für das apt-Modul definieren wir wiederum 3 Parameter (Zeile 6-8). 
+In unserem Beispiel nutzen wir das Modul "apt" zur Installation des Apache2 mit folgenden Parametern:
 * **name**: Name des zu installierenden Pakets
 * **state**: Ziel-Zustand. present = installiert, absent = deinstalliert, latest = aktuellste Version
 * **update_cache**: erzwingt das vorherige Erneuern des Paket-Zwischenspeichers
@@ -148,10 +149,10 @@ In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Ac
 #### Hinweis zu Modul-Parametern
 Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind und einige die zwingend angegeben werden müssen. Hier hilft uns aber die Ansible-Dokumentation sehr zuverlässig weiter. Für unser Beispiel finden wir die Informationen auf diesen Seiten:
 
-[Doku zum Modul apt](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
+* [Doku zum Modul apt](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
 
 
-[Doku zum Modul systemd](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)
+* [Doku zum Modul systemd](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)
 
 ## Beispiel
 
