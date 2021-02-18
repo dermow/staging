@@ -101,7 +101,7 @@ Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
         state: present
 ```
 
-Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B. einzelne Hosts oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns'). Dazu aber in einem späteren Artikel mehr.
+Es gibt noch einige weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B. einzelne Hosts oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns'). Dazu aber in einem späteren Artikel mehr.
 
 
 #### Tasks
@@ -171,7 +171,7 @@ ansible-guide-3 ansible_ssh_user=ansible ansible_host=192.168.0.13
 
 Aufteilen möchte ich das ganze nun in zwei Playbooks. Je nach eigenen Präferenzen und Anwendungsfall könnten wir auch zwei Plays innerhalb eines Playbooks definieren.
 
-#### webservers.yml
+####  ~/ansible-guide/webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -223,7 +223,7 @@ Interessant ist hier, dass der Task "start and enable apache2" den Status "ok" l
 Nun können wir noch kurz testen, ob unsere Installation auch funktioniert hat, indem wir eine der IP-Adressen in den Browser eingeben. Wir müssten jetzt die Standard-Seite des Apache Webservers zu sehen bekommen.
 
 
-#### database.yml
+####  ~/ansible-guide/database.yml
 ``` yaml
 - name: database setup
   hosts: db
@@ -285,7 +285,7 @@ Die Datei sieht dann so aus:
 
 Nun erweitern wir unser Playbook "webservers.yml" um einen Task:
 
-#### webservers.yml
+####  ~/ansible-guide/webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -369,7 +369,7 @@ Wir legen uns die Apache-Konfiguration also wieder auf dem Ansible-Controller ab
 
 Die Datei legen wir wieder in unserem Unterordner "files" ab:
 
-##### files/apache2.conf
+#####  ~/ansible-guide/files/apache2.conf
 
 ```
 DefaultRuntimeDir ${APACHE_RUN_DIR}
@@ -427,7 +427,7 @@ IncludeOptional sites-enabled/*.conf
 
 Wie erweitern unser Playbook um einen weiteren Task:
 
-### webservers.yml
+###  ~/ansible-guide/webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -461,7 +461,7 @@ Wie erweitern unser Playbook um einen weiteren Task:
 
 Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf wie auch schon die index.html auf die Zielsysteme kopieren. Wir wollen ja aber auch den automatischen Restart des Apache-Service bei Änderungen implementieren. Deshalb fügen wir nun noch einen Handler hinzu und rufen diesen im neuen Task auch direkt auf. Die wichtigsten Zeilen habe ich mit Kommentaren versehen:
 
-### webservers.yml
+###  ~/ansible-guide/webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
