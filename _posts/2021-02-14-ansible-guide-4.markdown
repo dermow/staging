@@ -33,13 +33,24 @@ Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels
 ```
 
 
-## Taskname (Zeile 1)
+#### Taskname
+```yaml
+...
+1 - name: webserver install     # <---
+...
+```
 Im Feld "name" in Zeile 1 kann ein beschreibender Name für den Play vergeben werden. Dieser Parameter ist optional, ich empfehle aber jeden Play möglichst sinnvoll zu benennen.
 
-## Zieldefinition (Zeile 2)
+#### Zieldefinition
+```yaml
+...
+1 - name: webserver install
+2   hosts: webservers           # <---
+...
+```
 In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsysteme für diesen Play. Hier haben wir mehrere Möglichkeiten:
 
-#### Gruppe(n)
+##### Gruppe(n)
 
 Wir können eine oder mehrere Gruppen aus unserem Inventory als Ziel definieren:
 
@@ -65,7 +76,7 @@ Wir können eine oder mehrere Gruppen aus unserem Inventory als Ziel definieren:
         state: present
 ```
 
-#### Hosts
+##### Hosts
 
 Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
 
@@ -94,39 +105,37 @@ Alternativ können wir auch direkt die Hosts aus dem Inventory als Ziel angeben:
 Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel-Liste beeinflussen können. Wir können z.B. einzelne Hosts oder Gruppen wieder von der Zieldefinition ausnehmen (Stichwort 'Patterns'). Dazu aber in einem späteren Artikel mehr.
 
 
-## Tasks (Zeile 3)
+####Tasks
+
+```yaml
+1 - name: webserver install 
+2   hosts: webservers
+3   tasks:                   # <---
+...
+```
 
 Hier beginnt die Liste der einzelnen Tasks für diesen Play.
 
-## Task-Struktur (Zeile 4)
-
-Hiermit kommen wir zur Struktur eines Tasks. Achtet auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern, die zum Task gehören, und Parametern, die zum Modul gehören.
-
-Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohlen, da es später auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen, um ein Paket zu installieren. Alles, was jetzt eine Einrückungsebene weiter steht ist ein Parameter auf Modul-Ebene, bezieht sich also auf das Modul und nicht auf den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
-
-Task-Parameter beeinflussen das Verhalten des Tasks und können für jeden Task definiert werden. Für jeden Task kann man z.B. einen Namen definieren. Modul-Parameter dagegen, sind speziell für das jeweilige Modul. z.B. muss für das Modul "copy", welches Dateien vom Controller zu den Zielen kopiert ein Quell- und Zielpfad definiert werden.
-
-Zur einfacheren Übersicht füge ich unser Beispiel-Playbook hier noch einmal ein:
+#### Task-Struktur
 
 ```yaml
 1 - name: webserver install 
 2   hosts: webservers
 3   tasks: 
-4     - name: install apache2
-5       apt:
-6         name: apache2
-7         state: present
-8         update_cache: yes
-9       become: true
-10
-11    - name: enable and start apache2 systemd service
-12      systemd:
-13        name: apache2
-14        enabled: true
-15        state: started
-16      become: true
-
+4     - name: install apache2      # <--- Task-Parameter
+5       apt:                       # <--- Modul
+6         name: apache2            # <--- Modul-Parameter
+7         state: present           # <--- Modul-Parameter
+8         update_cache: yes        # <--- Modul-Parameter
+9       become: true               # <--- Task-Parameter
+...
 ```
+
+Hiermit kommen wir zur Struktur eines Tasks. Achtet auf die Einrückung der einzelnen Elemente. Wir unterscheiden zwischen Parametern, die zum Task gehören, und Parametern, die zum Modul gehören.
+
+Das Feld "name" (Zeile 4) ist wie auch beim Play optional, aber dringend empfohlen, da es später auch bei der Ausgabe erscheint. Schließlich wollen wir ja gerne wissen, was gerade passiert. In Zeile 5 steht der Name des Moduls, das wir nutzen wollen. In diesem Fall wollen wir das Modul "apt" nutzen, um ein Paket zu installieren. Alles, was jetzt eine Einrückungsebene weiter steht ist ein Parameter auf Modul-Ebene, bezieht sich also auf das Modul und nicht auf den Task selbst. Das ist ein Punkt, bei dem sehr viele zunächst ihre Probleme haben. 
+
+Task-Parameter sind Parameter, die den Task selbst beeinflussen, also für jeden Task definierbar sind. Modul-Parameter dagegen unterscheiden sich für jedes Modul. Zum Beispiel benötigt das Copy Modul Angaben zu Quell- und Zielpfad, das Modul "apt" dagegen den Namen des zu installierenden Pakets. 
 
 Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das Modul apt (Zeile 5). Für das apt-Modul definieren wir wiederum 3 Parameter (Zeile 6-8). 
 * **name**: Name des zu installierenden Pakets
@@ -135,15 +144,8 @@ Wir haben also einen Task mit dem Namen "install apache2". Dieser Task nutzt das
 
 In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Achtet auf die Einrückung). Mit "become: true" geben wir im Prinzip an, dass für die Ausführung dieses Tasks Superuser-Rechte benötigt werden. Diesen Parameter werden wir sehr häufig brauchen, ich werde dem Thema daher einen eigenen Teil in dieser Reihe widmen.
 
-Dieselbe Struktur hat der 2. Task ab Zeile 11. Wir deklarieren erneut einen Task und vergeben hier den Namen "enable and start apache2 systemd service", rufen hier das Modul "systemd" auf, mit dem wir (...Trommelwirbel...) systemd-Dienste verwalten können.
-Für das Modul legen wir 3 Parameter fest (Zeile 13-15).
 
-*  **name**:    Name des zu verwaltenden Services
-*  **enabled**: Legt fest, ob der Service aktiviert werden soll. Aktivierte Services werden beim System-Boot automatisch gestartet.
-*  **state**:   Gibt den gewünschten Ziel-Zustand des Services an. In unserem Fall also "started".
-
-
-### Hinweis zu Modul-Parametern
+#### Hinweis zu Modul-Parametern
 Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind und einige die zwingend angegeben werden müssen. Hier hilft uns aber die Ansible-Dokumentation sehr zuverlässig weiter. Für unser Beispiel finden wir die Informationen auf diesen Seiten:
 
 [Doku zum Modul apt](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
