@@ -36,17 +36,15 @@ In den folgenden Zeilen möchte ich dieses Beispiel-Playbook mit euch durchgehen
 
 #### Taskname
 ```yaml
-...
-1 - name: webserver install     # <---
+1 - name: webserver install # <---
 ...
 ```
 Im Feld "name" in Zeile 1 kann ein beschreibender Name für den Play vergeben werden. Dieser Parameter ist optional, ich empfehle aber jeden Play möglichst sinnvoll zu benennen.
 
 #### Zieldefinition
 ```yaml
-...
 1 - name: webserver install
-2   hosts: webservers           # <---
+2   hosts: webservers # <---
 ...
 ```
 In Zeile 2 definieren wir mit dem Feld "hosts" die Zielsysteme für diesen Play. Hier haben wir mehrere Möglichkeiten:
@@ -111,7 +109,7 @@ Es gibt noch viele weitere Möglichkeiten, mit denen wir in diesem Feld die Ziel
 ```yaml
 1 - name: webserver install 
 2   hosts: webservers
-3   tasks:                   # <---
+3   tasks: # <---
 ...
 ```
 
@@ -123,12 +121,12 @@ Hier beginnt die Liste der einzelnen Tasks für diesen Play.
 1 - name: webserver install 
 2   hosts: webservers
 3   tasks: 
-4     - name: install apache2      # <--- Task-Parameter
-5       apt:                       # <--- Modul
-6         name: apache2            # <--- Modul-Parameter
-7         state: present           # <--- Modul-Parameter
-8         update_cache: yes        # <--- Modul-Parameter
-9       become: true               # <--- Task-Parameter
+4     - name: install apache2  # <--- Task-Parameter
+5       apt:                   # <--- Modul
+6         name: apache2        # <--- Modul-Parameter
+7         state: present       # <--- Modul-Parameter
+8         update_cache: yes    # <--- Modul-Parameter
+9       become: true           # <--- Task-Parameter
 ...
 ```
 
@@ -467,8 +465,8 @@ Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf w
 ``` yaml
 - name: webserver setup
   hosts: webservers
-  handlers:                                  # <--- Liste mit Handlern
-    - name: restart-apache                   # <--- Handler-Definition
+  handlers:                     # <--- Liste mit Handlern
+    - name: restart-apache      # <--- Handler-Definition
       systemd:
         name: apache2
         state: restarted
