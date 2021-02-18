@@ -9,7 +9,7 @@ Wilkommen zurück zur Ansible Starter-Guide. In diesem Teil des Tutorials will i
 
 ## Playbooks
 
-Mit Playbooks können wir Tasks wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen, um damit unsere Webserver zu verwalten.
+Mit Playbooks können wir Ansible-Code wiederverwendbar definieren. Ein Playbook besteht dabei aus einem oder mehreren Plays. Wir könnten z.B ein Playbook mit dem Namen "webserver.yml" nutzen, um damit unsere Webserver zu verwalten.
 
 Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels zu lernen:
 
