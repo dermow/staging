@@ -110,6 +110,30 @@ copy_files: true
 overwrite_files: false
 ```
 
+## Host- und Groupvars
+
+Die im ersten Beispiel definierte Variable gilt nun für alle Hosts mit dem selben Wert. Was machen wir nun aber, wenn wir Werte definieren wollen, die sich für jeden Host unterscheiden? Gehen wir zurück zu unserem Beispiel-Szenario. Nehmen wir an, der Inhalt der index.html unserer beiden Webserver soll sich pro Host unterscheiden, sodass der erste "Ich bin webserver1" und der zweite "Ich bin webserver2" ausgibt.
+
+Dazu nutzen wir soganannte Host-Variablen (host_vars). Um diese zu nutzen, legen wir uns ein neues Verzeichnis in unserem Beispiel-Setup an:
+
+```bash
+cd ~/ansible-guide
+mkdir -p host_vars/ansible-guide-1
+mkdir -p host_vars/ansible-guide-2
+```
+In jedem Verzeichnis erstellen wir jetzt noch ein File "main.yml"
+
+#### ansible-guide-1/main.yml
+```yaml
+my_welcome_text: Ich bin webserver1!
+```
+
+#### ansible-guide-2/main.yml
+```yaml
+my_welcome_text: Ich bin webserver2!
+```
+
+
 
 
 
