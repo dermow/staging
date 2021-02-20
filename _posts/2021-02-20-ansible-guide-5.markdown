@@ -57,7 +57,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
 
 Dies ist die simpelste Definitions von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden nutzen wir folgendes Format "{{ variablen_name }}". Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
 
-In diesem Fall nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. Aktuell kennt Ansible die folgenden Typen:
+In diesem Fall nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
 
 
 ### Variablen-Typen
@@ -108,7 +108,6 @@ copy_files: true
 overwrite_files: false
 ```
 
-Auf jeden der einzelnen Datentypen werden wir im Laufe des Tutorials noch genauer eingehen. Einigen werde ich wahrscheinlich sogar ein eigenes Kapitel widmen. In diesem Teil möchte ich aber zunächst die allgemeine Funktion von Variablen behandeln.
 
 
 
