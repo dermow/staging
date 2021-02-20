@@ -51,7 +51,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
    - name: copy style.css
      copy:
        src: files/style.css
-       dest: "{{ my_docroot }}/style.css"
+       dest: {% raw %}"{{ my_docroot }}/style.css" {% endraw %}
      become: true
 ```
 
