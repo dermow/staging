@@ -8,6 +8,8 @@ categories: Ansible
 Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen wie Variablen funktionieren und wie wir mit
 mit ihnen mit Unterschieden zwischen verschiedenen Systemen umgehen können. Auch möchte ich euch den Nutzen von sogenannten Facts erklären. 
 
+# Variablen
+
 Die simpelste Anwendung von Variablen ist hierbei, mehrfach vorkommende Werte (z.B. Dateipfade) in einer Variable zu speichern. 
 
 Lasst uns direkt mit einem Beispiel beginnen. Nehmen wir an, wir möchten eine index.html und eine style.css an unseren Webserver ausliefern. Zur besseren Übersicht 
