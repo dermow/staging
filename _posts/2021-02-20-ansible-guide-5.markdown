@@ -123,19 +123,48 @@ mkdir -p host_vars/ansible-guide-2
 ```
 In jedem Verzeichnis erstellen wir jetzt noch ein File "main.yml"
 
-#### ansible-guide-1/main.yml
+#### ~/ansible-guide/host_vars/ansible-guide-1/main.yml
 ```yaml
 my_welcome_text: Ich bin webserver1!
 ```
 
-#### ansible-guide-2/main.yml
+#### ~/ansible-guide/host_vars/ansible-guide-2/main.yml
 ```yaml
 my_welcome_text: Ich bin webserver2!
 ```
 
+Wenn wir unser Playbook starten, wird ansible automatisch alle Dateien unter "host_vars" lesen und die Variablen-Werte den passenden Hosts zuordnen. Wichtig ist hierbei, dass die Namen der Verzeichnisse mit den Namen der Hosts in unserem Inventory übereinstimmen.
 
+Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserver-Playbook vornehmen. Mit dem Modul "copy" können wir nämlich anstelle einer Quell-Datei auch direkt den gewünschten Inhalt der Zieldatei definieren. Das sieht dann so aus:
 
+#### ~/ansible-guide/webservers.yml
 
+```yaml
+- name: webserver setup
+  hosts: webservers
+  tasks:
+    - name: Apache2 Setup
+      apt:
+        name: apache2
+        state: present
+        update_cache: true
+      become: true
+
+    - name: start and enable apache2
+      systemd:
+        name: apache2
+        state: started
+        enabled: true
+      become: true
+
+    - name: copy index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: {%raw%}"<h1>{{ my_welcome_text }}"{%endraw%} # <-- Inhalt
+      become: true
+```
+Beachtet hier die Änderung am letzten Task. Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewwünschten Inhalt der
+Zieldatei ein und nutzen hierfür unsere Variable.
 
 
 
