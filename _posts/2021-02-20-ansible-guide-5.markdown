@@ -45,7 +45,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
     - name: copy index.html
       copy: 
         src: files/index.hmlt
-        dest: "{{ my_docroot }}/index.html" # <-- Nutzung der Variable
+        dest: "{%raw}{{ my_docroot }}{%raw}/index.html" # <-- Nutzung der Variable
       become: true
       
    - name: copy style.css
