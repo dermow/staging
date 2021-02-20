@@ -6,4 +6,6 @@ categories: Ansible
 ---
 
 Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen wie Variablen funktionieren und wie wir mit
-sogenannte Facts arbeiten können. 
+mit ihnen mit Unterschieden zwischen verschiedenen Systemen umgehen können. Auch möchte ich euch den Nutzen von sogenannten Facts erklären. 
+
+
