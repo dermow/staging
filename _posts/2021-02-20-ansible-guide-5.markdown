@@ -37,7 +37,6 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
 #### Mit Nutzung einer Variable
 
 ```yaml
-{% raw %}
 - name: Play mit Variable
   hosts: webservers
   vars:
@@ -46,7 +45,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
     - name: copy index.html
       copy: 
         src: files/index.hmlt
-        dest: "{{ my_docroot }}/index.html" # <-- Nutzung der Variable
+        dest: {% raw %}"{{ my_docroot }}/index.html" # <-- Nutzung der Variable {% endraw %}
       become: true
       
    - name: copy style.css
@@ -54,7 +53,6 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
        src: files/style.css
        dest: "{{ my_docroot }}/style.css"
      become: true
-{% endraw %}
 ```
 
 Dies ist die simpelste Definitions von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden nutzen wir folgendes Format "{{ variablen_name }}". Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
