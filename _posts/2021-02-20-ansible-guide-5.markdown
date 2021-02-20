@@ -1,14 +1,12 @@
 ---
 layout: post
-title:  "Ansible Starter-Guide: #005 - Variablen und Facts"
+title:  "Ansible Starter-Guide: #005 - Variablen" 
 date:   2021-02-20 16:57:42 +0100
 categories: Ansible
 ---
 
 Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen wie Variablen funktionieren und wie wir mit
-mit ihnen mit Unterschieden zwischen verschiedenen Systemen umgehen können. Auch möchte ich euch den Nutzen von sogenannten Facts erklären. 
-
-# Variablen
+mit ihnen mit Unterschieden zwischen verschiedenen Systemen umgehen können.
 
 Die simpelste Anwendung von Variablen ist hierbei, mehrfach vorkommende Werte (z.B. Dateipfade) in einer Variable zu speichern. 
 
