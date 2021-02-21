@@ -5,13 +5,13 @@ date:   2021-02-20 16:57:42 +0100
 categories: Ansible
 ---
 
-Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen wie Variablen funktionieren und wie wir mit
+Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen, wie Variablen funktionieren und wie wir
 mit ihnen mit Unterschieden zwischen verschiedenen Systemen umgehen können.
 
 Die simpelste Anwendung von Variablen ist hierbei, mehrfach vorkommende Werte (z.B. Dateipfade) in einer Variable zu speichern. 
 
 Lasst uns direkt mit einem Beispiel beginnen. Nehmen wir an, wir möchten eine index.html und eine style.css an unseren Webserver ausliefern. Zur besseren Übersicht 
-packe ich das ganze in ein eigenes Playbook. Wer möchte kann aber einfach das webservers.yml aus dem letzten Teil erweitern.
+packe ich das Ganze in ein eigenes Playbook. Ihr könnt aber auch einfach das webservers.yml aus dem letzten Teil erweitern.
 
 #### Ohne Nutzung von Variablen:
 
@@ -32,7 +32,7 @@ packe ich das ganze in ein eigenes Playbook. Wer möchte kann aber einfach das w
      become: true
 ```
 
-Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var/www/html" verwenden müssen. Es wäre soch super, wenn wir diesen einfach in ein Variable packen können. Dann machen wir das doch:
+Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var/www/html" verwenden müssen. Es wäre doch super, wenn wir diesen einfach in ein Variable packen können. Dann machen wir das doch:
 
 #### Mit Nutzung einer Variable
 
@@ -55,7 +55,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
      become: true
 ```
 
-Dies ist die simpelste Definitions von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden nutzen wir folgendes Format {% raw %}"{{ variablen_name }}"{% endraw %}. Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
+Dies ist die simpelste Definition von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden, nutzen wir folgendes Format {% raw %}"{{ variablen_name }}"{% endraw %}. Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
 
 Im obigen Beispiel nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
 
@@ -110,9 +110,9 @@ overwrite_files: false
 
 ## Host- und Groupvars
 
-Die im ersten Beispiel definierte Variable gilt nun für alle Hosts mit dem selben Wert. Was machen wir nun aber, wenn wir Werte definieren wollen, die sich für jeden Host unterscheiden? Gehen wir zurück zu unserem Beispiel-Szenario. Nehmen wir an, der Inhalt der index.html unserer beiden Webserver soll sich pro Host unterscheiden, sodass der erste "Ich bin webserver1" und der zweite "Ich bin webserver2" ausgibt.
+Die im ersten Beispiel definierte Variable gilt nun für alle Hosts mit demselben Wert. Was machen wir nun aber, wenn wir Werte definieren wollen, die sich für jeden Host unterscheiden? Gehen wir zurück zu unserem Beispiel-Szenario. Nehmen wir an, der Inhalt der index.html unserer beiden Webserver soll sich pro Host unterscheiden, sodass der erste "Ich bin webserver1" und der zweite "Ich bin webserver2" ausgibt.
 
-Dazu nutzen wir soganannte Host-Variablen (host_vars). Um diese zu nutzen, legen wir uns ein neues Verzeichnis in unserem Beispiel-Setup an:
+Dazu nutzen wir sogenannte Host-Variablen (host_vars). Um diese zu nutzen, legen wir uns ein neues Verzeichnis in unserem Beispiel-Setup an:
 
 ```bash
 cd ~/ansible-guide
@@ -131,7 +131,7 @@ my_welcome_text: Ich bin webserver1!
 my_welcome_text: Ich bin webserver2!
 ```
 
-Wenn wir unser Playbook starten, wird ansible automatisch alle Dateien unter "host_vars" lesen und die Variablen-Werte den passenden Hosts zuordnen. Wichtig ist hierbei, dass die Namen der Verzeichnisse mit den Namen der Hosts in unserem Inventory übereinstimmen.
+Wenn wir unser Playbook starten, wird Ansible automatisch alle Dateien unter "host_vars" lesen und die Variablen-Werte den passenden Hosts zuordnen. Wichtig ist hierbei, dass die Namen der Verzeichnisse mit den Namen der Hosts in unserem Inventory übereinstimmen.
 
 Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserver-Playbook vornehmen. Mit dem Modul "copy" können wir nämlich anstelle einer Quell-Datei auch direkt den gewünschten Inhalt der Zieldatei definieren. Das sieht dann so aus:
 
@@ -199,7 +199,7 @@ ansible-guide-1          : ok=4    changed=1    unreachable=0    failed=0    ski
 ansible-guide-2          : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-Der Task "copy index.html" hat nun für beide Hosts den Status "changed" und somit den neuen Inhalt für diei index.html übernommen. Ob wir den gewünschten Effekt erzielt haben können wir nun wieder mit curl, oder dem Browser prüfen:
+Der Task "copy index.html" hat nun für beide Hosts den Status "changed" und somit den neuen Inhalt für die index.html übernommen. Ob wir den gewünschten Effekt erzielt haben können wir nun wieder mit curl, oder dem Browser prüfen:
 ```bash
 curl http://192.168.0.11
 <h1>Ich bin webserver1!</h1>
@@ -210,7 +210,7 @@ curl http://192.168.0.12
 
 BAM! Sieht gut aus! Wir haben also erfolgreich hostspezifische Variablen verwendet. 
 
-Das Ganze funktioniert auch auch mit Gruppen. Dazu dienen die sogenannten group_vars. Auch dafür erstellen wir uns ein neues Playbook und nutzen dafür das nützliche Modul "debug" um die Variablen zu testen.
+Das Ganze funktioniert auch mit Gruppen. Dazu dienen die sogenannten group_vars. Auch dafür erstellen wir uns ein neues Playbook und nutzen dafür das nützliche Modul "debug" um die Variablen zu testen.
 
 #### ~/ansible-guide/groupvars-test.yml
 In Teil 4 dieses Guides haben wir ein Inventory mit zwei verschiedenen Gruppen angelegt "webservers" und "db". Wir erstellen also ein Playbook, welches genau diese beiden nutzt.
@@ -230,7 +230,7 @@ Das Modul "debug" ist sehr hilfreich, wenn wir Playbooks erstellen und zwischend
 
 **msg**: Beliebiger String, der dann während dem Play ausgegeben wird
 
-Jetzt müssen wir die Variable "test_text" nur noch definieren. Und zwar für jede Gruppe anders. Wir legen uns auf der selben Ebene wir "host_vars" ein weiteres Verzeichnis an:
+Jetzt müssen wir die Variable "test_text" nur noch definieren. Und zwar für jede Gruppe anders. Wir legen uns auf derselben Ebene wie "host_vars" ein weiteres Verzeichnis an:
 
 ```bash
 mkdir ~/ansible-guide/group_vars
@@ -283,7 +283,7 @@ Wie wir oben sehen, zieht jeder der drei Hosts nun die gruppenspezifische Variab
 
 ## Zusammenfassung
 
-In diesem Kapitel hab ihr gelernt was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grundgerüst haben, um die ersten Projekte mit Ansible umzusetzen!
+In diesem Kapitel hab ihr gelernt, was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grundgerüst haben, um die ersten Projekte mit Ansible umzusetzen!
 
 Im nächsten Kapitel möchte ich euch dann Facts vorstellen.
 
