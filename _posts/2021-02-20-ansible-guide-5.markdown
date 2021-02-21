@@ -181,8 +181,8 @@ Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserve
 
     - name: copy index.html
       copy:
-        src: files/index.html
         dest: /var/www/html/index.html
+        content: {% raw %}"{{ my_welcome_text }}"{% endraw %}
       become: true
 
     - name: copy apache2.conf
