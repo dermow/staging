@@ -13,7 +13,7 @@ Die simpelste Anwendung von Variablen ist hierbei, mehrfach vorkommende Werte (z
 Lasst uns direkt mit einem Beispiel beginnen. Nehmen wir an, wir möchten eine index.html und eine style.css an unseren Webserver ausliefern. Zur besseren Übersicht 
 packe ich das Ganze in ein eigenes Playbook. Ihr könnt aber auch einfach das webservers.yml aus dem letzten Teil erweitern.
 
-#### Ohne Nutzung von Variablen:
+##### ~/ansible-guide/playbook-without-vars.yml
 
 ```yaml
 - name: Play ohne Variablen
@@ -34,7 +34,7 @@ packe ich das Ganze in ein eigenes Playbook. Ihr könnt aber auch einfach das we
 
 Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var/www/html" verwenden müssen. Es wäre doch super, wenn wir diesen einfach in ein Variable packen können. Dann machen wir das doch:
 
-#### Mit Nutzung einer Variable
+##### ~/ansible-guide/playbook-with-vars.yml
 
 ```yaml
 - name: Play mit Variable
@@ -121,12 +121,12 @@ mkdir -p host_vars/ansible-guide-2
 ```
 In jedem Verzeichnis erstellen wir jetzt noch ein File "main.yml"
 
-#### ~/ansible-guide/host_vars/ansible-guide-1/main.yml
+##### ~/ansible-guide/host_vars/ansible-guide-1/main.yml
 ```yaml
 my_welcome_text: Ich bin webserver1!
 ```
 
-#### ~/ansible-guide/host_vars/ansible-guide-2/main.yml
+##### ~/ansible-guide/host_vars/ansible-guide-2/main.yml
 ```yaml
 my_welcome_text: Ich bin webserver2!
 ```
@@ -135,7 +135,7 @@ Wenn wir unser Playbook starten, wird Ansible automatisch alle Dateien unter "ho
 
 Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserver-Playbook vornehmen. Mit dem Modul "copy" können wir nämlich anstelle einer Quell-Datei auch direkt den gewünschten Inhalt der Zieldatei definieren. Das sieht dann so aus:
 
-###  ~/ansible-guide/webservers.yml
+#####  ~/ansible-guide/webservers.yml
 ``` yaml
 - name: webserver setup
   hosts: webservers
@@ -240,12 +240,12 @@ mkdir ~/ansible-guide/group_vars/db
 
 In beiden Verzeichnissen erstellen wir uns eine "main.yml":
 
-#### ~/ansible-guide/group_vars/webservers/main.yml
+##### ~/ansible-guide/group_vars/webservers/main.yml
 ```yaml
 test_text: Ich bin ein Host in der Gruppe 'webservers'!
 ```
 
-#### ~/ansible-guide/group_vars/db/main.yml
+##### ~/ansible-guide/group_vars/db/main.yml
 ```yaml
 test_text: Ich bin ein Host in der Gruppe 'db'!
 ```
