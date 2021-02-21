@@ -135,9 +135,8 @@ Wenn wir unser Playbook starten, wird ansible automatisch alle Dateien unter "ho
 
 Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserver-Playbook vornehmen. Mit dem Modul "copy" können wir nämlich anstelle einer Quell-Datei auch direkt den gewünschten Inhalt der Zieldatei definieren. Das sieht dann so aus:
 
-#### ~/ansible-guide/webservers.yml
-
-```yaml
+###  ~/ansible-guide/webservers.yml
+``` yaml
 - name: webserver setup
   hosts: webservers
   tasks:
@@ -157,20 +156,139 @@ Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserve
 
     - name: copy index.html
       copy:
+        src: files/index.html
         dest: /var/www/html/index.html
-        content: {%raw%}"<h1>{{ my_welcome_text }}"{%endraw%} # <-- Inhalt
+      become: true
+
+    - name: copy apache2.conf
+      copy:
+        src: files/apache2.conf
+        dest: /etc/apache2/apache2.conf
       become: true
 ```
-Beachtet hier die Änderung am letzten Task. Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewwünschten Inhalt der
+
+Beachtet hier die Änderung am Task "copy index.html". Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewwünschten Inhalt der
 Zieldatei ein und nutzen hierfür unsere Variable.
 
+Dann führen wir das Playbook doch mal aus:
+```yaml
+cd ~/ansible-guide
+ansible-playbook -i inventory.txt webservers.yml
+```
+```
+PLAY [webserver setup] *******************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [Apache2 Setup] *********************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [start and enable apache2] **********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [copy index.html] *******************************************************************************************************************************************************************************************************************************************************************
+changed: [ansible-guide-1]
+changed: [ansible-guide-2]
+
+PLAY RECAP *******************************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1          : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-guide-2          : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+Der Task "copy index.html" hat nun für beide Hosts den Status "changed" und somit den neuen Inhalt für diei index.html übernommen. Ob wir den gewünschten Effekt erzielt haben können wir nun wieder mit curl, oder dem Browser prüfen:
+```bash
+curl http://192.168.0.11
+<h1>Ich bin webserver1!</h1>
+
+curl http://192.168.0.12
+<h1>Ich bin webserver2!</h1>
+```
+
+BAM! Sieht gut aus! Wir haben also erfolgreich hostspezifische Variablen verwendet. 
+
+Das Ganze funktioniert auch auch mit Gruppen. Dazu dienen die sogenannten group_vars. Auch dafür erstellen wir uns ein neues Playbook und nutzen dafür das nützliche Modul "debug" um die Variablen zu testen.
+
+#### ~/ansible-guide/groupvars-test.yml
+In Teil 4 dieses Guides haben wir ein Inventory mit zwei verchiedenen Gruppen angelegt "webservers" und "db". Wir erstellen also ein Playbook, welches genau diese beiden nutzt.
+
+```yaml
+- name: group_vars showcase
+  hosts:
+    - webservers
+    - db
+  tasks:
+    - name: Debug Ausgabe
+      debug:
+        msg: {% raw %}"{{ test_text }}"{% endraw %}
+```
+
+Das Modul "debug" ist sehr hilfreich, wenn wir Playbooks erstellen und zwischendurch testen wollen. Wir können uns damit z.B. Werte von Variablen ausgeben lassen. In unserem Fall definieren wir für das Modul einen Parameter:
+
+**msg**: Beliebiger String, der dann während dem Play ausgegeben wird
+
+Jetzt müssen wir die Variable "test_text" nur noch definieren. Und zwar für jede Gruppe anders. Wir legen uns auf der selben Ebene wir "host_vars" ein weiteres Verzeichnis an:
+
+```bash
+mkdir ~/ansible-guide/group_vars
+mkdir ~/ansible-guide/group_vars/webservers
+mkdir ~/ansible-guide/group_vars/db
+```
+
+In beiden Verzeichnissen erstellen wir uns eine "main.yml":
+
+#### ~/ansible-guide/group_vars/webservers/main.yml
+```yaml
+test_text: Ich bin ein Host in der Gruppe 'webservers'!
+```
+
+#### ~/ansible-guide/group_vars/db/main.yml
+```yaml
+test_text: Ich bin ein Host in der Gruppe 'db'!
+```
+
+Wir sind also genauso vorgegangen wie auch schon bei den host_vars, nur diesmal eben auf Gruppen-Ebene. Lasst uns nun das neue Playbook ausführen:
+
+```bash
+cd ~/ansible-guide
+ansible-playbook -i inventory.txt groupvars-test.yml
+```
+```
+ASK [Gathering Facts] *******************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+ok: [ansible-guide-3]
+
+TASK [Debug Ausgabe] *********************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1] => {
+    "msg": "Ich bin ein Host in der Gruppe 'webservers'!"
+}
+ok: [ansible-guide-2] => {
+    "msg": "Ich bin ein Host in der Gruppe 'webservers'!"
+}
+ok: [ansible-guide-3] => {
+    "msg": "Ich bin ein Host in der Gruppe 'db'!"
+}
+PLAY RECAP *******************************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-guide-2                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-guide-3                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+Wie wir oben sehen, zieht jeder der drei Hosts nun die gruppenspezifische Variable "test_text" und gibt diese entsprechend aus.
 
 
+## Zusammenfassung
 
+In diesem Kapitel hab ihr gelernt was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grudngerüst haben, um die ersten Projekte mit Ansible umzusetzen!
 
+Im nächsten Kapitel möchte ich euch dann Facts vorstellen.
 
+Bis dahin!
 
-
-
+Der Mow
 
 
