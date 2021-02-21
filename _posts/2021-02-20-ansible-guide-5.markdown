@@ -57,7 +57,7 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
 
 Dies ist die simpelste Definitions von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden nutzen wir folgendes Format {% raw %}"{{ variablen_name }}"{% endraw %}. Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
 
-In diesem Fall nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
+Im obigen Beispiel nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
 
 
 ### Variablen-Typen
@@ -167,7 +167,7 @@ Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserve
       become: true
 ```
 
-Beachtet hier die Änderung am Task "copy index.html". Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewwünschten Inhalt der
+Beachtet hier die Änderung am Task "copy index.html". Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewünschten Inhalt der
 Zieldatei ein und nutzen hierfür unsere Variable.
 
 Dann führen wir das Playbook doch mal aus:
@@ -213,7 +213,7 @@ BAM! Sieht gut aus! Wir haben also erfolgreich hostspezifische Variablen verwend
 Das Ganze funktioniert auch auch mit Gruppen. Dazu dienen die sogenannten group_vars. Auch dafür erstellen wir uns ein neues Playbook und nutzen dafür das nützliche Modul "debug" um die Variablen zu testen.
 
 #### ~/ansible-guide/groupvars-test.yml
-In Teil 4 dieses Guides haben wir ein Inventory mit zwei verchiedenen Gruppen angelegt "webservers" und "db". Wir erstellen also ein Playbook, welches genau diese beiden nutzt.
+In Teil 4 dieses Guides haben wir ein Inventory mit zwei verschiedenen Gruppen angelegt "webservers" und "db". Wir erstellen also ein Playbook, welches genau diese beiden nutzt.
 
 ```yaml
 - name: group_vars showcase
@@ -283,7 +283,7 @@ Wie wir oben sehen, zieht jeder der drei Hosts nun die gruppenspezifische Variab
 
 ## Zusammenfassung
 
-In diesem Kapitel hab ihr gelernt was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grudngerüst haben, um die ersten Projekte mit Ansible umzusetzen!
+In diesem Kapitel hab ihr gelernt was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grundgerüst haben, um die ersten Projekte mit Ansible umzusetzen!
 
 Im nächsten Kapitel möchte ich euch dann Facts vorstellen.
 
