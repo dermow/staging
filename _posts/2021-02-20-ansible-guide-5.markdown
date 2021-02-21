@@ -308,12 +308,10 @@ Wie wir oben sehen, zieht jeder der drei Hosts nun die gruppenspezifische Variab
 
 ## Zusammenfassung
 
-In diesem Kapitel hab ihr gelernt, was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Ihr solltet jetzt insgesamt ein gutes Grundgerüst haben, um die ersten Projekte mit Ansible umzusetzen!
-
-Im nächsten Kapitel möchte ich euch dann Facts vorstellen.
+In diesem Kapitel hab ihr gelernt, was Variablen sind und wie wir diese an verschiedenen Stellen definieren können. Im nächsten Kapitel möchte ich euch 
+dann Facts vorstellen. Diese sind den Variablen sehr ähnlich, es gibt aber einige Unterschiede!
 
 Bis dahin!
 
 Der Mow
-
 
