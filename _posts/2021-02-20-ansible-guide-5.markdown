@@ -171,7 +171,7 @@ Beachtet hier die Änderung am Task "copy index.html". Statt eine Quelldatei fü
 Zieldatei ein und nutzen hierfür unsere Variable.
 
 Dann führen wir das Playbook doch mal aus:
-```yaml
+```bash
 cd ~/ansible-guide
 ansible-playbook -i inventory.txt webservers.yml
 ```
