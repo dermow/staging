@@ -83,8 +83,7 @@ Variablen können auch auf Taskebene definiert werden. Das sähe dann so aus:
 
 Das macht aber nur in ganz speziellen Fällen Sinn, wenn tatsächlich nur ein bestimmter Task diese Variable benötigt.
 
-Im obigen Beispielen nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
-
+Im obigen Beispielen nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden.
 
 ### Variablen-Typen
 
