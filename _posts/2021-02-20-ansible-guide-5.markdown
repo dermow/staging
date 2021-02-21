@@ -193,7 +193,7 @@ Um das nun zu testen, müssen wir noch eine kleine Anpassung an unserem Webserve
 ```
 
 Beachtet hier die Änderung am Task "copy index.html". Statt eine Quelldatei für das Copy-Modul zu definieren, geben wir direkt den gewünschten Inhalt der
-Zieldatei ein und nutzen hierfür unsere Variable.
+Zieldatei ein und nutzen hierfür unsere Variable "my_welcome_text".
 
 Dann führen wir das Playbook doch mal aus:
 ```bash
