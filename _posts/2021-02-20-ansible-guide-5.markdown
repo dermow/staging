@@ -57,7 +57,33 @@ Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var
 
 Dies ist die simpelste Definition von Variablen. Wir haben die Variable "my_docroot" ganz einfach im Playbook definiert und können auf sie nun im gesamten Play "Play mit Variable" zugreifen. Um Variablen zu verwenden, nutzen wir folgendes Format {% raw %}"{{ variablen_name }}"{% endraw %}. Wichtig ist hier, dass wir den gesamten String dafür in Quotes (") setzen müssen.
 
-Im obigen Beispiel nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
+Variablen können auch auf Taskebene definiert werden. Das sähe dann so aus:
+
+##### ~/ansible-guide/playbook-with-task-vars.yml
+
+``` yaml
+- name: Play mit Variablen auf Taskebene
+  hosts: webservers
+  tasks:
+    - name: copy index.html
+      copy: 
+        src: files/index.hmlt
+        dest: {% raw %}"{{ my_docroot }}/index.html" # <-- Nutzung der Variable {% endraw %}
+      become: true
+      vars:
+        my_docroot: /var/www/html
+      
+   - name: copy style.css
+     copy:
+       src: files/style.css
+       dest: {% raw %}"{{ my_docroot }}/style.css" {% endraw %}
+     become: true
+     my_docroot: /var/www/html
+```
+
+Das macht aber nur in ganz speziellen Fällen Sinn, wenn tatsächlich nur ein bestimmter Task diese Variable benötigt.
+
+Im obigen Beispielen nutzen wir eine Variable des Typs "string", also eine einfache Zeichenkette. Es gibt aber noch weitere Variablen-Typen, auf die wir im Verlauf der Starter-Guide noch genauer eingehen werden. In diesem Teil werde ich zu jedem der Typen nur einen kurzen Satz verlieren, da wir im Laufe des Tutorials noch genauer darauf eingehen werden. Einige davon sind sogar ein eigenes Kapitel wert.
 
 
 ### Variablen-Typen
