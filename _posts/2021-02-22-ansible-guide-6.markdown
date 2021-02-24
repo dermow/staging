@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Ansible Starter-Guide: #005 - Variablen" 
-date:   2021-02-22 16:57:42 +0100
+title:  "Ansible Starter-Guide: #006 - Facts" 
+date:   2021-02-24 16:57:42 +0100
 categories: Ansible
 ---
 
