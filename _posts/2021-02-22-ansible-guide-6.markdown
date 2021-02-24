@@ -11,11 +11,10 @@ Hallo zusammen. Hiermit kommen wir zu Teil 6 der Ansible Starter-Guide. In diese
 
 Vielleicht ist euch zu Beginn jedes Playbook-Durchlaufs schon folgender Part aufgefallen:
 
-```
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1]
 ```
-Dies ist ein Task, der von Ansible standardmäßig ausgeführt wird wenn das Sammeln von Facts aktiviert ist. Facts sind Variablen, die von Ansible zum Start eines Playbooks automatisch gesetzt werden. Sie enthalten alle möglichen Informationen zum aktuellen Play, dessen Zielsystemen und der aktuellen Umgebung. 
+Dies ist ein Task, der von Ansible standardmäßig ausgeführt wird, wenn das Sammeln von Facts aktiviert ist. Facts sind Variablen, die von Ansible zum Start eines Playbooks automatisch gesetzt werden. Sie enthalten alle möglichen Informationen zum aktuellen Play, dessen Zielsystemen und der aktuellen Umgebung. 
 
 Ein paar kleine Beispiele:
 
@@ -25,7 +24,7 @@ Ein paar kleine Beispiele:
 
 **ansible_default_ipv4**: Enthält die erste von Ansible gefundene, primäre IPv4-Adresse
 
-**ansible_distribution**: Enthält den Namen der OS-Distribution des Zielhosts, z.B "Ubuntu", "Debian" oder "Suse".
+**ansible_distribution**: Enthält den Namen der OS-Distribution des Zielhosts, z.B. "Ubuntu", "Debian" oder "Suse".
 
 Wir können uns mit einem kleinen AdHoc-Command alle verfügbaren Facts zu einem System anzeigen lassen:
 
@@ -36,7 +35,7 @@ ansible ansible-guide-1 -m setup
 Die Ausgabe ist dann ein sehr großer Block im JSON (Java Script Object Notation) Format, den ich jetzt zwecks Übersichtlichkeit nicht hier einfüge. Probiert das am besten einfach selbst aus!
 
 ### Fact-Gathering aktivieren / deaktivieren
-Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings kostest das auch Zeit und kann daher bei Bedarf deaktiviert werden:
+Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings kostet das auch Zeit und kann daher bei Bedarf deaktiviert werden:
 
 ```yaml
 - hosts: all
@@ -48,7 +47,7 @@ Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings 
 
 ```
 
-Meine Empfehlung ist, das Sammeln von Facts nur zu aktivieren, wenn wir auch wirklich Facts nutezn möchten. Dies verhindert eine unnötige Verlängerung der Playbook-Laufzeit.
+Meine Empfehlung ist, das Sammeln von Facts nur zu aktivieren, wenn wir auch wirklich auf diese zugreifen müssen. Dies verhindert eine unnötige Verlängerung der Playbook-Laufzeit.
 
 ### Zugriff auf Facts in einem Playbook
 
@@ -188,7 +187,7 @@ Da der Fact "fact_1" nun in einem vorherigen Task definiert wurde, können wir i
 
 
 ### Zusammenfassung
-Damit kommen wir schon zum Ende dieses kurzen Kapitels in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispieln nutzen, unter Anderem im nächtsten Teil, in dem wir uns Conditionals (Bedingungen) anschauen werden.
+Damit kommen wir schon zum Ende dieses kurzen Kapitels, in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispieln nutzen, unter anderem im nächtsten Teil, in dem wir uns Conditionals (Bedingungen) anschauen werden.
 
 Bis bald!
 
