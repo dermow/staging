@@ -53,7 +53,6 @@ Meine Empfehlung ist, das Sammeln von Facts nur dann zu aktivieren, wenn wir auc
 ### Zugriff auf Facts in einem Playbook
 Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch. So können wir uns z.B. die aktuelle Distribution und OS-Familie ausgeben lassen:
 
-##### ~/ansible-guide/playbook-with-facts.yml
 ```yaml
 - hosts: all
   tasks:
@@ -156,6 +155,7 @@ Der Task schlägt fehl, da die Variable "fact_1" noch nicht verfügbar ist. Dies
         fact_1: "ich bin fact_1"
 
     - name: fact_2 in neuem Task definieren
+      set_fact:
         fact_2: "fact_1 lautet: {% raw %}{{ fact_1 }}{% endraw %}"
 
     - name: Ausgabe
