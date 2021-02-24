@@ -11,6 +11,7 @@ Hallo zusammen. Hiermit kommen wir zu Teil 6 der Ansible Starter-Guide. In diese
 
 Vielleicht ist euch zu Beginn jedes Playbook-Durchlaufs schon folgender Part aufgefallen:
 
+```
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1]
 ```
