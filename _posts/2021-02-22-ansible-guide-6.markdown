@@ -48,6 +48,8 @@ Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings 
 
 ```
 
+Meine Empfehlung ist, das Sammeln von Facts nur zu aktivieren, wenn wir auch wirklich Facts nutezn möchten. Dies verhindert eine unnötige Verlängerung der Playbook-Laufzeit.
+
 ### Zugriff auf Facts in einem Playbook
 
 Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch. So können wir uns z.B. die aktuelle Distribution und OS-Familie ausgeben lassen:
@@ -66,9 +68,9 @@ Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch
 
 ```
 
-#### Zusammenfassung
+### Zusammenfassung
 Damit kommen wir schon zum Ende dieses kurzen Kapitels in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispieln nutzen, unter Anderem im nächtsten Teil, in dem wir uns Conditionals (Bedingungen) anschauen werden.
 
 Bis bald!
-Der Mow
 
+Der Mow
