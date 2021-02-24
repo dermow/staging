@@ -5,7 +5,7 @@ date:   2021-02-24 16:57:42 +0100
 categories: Ansible
 ---
 
-Hallo zusammen. Hiermit kommen wir zu Teil 6 der Ansible Starter-Guide. In diesem Teil möchte ich mir mit euch zusammen die sogenannten Facts anschauen. Diese sind nicht schwer zu verstehen, können uns aber bei vielen Aufgaben mit Ansible das Leben ereleichtern.
+Hallo zusammen. Hiermit kommen wir zu Teil 6 der Ansible Starter-Guide. In diesem Teil möchte ich mir mit euch zusammen die sogenannten Facts anschauen. Diese sind nicht schwer zu verstehen, können uns aber bei vielen Aufgaben mit Ansible das Leben erleichtern.
 
 ### Was sind Facts?
 
