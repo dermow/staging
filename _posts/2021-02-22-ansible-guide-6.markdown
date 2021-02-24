@@ -72,9 +72,9 @@ Zusätzlich zu den von Ansible bereitgestellten Facts können wir diese auch sel
 Dazu nutzen wir das Modul "set_fact":
 
 ```yaml
-- hosts: ansible-guide
+- hosts: ansible-guide-1
   gather_facts: true
-  task:
+  tasks:
     - name: set facts
       set_fact:
         my_custom_fact_1: "Ich wurde zur Laufzeit definiert"
@@ -191,7 +191,9 @@ Da der Fact "fact_1" nun in einem vorherigen Task definiert wurde, können wir i
 Damit kommen wir schon zum Ende dieses kurzen Kapitels, in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispielen nutzen.
 
 ### Wie geht es weiter?
-Im nächsten Teil dieser Reihe befassen wir uns mit Rückgabewerten (Return Values). 
+Im nächsten Teil dieser Reihe befassen wir uns mit Rückgabewerten (Return Values). Wie immer hoffe ich, dass euch der Guide bisher weiterhelfen konnte. 
+
+Ich würde mich sehr über euer Feedback freuen. Hinterlasst doch einfach ein Kommentar hier oder schreibt mir eine Mail!
 
 Bis bald!
 
