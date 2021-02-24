@@ -60,13 +60,131 @@ Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch
   tasks:
     - name: print current distribution
       debug:
-        msg: "My distribution is {{ ansible_distribution }}"
+        msg: "My distribution is {% raw %}{{ ansible_distribution }}{% endraw %}"
 
     - name: print current os family
       debug:
-        msg: "My os family is {{ ansible_os_family }}"
+        msg: "My os family is {% raw %}{{ ansible_os_family }}{% endraw %}"
 
 ```
+
+### Eigene Facts definieren
+Zusätzlich zu den von Ansible bereitgestellten Facts können wir diese auch selbst definieren. Dies ist immer dann nützlich, wenn wir uns zur Laufzeit eigenen Variablen festlegen möchten.
+
+Dazu nutzen wir das Modul "set_fact":
+
+```yaml
+- hosts: ansible-guide
+  gather_facts: true
+  task:
+    - name: set facts
+      set_fact:
+        my_custom_fact_1: "Ich wurde zur Laufzeit definiert"
+        my_custom_fact_2: "Ich wurde auch zur Laufzeit definiert"
+        another_custom_fact: "Hallo Welt"
+
+    - name: Ausgabe
+      debug:
+        msg: "{% raw %}{{ my_custom_fact_1 }}{% endraw %}"
+```
+
+Mit dem Modul "set_fact" können wir einen oder mehrere Facts manuell definieren. Innerhalb der Werte könnten wir auch wieder auf Facts oder Variablen zugreifen:
+
+```yaml
+- hosts: ansible-guide-1
+  gather_facts: true
+  tasks:
+    - name: set facts
+      set_fact:
+        my_custom_fact: "Meine Distirubtion ist: {% raw %}{{ ansible_distribution }}{% endraw %}"
+
+    - name: Ausgabe
+      debug:
+        msg: "{% raw %}{{ my_custom_fact }}{% endraw %}"
+
+```
+###### Ausgabe:
+```
+PLAY [localhost] ***************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [set facts] ***************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [Ausgabe] *****************************************************************************************************************************************************************************************************************************************************************
+ok: [ok: [ansible-guide-1]] => {
+    "msg": "Meine Distirubtion ist: Ubuntu"
+}
+
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+
+Die mit dem Modul "set_fact" definierten Facts sind erst NACH der Ausführung des Tasks verfügbar. Das heißt, wir können nicht auf Facts zugreifen, die im selben Task erst definiert werden:
+
+```yaml
+- hosts: ansible-guide-1
+  tasks:
+    - name: Das hier funktioniert NICHT!
+      set_fact:
+        fact_1: "ich bin fact_1"
+        fact_2: "fact_1 lautet: {% raw %}{{ fact_1 }}{% endraw %}"
+```
+###### Ausgabe:
+```
+PLAY [ansible-guide-1] ***************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [Das hier funktioniert NICHT!] ********************************************************************************************************************************************************************************************************************************************
+fatal: [ansible-guide-1]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'fact_1' is undefined\n\nThe error appears to be in '/home/sseibold/blog/facts.yml': line 5, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n  tasks:\n    - name: Das hier funktioniert NICHT!\n      ^ here\n"}
+
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+```
+
+Der Task schlägt wie erwartet fehl, da die Variable "fact_1" noch nicht verfügbar ist. Dies ist erst nach dem Durchlauf des Tasks der Fall. Das Playbook müsste also so aussehen:
+
+```yaml
+- hosts: ansible-guide-1
+  tasks:
+    - name: Das hier funktioniert!
+      set_fact:
+        fact_1: "ich bin fact_1"
+
+    - name: fact_2 in neuem Task definieren
+        fact_2: "fact_1 lautet: {% raw %}{{ fact_1 }}{% endraw %}"
+
+    - name: Ausgabe
+      debug:
+        msg: "{% raw %}{{ fact_2 }}{% endraw %}"
+```
+###### Ausgabe:
+```
+PLAY [ansible-guide-1] ***************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [Das hier funktioniert] ***************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [fact_2 in neuem Task definieren] *****************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [Ausgabe] *****************************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1] => {
+    "msg": "fact_1 lautet: ich bin fact_1"
+}
+
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+
 
 ### Zusammenfassung
 Damit kommen wir schon zum Ende dieses kurzen Kapitels in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispieln nutzen, unter Anderem im nächtsten Teil, in dem wir uns Conditionals (Bedingungen) anschauen werden.
