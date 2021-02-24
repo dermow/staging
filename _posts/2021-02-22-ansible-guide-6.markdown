@@ -30,7 +30,7 @@ Ein paar kleine Beispiele:
 Wir können uns mit einem kleinen AdHoc-Command alle verfügbaren Facts zu einem System anzeigen lassen:
 
 ```bash
-ansible ansible-guide-1 -m setup
+ansible ansible-guide-1 -i inventory.txt -m setup
 ```
 
 Die Ausgabe ist dann ein sehr großer Block im JSON (JavaScript Object Notation) Format, den ich jetzt zwecks Übersichtlichkeit nicht hier einfüge. Probiert das am besten einfach selbst aus!
