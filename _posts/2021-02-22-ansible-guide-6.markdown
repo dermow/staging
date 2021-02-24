@@ -184,6 +184,7 @@ ok: [ansible-guide-1] => {
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
 ```
+Da der Fact "fact_1" nun in einem vorherigen Task definiert wurde, können wir im nächsten Task darauf zugreifen.
 
 
 ### Zusammenfassung
