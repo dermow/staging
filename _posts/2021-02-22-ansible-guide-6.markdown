@@ -188,7 +188,10 @@ Da der Fact "fact_1" nun in einem vorherigen Task definiert wurde, können wir i
 
 
 ### Zusammenfassung
-Damit kommen wir schon zum Ende dieses kurzen Kapitels, in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispielen nutzen, unter anderem im nächsten Teil, in dem wir uns Conditionals (Bedingungen) anschauen werden.
+Damit kommen wir schon zum Ende dieses kurzen Kapitels, in dem wir gelernt haben, was Facts sind und wie wir auf diese zugreifen können. Wir werden Facts im Laufe dieses Guides noch sehr häufig in praktischen Beispielen nutzen.
+
+### Wie geht es weiter?
+Im nächsten Teil dieser Reihe befassen wir uns mit Rückgabewerten (Return Values). 
 
 Bis bald!
 
