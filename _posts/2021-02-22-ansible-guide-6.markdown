@@ -5,7 +5,7 @@ date:   2021-02-24 16:57:42 +0100
 categories: Ansible
 ---
 
-Hallo zusammen. Hiermit kommen wir zu Teil 6 der Ansible Starter-Guide. In diesem Teil möchte ich mir mit euch zusammen die sogenannten Facts anschauen. Diese sind nicht schwer zu verstehen, können uns aber bei vielen Aufgaben mit Ansible das Leben erleichtern.
+Hallo zusammen. Hiermit kommen wir zu Teil 6 des Ansible Starter-Guides. In diesem Teil möchte ich mir mit euch zusammen die sogenannten Facts anschauen. Diese sind nicht schwer zu verstehen, können uns aber bei vielen Aufgaben mit Ansible das Leben erleichtern.
 
 ### Was sind Facts?
 
@@ -33,7 +33,7 @@ Wir können uns mit einem kleinen AdHoc-Command alle verfügbaren Facts zu einem
 ansible ansible-guide-1 -m setup
 ```
 
-Die Ausgabe ist dann ein sehr großer Block im JSON (Java Script Object Notation) Format, den ich jetzt zwecks Übersichtlichkeit nicht hier einfüge. Probiert das am besten einfach selbst aus!
+Die Ausgabe ist dann ein sehr großer Block im JSON (JavaScript Object Notation) Format, den ich jetzt zwecks Übersichtlichkeit nicht hier einfüge. Probiert das am besten einfach selbst aus!
 
 ### Fact-Gathering aktivieren / deaktivieren
 Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings kostet das auch Zeit und kann daher bei Bedarf deaktiviert werden:
@@ -48,10 +48,9 @@ Per Default ist das Sammeln von Facts für jedes Playbook aktiviert. Allerdings 
 
 ```
 
-Meine Empfehlung ist, das Sammeln von Facts nur zu aktivieren, wenn wir auch wirklich auf diese zugreifen müssen. Dies verhindert eine unnötige Verlängerung der Playbook-Laufzeit.
+Meine Empfehlung ist, das Sammeln von Facts nur dann zu aktivieren, wenn wir auch wirklich auf diese zugreifen müssen. Dies kann die Laufzeit eines Playbooks deutlich verkürzen.
 
 ### Zugriff auf Facts in einem Playbook
-
 Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch. So können wir uns z.B. die aktuelle Distribution und OS-Familie ausgeben lassen:
 
 ##### ~/ansible-guide/playbook-with-facts.yml
@@ -69,7 +68,7 @@ Da Facts schlussendlich auch Variablen sind, ist der Zugriff auf diese identisch
 ```
 
 ### Eigene Facts definieren
-Zusätzlich zu den von Ansible bereitgestellten Facts können wir diese auch selbst definieren. Dies ist immer dann nützlich, wenn wir uns zur Laufzeit eigenen Variablen festlegen möchten.
+Zusätzlich zu den von Ansible bereitgestellten Facts können wir diese auch selbst definieren. Dies ist immer dann nützlich, wenn wir zur Laufzeit eigenen Variablen festlegen möchten.
 
 Dazu nutzen wir das Modul "set_fact":
 
@@ -88,7 +87,7 @@ Dazu nutzen wir das Modul "set_fact":
         msg: "{% raw %}{{ my_custom_fact_1 }}{% endraw %}"
 ```
 
-Mit dem Modul "set_fact" können wir einen oder mehrere Facts manuell definieren. Innerhalb der Werte könnten wir auch wieder auf Facts oder Variablen zugreifen:
+Mit dem Modul "set_fact" können wir einen oder mehrere Facts manuell definieren. Bei der Definition könnten wir auch wieder auf Facts oder Variablen zugreifen:
 
 ```yaml
 - hosts: ansible-guide-1
@@ -123,12 +122,12 @@ ok: [ansible-guide-1]                  : ok=3    changed=0    unreachable=0    f
 
 ```
 
-Die mit dem Modul "set_fact" definierten Facts sind erst NACH der Ausführung des Tasks verfügbar. Das heißt, wir können nicht auf Facts zugreifen, die im selben Task erst definiert werden:
+Die mit dem Modul "set_fact" definierten Facts sind erst NACH der Ausführung des Tasks verfügbar. Das heißt, wir können nicht auf Facts zugreifen, die im selben Task definiert werden:
 
 ```yaml
 - hosts: ansible-guide-1
   tasks:
-    - name: Das hier funktioniert NICHT!
+    - name: Das hier funktioniert leider NICHT!
       set_fact:
         fact_1: "ich bin fact_1"
         fact_2: "fact_1 lautet: {% raw %}{{ fact_1 }}{% endraw %}"
@@ -140,14 +139,14 @@ PLAY [ansible-guide-1] *********************************************************
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1]
 
-TASK [Das hier funktioniert NICHT!] ********************************************************************************************************************************************************************************************************************************************
+TASK [Das hier funktioniert leider NICHT!] ********************************************************************************************************************************************************************************************************************************************
 fatal: [ansible-guide-1]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'fact_1' is undefined\n\nThe error appears to be in '/home/sseibold/blog/facts.yml': line 5, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n  tasks:\n    - name: Das hier funktioniert NICHT!\n      ^ here\n"}
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
 ```
 
-Der Task schlägt wie erwartet fehl, da die Variable "fact_1" noch nicht verfügbar ist. Dies ist erst nach dem Durchlauf des Tasks der Fall. Das Playbook müsste also so aussehen:
+Der Task schlägt fehl, da die Variable "fact_1" noch nicht verfügbar ist. Dies ist erst nach dem Durchlauf des Tasks der Fall. Das Playbook müsste also so aussehen:
 
 ```yaml
 - hosts: ansible-guide-1
@@ -184,6 +183,7 @@ ok: [ansible-guide-1] => {
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
 ```
+
 Da der Fact "fact_1" nun in einem vorherigen Task definiert wurde, können wir im nächsten Task darauf zugreifen.
 
 
