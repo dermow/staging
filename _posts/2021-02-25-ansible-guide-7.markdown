@@ -60,7 +60,7 @@ Wenn wir nun Informationen zu diesem File nutzen möchten, müssen wir den Rück
 
 Damit teilen wir Ansible mit, dass es den Rückgabewert des Tasks "check if hosts file is there" in einer Variable mit dem Namen "my_var_with_return_value" speichern soll. Nun enthält der Return-Value jedes Moduls unterschiedliche Felder. Diese finden wir aber in der offiziellen Ansible-Dokumentation zu jedem Modul. Für das Modul "stat" ist das hier:
 
-https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html
+[https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html](https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html)
 
 Der Rückgabewert ist in einem Dictionary gespeichert. Ich weiß, diese haben wir noch nicht im Detail behandelt, für diesen Fall soll es aber erstmal reichen. Um zu prüfen, ob unsere Datei existiert gehen wir so vor:
 
@@ -145,7 +145,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 
 Wir führen also wieder einen Task aus und speichern den Rückgabewert per "register" in eine Variable. Dann schauen wir uns den Aufbau des Rückgabewerts an:
 
-https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
+[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html)
 
 Unter "Return Values" sehen wir, dass es das Feld "stdout" gibt, also den standard output des aufgerufenen Shellcommands. Dieses Feld geben wir uns hier wieder mit dem Modul "debug" aus.
 
