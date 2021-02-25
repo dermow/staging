@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #007 - Rückgabewerte (Return Values)" 
-date:   2021-02-26 16:57:42 +0100
+date:   2021-02-25 16:57:42 +0100
 categories: Ansible
 ---
 
