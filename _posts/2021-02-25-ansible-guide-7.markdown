@@ -5,7 +5,7 @@ date:   2021-02-25 16:57:42 +0100
 categories: Ansible
 ---
 
-Hallo! Weiter geht es mit dem Ansible Starter-Guide. Wir sind bereits bei Teil 7 angelang, der sich mit Rückgabewerten von Tasks beschäftigen wird.
+Hallo! Weiter geht es mit dem Ansible Starter-Guide. Wir sind bereits bei Teil 7 angelangt, der sich mit Rückgabewerten von Tasks beschäftigen wird.
 
 Jetzt fragt ihr euch sicher (zurecht!): Was zur Hölle sind Rückgabewerte und wozu brauche ich die?
 
@@ -62,7 +62,7 @@ Damit teilen wir Ansible mit, dass es den Rückgabewert des Tasks "check if host
 
 https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html
 
-Die Variable ist also ein Dictionary. Um zu prüfen, ob unsere Datei existiert gehen wir so vor:
+Der Rückgabewert ist in einem Dictionary gespeichert. Ich weiß, diese haben wir noch nicht im Detail behandelt, für diesen Fall soll es aber erstmal reichen. Um zu prüfen, ob unsere Datei existiert gehen wir so vor:
 
 ```yaml
 - name: Beispiel mit Return Values
@@ -148,6 +148,19 @@ Wir führen also wieder einen Task aus und speichern den Rückgabewert per "regi
 https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
 
 Unter "Return Values" sehen wir, dass es das Feld "stdout" gibt, also den standard output des aufgerufenen Shellcommands. Dieses Feld geben wir uns hier wieder mit dem Modul "debug" aus.
+
+### Standard-Felder
+Zusätzlich zu den modulspezifischen Feldern, existieren in jedem Rückgabewert-Dictionary einige Standard-Felder. Ein paar Beispiele:
+
+**changed**: Enthält die Information als Boolean (true/false), ob der Task den Status "changed" zurückgeliefert hat
+
+**skipped**: Enthält die Information, ob der Task übersprungen wurde
+
+**failed**: Ist hoffentlich "false". Enthält die Information, ob der Task fehlgeschlagen ist.
+
+Die vollständige Liste findet ihr hier:
+
+[https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html](https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html)
 
 ### Zusammenfassung
 Vermutlich fragen sich einige zu diesem Zeitpunkt noch, was sie nun mit Variablen, Facts und Return Values so alles anfangen sollen. Aber ich habe euch diese nicht umsonst vorgestellt. Im nächsten Teil möchte ich euch Conditionals vorstellen, das sind Bedingungen, von denen wir unsere Tasks abhängig machen können. Hier werden wir dann fleißig Gebrauch von den bisher gelernten Elementen machen!
