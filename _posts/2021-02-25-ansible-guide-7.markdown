@@ -75,7 +75,7 @@ Der Rückgabewert ist in einem Dictionary gespeichert. Ich weiß, diese haben wi
 
     - name: debug output
       debug:
-        msg: "File exists is: {{ my_var_with_return_value.stat.exists }}"
+        msg: "File exists is: {% raw %}{{ my_var_with_return_value.stat.exists }}{% endraw %}"
 
 ```
 
@@ -121,7 +121,7 @@ Genauso könnten wir uns die Ausgabe eines Shellcommands ausgeben lassen, welche
 
     - name: debug output
       debug:
-        msg: "{{ my_var_with_return_value.stdout }}"
+        msg: "{% raw %}{{ my_var_with_return_value.stdout }}{% endraw %}"
 
 ```
 ###### Ausgabe:
