@@ -7,9 +7,9 @@ categories: Ansible
 
 Hallo! Weiter geht es mit dem Ansible Starter-Guide. Wir sind bereits bei Teil 7 angelangt, der sich mit Rückgabewerten von Tasks beschäftigen wird.
 
-Jetzt fragt ihr euch sicher (zurecht!): Was zur Hölle sind Rückgabewerte und wozu brauche ich die?
+Jetzt fragt ihr euch sicher: Was zur Hölle sind Rückgabewerte und wozu brauche ich die?
 
-Kurz zusammengefasst: Wenn ein Task durchgelaufen ist, erstellt er einen Rückgabewert, der Informationen zum Task-Ergebnis enthält. Wir brauchen Rückgabewerte immer dann, wenn wir in einem Task mit dem Ergebnis aus einem vorausgegangenen Tasks weiterarbeiten wollen. 
+Kurz zusammengefasst: Wenn ein Task ausgeführt wurde, erstellt er einen Rückgabewert, der Informationen zum Task-Ergebnis enthält. Wir brauchen Rückgabewerte immer dann, wenn wir in einem Task mit dem Ergebnis aus einem vorausgegangenen Tasks weiterarbeiten wollen. 
 
 ### Beispiel
 
@@ -43,9 +43,9 @@ ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=
 ansible-guide-2                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Wie wir sehen, haben beide Tasks funktioniert und liefern den Status "ok". Und was haben wir nun davon? Bisher noch nichts. Das Modul stat sammelt nur Statistiken zu einem File und würde übrigens auch "ok" melden, sollte die Datei nicht existieren.
+Wie wir sehen, haben beide Tasks funktioniert und liefern den Status "ok". Und was haben wir nun davon? Bisher noch nichts. Das Modul stat sammelt nur Statistiken zu einem File (bzw. Pfad) und würde übrigens auch "ok" melden, sollte die Datei nicht existieren.
 
-Wenn wir nun Informationen zu diesem File nutzen möchten, müssen wir den Rückgabewert des Tasks nutzen. Um diesen festzuhalten, gibt es den Task-Parameter "register":
+Wenn wir nun die gesammelten Informationen zu diesem File nutzen möchten, müssen wir den Rückgabewert des Tasks nutzen. Um diesen festzuhalten, gibt es den Task-Parameter "register":
 
 ```yaml
 - name: Beispiel mit Return Values
@@ -62,7 +62,7 @@ Damit teilen wir Ansible mit, dass es den Rückgabewert des Tasks "check if host
 
 [https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html](https://docs.ansible.com/ansible/devel/collections/ansible/builtin/stat_module.html)
 
-Der Rückgabewert ist in einem Dictionary gespeichert. Ich weiß, diese haben wir noch nicht im Detail behandelt, für diesen Fall soll es aber erstmal reichen. Um zu prüfen, ob unsere Datei existiert gehen wir so vor:
+Der Rückgabewert ist in einem Dictionary gespeichert. Diese haben wir noch nicht im Detail behandelt, für diesen Fall soll es aber erstmal reichen. Um zu prüfen, ob unsere Datei existiert gehen wir so vor:
 
 ```yaml
 - name: Beispiel mit Return Values
@@ -135,7 +135,7 @@ TASK [get os version] **********************************************************
 changed: [ansible-guide-1]
 
 TASK [debug output] ************************************************************************************************************************************************************************************************************************************************************
-ok: [localhost] => {
+ok: [ansible-guide-1] => {
     "msg": ""msg": "NAME=\"Ubuntu\"\nVERSION=\"20.04.2 LTS (Focal Fossa)\"\nID=ubuntu\nID_LIKE=debian\nPRETTY_NAME=\"Ubuntu 20.04.2 LTS\"\nVERSION_ID=\"20.04\"\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nVERSION_CODENAME=focal\nUBUNTU_CODENAME=focal"
 }
 
@@ -162,10 +162,9 @@ Die vollständige Liste findet ihr hier:
 
 [https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html](https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html)
 
-### Zusammenfassung
-Vermutlich fragen sich einige zu diesem Zeitpunkt noch, was sie nun mit Variablen, Facts und Return Values so alles anfangen sollen. Aber ich habe euch diese nicht umsonst vorgestellt. Im nächsten Teil möchte ich euch Conditionals vorstellen, das sind Bedingungen, von denen wir unsere Tasks abhängig machen können. Hier werden wir dann fleißig Gebrauch von den bisher gelernten Elementen machen!
 
-Ich hoffe der Guide gefällt euch bisher!
+### Zusammenfassung
+Vermutlich fragen sich einige zu diesem Zeitpunkt noch, was sie nun mit Variablen, Facts und Return Values so alles anfangen sollen. Aber ich habe euch diese nicht umsonst vorgestellt. Im nächsten Teil möchte ich euch Conditionals zeigen, das sind Bedingungen, von denen wir unsere Tasks abhängig machen können. Hier werden wir dann fleißig Gebrauch von den bisher gelernten Elementen machen!
 
 Viele Grüße und bis zum nächsten Mal!
 
