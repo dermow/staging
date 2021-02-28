@@ -164,7 +164,6 @@ Die vollständige Liste findet ihr hier:
 
 
 ### Zusammenfassung
-
 Im nächsten Teil möchte ich euch Conditionals zeigen, das sind Bedingungen, an die wir die Ausführung unserer Tasks knüpfen können. 
 
 Viele Grüße und bis dahin!
