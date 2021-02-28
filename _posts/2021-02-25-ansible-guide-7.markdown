@@ -43,7 +43,7 @@ ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=
 ansible-guide-2                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Wie wir sehen, haben beide Tasks funktioniert und liefern den Status "ok". Und was haben wir nun davon? Bisher noch nichts. Das Modul stat sammelt nur Statistiken zu einem File (bzw. Pfad) und würde übrigens auch "ok" melden, sollte die Datei nicht existieren.
+Wie wir sehen, haben beide Tasks funktioniert und liefern den Status "ok". Und was haben wir nun davon? Bisher noch nichts. Das Modul "stat" sammelt nur Statistiken zu einem File (bzw. Pfad) und würde übrigens auch "ok" melden, sollte die Datei nicht existieren.
 
 Wenn wir nun die gesammelten Informationen zu diesem File nutzen möchten, müssen wir den Rückgabewert des Tasks nutzen. Um diesen festzuhalten, gibt es den Task-Parameter "register":
 
@@ -164,8 +164,9 @@ Die vollständige Liste findet ihr hier:
 
 
 ### Zusammenfassung
-Vermutlich fragen sich einige zu diesem Zeitpunkt noch, was sie nun mit Variablen, Facts und Return Values so alles anfangen sollen. Aber ich habe euch diese nicht umsonst vorgestellt. Im nächsten Teil möchte ich euch Conditionals zeigen, das sind Bedingungen, von denen wir unsere Tasks abhängig machen können. Hier werden wir dann fleißig Gebrauch von den bisher gelernten Elementen machen!
 
-Viele Grüße und bis zum nächsten Mal!
+Im nächsten Teil möchte ich euch Conditionals zeigen, das sind Bedingungen, an die wir die Ausführung unserer Tasks knüpfen können. 
+
+Viele Grüße und bis dahin!
 
 Der Mow
