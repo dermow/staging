@@ -273,7 +273,7 @@ Etwas komplizierter wird es, wenn wir AND und OR kombinieren möchten:
 
 Wir haben hier also zwei Conditionals in einer Liste definiert. Wie wir gelernt haben, müssen beide Listen-Items am Ende wahr sein, um den Task auszuführen. Das Beispiel oben umformuliert bedeutet also folgendes:
 
-** Wenn my_text 'Hallo Welt' ist UND my_number 5 oder größer als 3 ist. **
+**Wenn my_text 'Hallo Welt' ist UND my_number 5 oder größer als 3 ist.**
 
 Führen wir das Playbook nun aus, wird der Task ausgeführt:
 
