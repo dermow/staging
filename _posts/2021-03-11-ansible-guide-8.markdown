@@ -331,7 +331,7 @@ ansible-guide-1                  : ok=1    changed=0    unreachable=0    failed=
 ```
 
 ### Ausprobieren!
-Am besten probiert ihr das einfach selbst mal aus und variiert die Variablen-Werte beliebig um ein Gefühl zu bekommen.
+Am besten probiert ihr das einfach selbst mal aus und variiert die Variablen-Werte beliebig. 
 
 ### So geht es weiter
 
