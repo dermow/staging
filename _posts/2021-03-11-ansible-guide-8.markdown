@@ -251,7 +251,6 @@ Ich habe mir erlaubt, die Variable "my_text" ein wenig abzuändern, dabei aber d
 
 **Wenn my_number 5 ist ODER 'Hallo' in my_text enthalten ist ODER my_other_text "Blubb." ist.**
 
-
 ### AND und OR kombiniert
 
 Etwas komplizierter wird es, wenn wir AND und OR kombinieren möchten:
