@@ -16,3 +16,16 @@ Ziel-Host ein bestimmtes Betriebssystem installiert hat. Wenn wir Conditionals n
 ### Ein erstes Beispiel
 
 Lasst uns mit einem sehr einfachen Beispiel beginnen. 
+
+##### simple-conditional.yml
+
+```yaml
+- hosts: ansible-guide-1
+  vars:
+    my_number: 6
+  tasks:
+    - name: task mit condition
+      debug:
+        msg: "Variable ist größer als 5!!"
+      when: "my_number > 5"
+```
