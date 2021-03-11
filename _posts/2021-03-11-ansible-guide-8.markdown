@@ -32,5 +32,33 @@ Lasst uns mit einem sehr einfachen Beispiel beginnen.
 
 Conditionals werden im Parameter "when" definiert. Dieser ist ein Parameter auf Task-Ebene. Unter "when" kann dann eine, oder auch eine Liste mit Conditionals stehen. Die Conditions werden vor der Ausführung des Tasks geprüft. Sollten sie zutreffen, wird der Task ausgeführt, falls nicht wird er übersprungen und erhält den Status "skipped".
 
-Was heißt das für das obige Beispiel-Playbook? Wir haben oben eine Variable "my_number" definiert, die den Wert 6 hat. 
+Was heißt das für das obige Beispiel-Playbook? Wir haben oben eine Variable "my_number" definiert, die den Wert 6 hat. Dann haben wir einen Task definiert, der die folgende Condition hat:
+
+```yaml
+...
+when: "my_number > 5"
+---
+```
+
+Wir wollen den Task also nur dann ausführen, wenn die Variable "my_number" größer ist als 5. In diesem Fall sollte der Task also ausgeführt werden. Dann lasst uns das Playbook doch einmal ausführen:
+
+```bash
+ansible-playbook -i inventory.txt simple-conditional.yml
+```
+```
+PLAY [ansible-guide-1] ***************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1] => {
+    "msg": "Variable ist größer als 5!!"
+}
+
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+```
+
+
 
