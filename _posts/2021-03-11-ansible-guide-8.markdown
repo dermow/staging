@@ -114,7 +114,7 @@ Mit Jinja2 werden wir noch sehr viel arbeiten, wenn wir zu den fortgeschrittener
 
 ### Mehrere Conditionals
 
-Wie weiter oben kurz erwähnt, kann unter dem Parameter "when" sowohl eine einzelne Bedingung stehen, als auch eine Liste. Hier ist es wichtig zu wissen, dass in Listen angegebene Bedinungen immer in einer "AND-Beziehung" zueinander stehen. Das heißt kurz gesagt, dass jedes Listen-Item unter "when" wahr sein muss, um die Taskausführung zu ermöglichen. 
+Wie weiter oben kurz erwähnt, kann unter dem Parameter "when" sowohl eine einzelne Bedingung stehen, als auch eine Liste. Hier ist es wichtig zu wissen, dass in Listen angegebene Bedingungen immer in einer "AND-Beziehung" zueinander stehen. Das heißt kurz gesagt, dass jedes Listen-Item unter "when" wahr sein muss, um die Taskausführung zu ermöglichen. 
 
 Auch dazu möchte ich noch ein kurzes Beispiel einbringen:
 
@@ -129,7 +129,7 @@ Auch dazu möchte ich noch ein kurzes Beispiel einbringen:
   tasks:
     - name: task mit condition
       debug:
-        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
       when:
         - "my_number == 5"
         - "'Hallo' in my_text"
@@ -147,24 +147,24 @@ ok: [ansible-guide-1]
 
 TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1] => {
-    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
 }
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
-Wie wir sehen, sind alle drei Bedinungen wahr und der Task wird ausgeführt. Lasst die drei Bedingungen ganz kurz durchgehen:
+Wie wir sehen, sind alle drei Bedingungen wahr und der Task wird ausgeführt. Lasst die drei Bedingungen ganz kurz durchgehen:
 
 ```yaml
 - "my_number == 5"
 ```
-Dies ist das selbe Prinzip, wie auch schon in den ersten Beispielen. Die Prüfung lautet "wenn my_number gleich 5 ist"
+Dies ist dasselbe Prinzip, wie auch schon in den ersten Beispielen. Die Prüfung lautet "wenn my_number gleich 5 ist"
 
 ```yaml
 - "'Hallo' in my_text"
 ```
-Hier prüfen wir mit dem Operator "in", ob sich der Substring "Hallo" im String my_text befindet. Der Operator 'in' prüft, ob sich eine Untermenge an Elementen in einer Liste befindet. Da ein String nichts anderes ist, als eine Liste aus Zeichen, können wir uns das hier zu Nutze machen.
+Hier prüfen wir mit dem Operator "in", ob sich der Substring "Hallo" im String my_text befindet. Der Operator 'in' prüft, ob sich eine Untermenge an Elementen in einer Liste befindet. Da ein String nichts anderes ist, als eine Liste aus Zeichen, können wir uns das hier zunutze machen.
 
 ```yaml
 - "my_other_text == 'Blubb.'"
@@ -185,7 +185,7 @@ Im obigen Beispiel definieren wir Conditinals in einer Liste, was eine AND-Bezie
   tasks:
     - name: task mit condition
       debug:
-        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
       when:
         - "my_number == 5 and 'Hallo' in my_text and my_other_text == 'Blubb.'"
 ```
@@ -203,7 +203,7 @@ ok: [ansible-guide-1]
 
 TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1] => {
-    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
 }
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
@@ -224,7 +224,7 @@ Möchten wir, dass der Task ausgeführt wird, sobald auch nur eine der Bedingung
   tasks:
     - name: task mit condition
       debug:
-        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
       when:
         - "my_number == 5 or 'Hallo' in my_text or my_other_text == 'Blubb.'"
 ```
@@ -240,14 +240,14 @@ ok: [ansible-guide-1]
 
 TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1] => {
-    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
 }
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Ich habe mir erlaubt, die Variable "my_text" ein wenig abzuändern, dabei aber die Bedinung selbst unten gleich zu lassen. Lediglich die Operatoren habe ich von "and" zu "or" geändert. Dennoch wird der Task ausgeführt, da die Bedingung ist: 
+Ich habe mir erlaubt, die Variable "my_text" ein wenig abzuändern, dabei aber die Bedingung selbst unten gleich zu lassen. Lediglich die Operatoren habe ich von "and" zu "or" geändert. Dennoch wird der Task ausgeführt, da die Bedingung ist: 
 
 **Wenn my_number 5 ist ODER 'Hallo' in my_text enthalten ist ODER my_other_text "Blubb." ist.**
 
@@ -266,7 +266,7 @@ Etwas komplizierter wird es, wenn wir AND und OR kombinieren möchten:
   tasks:
     - name: task mit condition
       debug:
-        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
       when:
         - "my_text == 'Hallo Welt'"
         - "my_number == 5 or my_number > 3"
@@ -289,7 +289,7 @@ ok: [ansbible-guide-1]
 
 TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
 ok: [ansible-guide-1] => {
-    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
 }
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
@@ -305,5 +305,6 @@ Nachdem wir uns in diesem Teil die Funktionsweise von Conditionals angeschaut ha
 
 Ich hoffe, euch hat es auch diesmal wieder gefallen und bin gespannt auf euer Feedback!
 
-Viele Grüße,
+Viele Grüße
+
 Der Mow
