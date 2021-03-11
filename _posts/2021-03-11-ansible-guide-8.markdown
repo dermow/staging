@@ -6,7 +6,9 @@ categories: Ansible
 ---
 
 Halli Hallo! Nach längerer Pause geht es nun mit Teil 8 des Ansible Starter-Guides weiter. Ich möchte euch in diesem Post zeigen, was Conditionals sind
-und wie wir diese in Playbooks nutzen können.
+und wie wir diese in Playbooks nutzen können. Ich habe mich dazu entschieden, dieses Thema in zwei Artikel aufzuteilen, da der Blog-Eintrag sonst zu lang werden würde. Daher versuche ich euch hier die prinzipielle Funktion von Conditionals zu zeigen, in Teil 2 gehen wir dann zusammen praktische Beispiele durch.
+
+Solltet ihr einzelne Punkte nicht verstehen, oder ich mich unklar ausgedrückt haben, schreibt mir gerne eine Mail. Ich versuche dann das aufzuklären :)
 
 ### Was sind Conditionals?
 
