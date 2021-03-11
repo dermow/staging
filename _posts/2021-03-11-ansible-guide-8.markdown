@@ -335,7 +335,7 @@ Am besten probiert ihr das einfach selbst mal aus und variiert die Variablen-Wer
 
 ### So geht es weiter
 
-Nachdem wir uns in diesem Teil die Funktionsweise von Conditionals angeschaut haben, möchte ich im nächsten Teil einige paraktische Anwendungsfälle mit euch durchgehen. Ich werde dazu dann eine weitere VM mit einem CentOS-Betriebssystem anlegen. Wer möchte, kann das bis dahin ja auch tun :)
+Nachdem wir uns in diesem Teil die Funktionsweise von Conditionals angeschaut haben, möchte ich im nächsten Teil einige paraktische Anwendungsfälle mit euch durchgehen. 
 
 Ich hoffe, euch hat es auch diesmal wieder gefallen und bin gespannt auf euer Feedback!
 
