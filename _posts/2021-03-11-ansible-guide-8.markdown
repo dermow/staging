@@ -64,6 +64,7 @@ ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=
 
 Wie wir sehen, wurde der Task ganz normal ausgeführt. Nun lasst uns einen weiteren Task definieren:
 
+###### simple-conditional.yml
 ```yaml
 - hosts: ansible-guide-1
   vars:
@@ -80,7 +81,6 @@ Wie wir sehen, wurde der Task ganz normal ausgeführt. Nun lasst uns einen weite
       when: "my_number == 8"
 ```
 
-###### simple-conditional.yml
 ```bash
 ansible-playbook -i inventory.txt simple-conditional.yml
 ```
