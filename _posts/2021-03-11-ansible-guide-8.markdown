@@ -244,6 +244,7 @@ Ich habe mir erlaubt, die Variable "my_text" ein wenig abzuändern, dabei aber d
 
 Etwas komplizierter wird es, wenn wir AND und OR kombinieren möchten:
 
+##### and-or.yml
 ```yaml
 - hosts: ansible-guide-1
   vars:
@@ -265,10 +266,23 @@ Wir haben hier also zwei Conditionals in einer Liste definiert. Wie wir gelernt 
 
 Führen wir das Playbook nun aus, wird der Task ausgeführt:
 
+``` bash
+ansible-playbook -i inventory.txt and-or.yml
+```
+```
+PLAY [ansible-guide-1] ***************************************************************************************************************************************************************************************************************************************************************
 
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansbible-guide-1]
 
+TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1] => {
+    "msg": "Dieser Task wird ausgeführt, weil alle 3 Bedinungen wahr sind"
+}
 
-### Ausprobieren!
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+```
 
 Wer Lust hat, kann sich nun gerne die verschiedenen Playbooks kopieren, die Werte und Conditionals abändern und so ein bisschen ein Geführ dafür bekommen.
 
@@ -281,8 +295,3 @@ Ich hoffe, euch hat es auch diesmal wieder gefallen und bin gespannt auf euer Fe
 
 Viele Grüße,
 Der Mow
-
-
-
-
-
