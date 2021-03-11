@@ -42,7 +42,7 @@ when: "my_number > 5"
 ---
 ```
 
-Wir wollen den Task also nur dann ausführen, wenn die Variable "my_number" größer ist als 5. In diesem Fall sollte der Task also ausgeführt werden. Dann lasst uns das Playbook doch einmal ausführen:
+Wir wollen den Task also nur dann ausführen, wenn die Variable "my_number" größer ist als 5. In diesem Fall sollte der Task also ausgeführt werden. Dann lasst uns das Playbook doch einmal starten:
 
 ```bash
 ansible-playbook -i inventory.txt simple-conditional.yml
@@ -64,11 +64,23 @@ ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=
 
 Wie wir sehen, wurde der Task ganz normal ausgeführt. Nun lasst uns einen weiteren Task definieren:
 
+```yaml
+- hosts: ansible-guide-1
+  vars:
+    my_number: 6
+  tasks:
+    - name: task mit condition
+      debug:
+        msg: "Variable ist größer als 5!!"
+      when: "my_number > 5"
+
+    - name: weiterer task mit condition
+      debug:
+        msg: "Variable ist 8!!"
+      when: "my_number == 8"
+```
+
 ###### simple-conditional.yml
-https://jinja.palletsprojects.com/en/master/templates/#logic
-
-Der zweite Task soll nur laufen, falls "my_number" genau 8 ist.
-
 ```bash
 ansible-playbook -i inventory.txt simple-conditional.yml
 ```
