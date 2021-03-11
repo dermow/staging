@@ -296,7 +296,7 @@ PLAY RECAP *********************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Wer Lust hat, kann sich nun gerne die verschiedenen Playbooks kopieren, die Werte und Conditionals abändern und so ein bisschen ein Geführ dafür bekommen.
+Wer Lust hat, kann sich nun gerne die verschiedenen Playbooks kopieren, die Werte und Conditionals abändern und so ein bisschen ein Gefühl dafür bekommen.
 
 
 ### So geht es weiter
