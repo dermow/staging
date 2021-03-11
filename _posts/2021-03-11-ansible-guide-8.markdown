@@ -159,7 +159,7 @@ Hier prüfen wir mit dem Operator "in", ob sich der Substring "Hallo" im String 
 ```
 Der Operator '==' kann auch auf Strings angewendet werden. Wir prüfen also "Ist die Variable my_other_text gleich 'Blubb.'". Auch dies trifft zu.
 
-### AND und OR
+### AND
 
 Im obigen Beispiel definieren wir Conditinals in einer Liste, was eine AND-Beziehung dieser impliziert. Wir können AND und OR Operatoren aber auch in einer Zeile definieren. So könnten wir den Task aus "multi-conditionals.yml" auch so definieren:
 
@@ -197,6 +197,8 @@ ok: [ansible-guide-1] => {
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
+
+### OR
 
 Möchten wir, dass der Task ausgeführt wird, sobald auch nur eine der Bedingungen wahr ist, nutzen wir den OR-Operator:
 
