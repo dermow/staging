@@ -29,3 +29,8 @@ Lasst uns mit einem sehr einfachen Beispiel beginnen.
         msg: "Variable ist größer als 5!!"
       when: "my_number > 5"
 ```
+
+Conditionals werden im Parameter "when" definiert. Dieser ist ein Parameter auf Task-Ebene. Unter "when" kann dann eine, oder auch eine Liste mit Conditionals stehen. Die Conditions werden vor der Ausführung des Tasks geprüft. Sollten sie zutreffen, wird der Task ausgeführt, falls nicht wird er übersprungen und erhält den Status "skipped".
+
+Was heißt das für das obige Beispiel-Playbook? Wir haben oben eine Variable "my_number" definiert, die den Wert 6 hat. 
+
