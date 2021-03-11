@@ -12,7 +12,7 @@ Solltet ihr einzelne Punkte nicht verstehen, oder ich mich unklar ausgedrückt h
 
 ### Was sind Conditionals?
 
-Conditionals sind Bedingungen, an die wir die Ausführung von Tasks knüpfen können. Zum Beispiel können wir die einen Task nur dann ausführen lassen, wenn der
+Conditionals sind Bedingungen, an die wir die Ausführung von Tasks knüpfen können. Zum Beispiel können wir einen Task nur dann ausführen lassen, wenn der
 Ziel-Host ein bestimmtes Betriebssystem installiert hat. Wenn wir Conditionals nutzen, greifen wir bei deren Definition auf Variablen und Facts zurück.
 
 ### Ein erstes Beispiel
@@ -42,7 +42,7 @@ when: "my_number > 5"
 ---
 ```
 
-Wir wollen den Task also nur dann ausführen, wenn die Variable "my_number" größer ist als 5. In diesem Fall sollte der Task also ausgeführt werden. Dann lasst uns das Playbook doch einmal starten:
+Wir wollen den Task also nur dann ausführen, wenn der Wert der Variable "my_number" größer ist als 5. In diesem Fall sollte der Task also ausgeführt werden. Dann lasst uns das Playbook doch einmal starten:
 
 ```bash
 ansible-playbook -i inventory.txt simple-conditional.yml
@@ -102,7 +102,7 @@ PLAY RECAP *********************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Was ist nun passiert? Ansible hat unseren ersten Task ausgeführt, da dessen Bedingung zutrifft. Beim zweiten Task hat es die Bedingung geprüft und festgestellt, dass die Variable "my_number" nicht 8 ist, die Bedingung also nicht zutrifft und den Task übersprungen. Das sehen wir an der Ausgabe "skipping: [ansible-guide-1]"
+Was ist nun passiert? Ansible hat unseren ersten Task ausgeführt, da dessen Bedingung zutrifft. Beim zweiten Task hat es die Bedingung geprüft und festgestellt, dass der Wert der Variable "my_number" nicht 8 ist, die Bedingung also nicht zutrifft und den Task übersprungen. Das sehen wir an der Ausgabe "skipping: [ansible-guide-1]"
 
 ### Operators und Jinja2
 
@@ -164,12 +164,12 @@ Dies ist dasselbe Prinzip, wie auch schon in den ersten Beispielen. Die Prüfung
 ```yaml
 - "'Hallo' in my_text"
 ```
-Hier prüfen wir mit dem Operator "in", ob sich der Substring "Hallo" im String my_text befindet. Der Operator 'in' prüft, ob sich eine Untermenge an Elementen in einer Liste befindet. Da ein String nichts anderes ist, als eine Liste aus Zeichen, können wir uns das hier zunutze machen.
+Hier prüfen wir mit dem Operator "in", ob sich der Substring "Hallo" im String my_text befindet. Der Operator "in" prüft, ob sich eine Untermenge an Elementen in einer Liste befindet. Da ein String nichts anderes ist, als eine Liste aus Zeichen, können wir uns das hier zunutze machen.
 
 ```yaml
 - "my_other_text == 'Blubb.'"
 ```
-Der Operator '==' kann auch auf Strings angewendet werden. Wir prüfen also "Ist die Variable my_other_text gleich 'Blubb.'". Auch dies trifft zu.
+Der Operator "==" kann auch auf Strings angewendet werden. Wir prüfen also "Ist die Variable my_other_text gleich 'Blubb.'". Auch dies trifft zu.
 
 ### AND
 
@@ -296,8 +296,42 @@ PLAY RECAP *********************************************************************
 ansible-guide-1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-Wer Lust hat, kann sich nun gerne die verschiedenen Playbooks kopieren, die Werte und Conditionals abändern und so ein bisschen ein Gefühl dafür bekommen.
+Wie erwartet wird der Task ausgeführt. Nun lasst uns das aber noch gegenprüfen, indem wir den Wert von "my_number" auf 2 setzen:
 
+##### and-or.yml
+```yaml
+- hosts: ansible-guide-1
+  vars:
+    my_number: 2
+    my_text: Hallo Welt
+    my_other_text: Blubb.
+  tasks:
+    - name: task mit condition
+      debug:
+        msg: "Dieser Task wird ausgeführt, weil alle 3 Bedingungen wahr sind"
+      when:
+        - "my_text == 'Hallo Welt'"
+        - "my_number == 5 or my_number > 3"
+```
+
+Was wird nun passieren? Die erste Bedingung in der Liste ist noch immer wahr. Der zweite Teil allerdings nicht mehr, da die Zahl 2 weder gleich 5, noch größer als 3 ist:
+``` bash
+ansible-playbook -i inventory.txt and-or.yml
+```
+```
+PLAY [ansible-guide-1] ***************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************************************************
+ok: [ansible-guide-1]
+
+TASK [task mit condition] ******************************************************************************************************************************************************************************************************************************************************
+skipping: [ansible-guide-1]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
+ansible-guide-1                  : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+### Ausprobieren!
+Am besten probiert ihr das einfach selbst mal aus und variiert die Variablen-Werte beliebig um ein Gefühl zu bekommen.
 
 ### So geht es weiter
 
