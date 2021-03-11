@@ -12,7 +12,7 @@ Solltet ihr einzelne Punkte nicht verstehen, oder ich mich unklar ausgedrückt h
 
 ### Was sind Conditionals?
 
-Conditionals sind Bedingungen, an die wir die Ausführung von Tasks knüpfen können. Zum Beispiel können wir die einen Task nur dann ausführen lassen, wenn ein der
+Conditionals sind Bedingungen, an die wir die Ausführung von Tasks knüpfen können. Zum Beispiel können wir die einen Task nur dann ausführen lassen, wenn der
 Ziel-Host ein bestimmtes Betriebssystem installiert hat. Wenn wir Conditionals nutzen, greifen wir bei deren Definition auf Variablen und Facts zurück.
 
 ### Ein erstes Beispiel
