@@ -328,6 +328,7 @@ skipping: [ansible-guide-1]
 
 PLAY RECAP *********************************************************************************************************************************************************************************************************************************************************************
 ansible-guide-1                  : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+```
 
 ### Ausprobieren!
 Am besten probiert ihr das einfach selbst mal aus und variiert die Variablen-Werte beliebig um ein Gefühl zu bekommen.
