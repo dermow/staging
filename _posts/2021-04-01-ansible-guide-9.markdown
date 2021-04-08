@@ -15,6 +15,7 @@ Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mi
 
 Unser neues Inventory sieht dann so aus:
 
+##### ~/ansible-guide/inventory.txt
 ```
 [webservers]
 ansible-guide-1 ansible_ssh_user=ansible ansible_host=192.168.0.11
@@ -26,6 +27,8 @@ ansible-guide-4 ansible_ssh_user=ansible ansible_host=192.168.0.14
 
 ```
 
+Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem Open Suse. Unsere beiden Webserver sind dabei identisch. Bei
+den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein. 
 
 
 
