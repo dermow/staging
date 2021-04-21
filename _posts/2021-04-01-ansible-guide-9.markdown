@@ -30,5 +30,9 @@ ansible-guide-4 ansible_ssh_user=ansible ansible_host=192.168.0.14
 Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem Open Suse. Unsere beiden Webserver sind dabei identisch. Bei
 den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein. 
 
+Nehmen wir an, wir möchten nun auf beiden Datenbankservern den MySQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. SUSE nutzt zum Verwalten von Paketen allerdings "zypper". 
+
+
+
 
 
