@@ -7,10 +7,10 @@ categories: Ansible
 
 
 Moin Moin! Wie versprochen möchte ich euch in diesem Teil nun einige Beispiele zeigen, wie wir Conditionals in Ansible verwenden können. 
-Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem Open Suse Betriebsystem erweitert:
+Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem CentOS Betriebsystem erweitert:
 
 #### ansible-guide-4
-* OS: openSUSE Leap 15.1
+* OS: CentOS 8
 * IP: 192.168.0.14
 
 Unser neues Inventory sieht dann so aus:
@@ -27,10 +27,15 @@ ansible-guide-4 ansible_ssh_user=ansible ansible_host=192.168.0.14
 
 ```
 
-Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem Open Suse. Unsere beiden Webserver sind dabei identisch. Bei
+Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem CentOS. Unsere beiden Webserver sind dabei identisch. Bei
 den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein. 
 
-Nehmen wir an, wir möchten nun auf beiden Datenbankservern den MySQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. SUSE nutzt zum Verwalten von Paketen allerdings "zypper". 
+Nehmen wir an, wir möchten nun auf beiden Datenbankservern den MySQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. CentOS nutzt zum Verwalten von Paketen allerdings ein Tool mit dem Namen "yum". Glücklicherweise bringt Ansible auch hier bereites ein Modul von Haus aus mit:
+
+[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html]
+
+
+
 
 
 
