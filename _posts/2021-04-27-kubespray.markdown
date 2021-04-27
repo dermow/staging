@@ -18,9 +18,9 @@ Das Projekt inklusive Doku findet sich auf GitHub:
 
 Ich möchte euch noch kurz an einem Beispiel zeigen, wie einfach wir uns damit ein Kubernetes Cluster bauen können. IN diesem Szenario haben wir 3 VMs:
 
-k8s-node1 (192.168.0.1) - Control Plane
-k8s-node2 (192.168.0.2) - Erste Node
-k8s-node3 (192.168.0.3) - Zweite Node
+* k8s-node1 (192.168.0.1) - Control Plane
+* k8s-node2 (192.168.0.2) - Erste Node
+* k8s-node3 (192.168.0.3) - Zweite Node
 
 Für dieses Beispiel werden wir Ansible nutzen um das Cluster bereitzustellen.
 
