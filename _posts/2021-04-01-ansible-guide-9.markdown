@@ -116,6 +116,38 @@ Dafür springe ich etwas zurück und erweitere das Playbook aus Teil 4, in dem w
       when: "inventory_hostname == 'ansible-guide-2'"
 ```
 
+Wir machen uns hier die Ansible Variable "inventory_hostname" zu Nutze, die in jedem Play (auch mit deaktiviertem Fact-Gathering) existiert und den jeweils
+aktuellen Hostnamen enthält so wie er im Inventory definiert ist. Wichtig: Das muss nicht zwingend der tatsächliche Hostname des Systems sein. Diesen enthält der Fact (Gathering muss aktiviert sein) "ansible_hostname".
+
+Im obigen Beispiel-Playbook wird der Task also nur ausgeführt, wenn der Name des aktuellen Hosts exakt "ansible-guide-2" ist.
+
+## Beispiel 3: Task nur ausführen, wenn der Host Mitglied einer bestimmten Gruppe ist
+
+Möchten wir einen Play auf für eine bestimmte Gruppe ausführen, so definieren wir das über den Parameter "hosts" im Playbook. Aber auch, wenn wir einen Play zum 
+Beispiel auf alle Hosts ausführen, können wir die Ausführung einzelner Tasks bei Bedarf von der Gruppenzugehörigkeit abhängig machen:
+
+##### all-hosts.yml
+
+``` yaml
+ - name: webserver install 
+   hosts: all
+   tasks: 
+     - name: add default user to all systems
+       user
+         name: technik
+         state: present
+       become: true
+    
+    - name: add dbadmin user on db servers
+      user: 
+        name: dbadmin
+        state: present
+      become: true
+      when: "'db' in group_names"
+```
+
+In diesem Beispiel führen wir den Play auf alle Hosts in unserem Inventory aus. Auf allen Systemen wird der User 'technik' angelegt. Für den User 'dbadmin' haben wir einen Condition definiert, die prüft, ob der String 'db' in der von Ansible bereitgestellten Liste 'group_names' enthalten ist. Das ist eine Liste, die für jeden Host im aktuellen Play existiert und die Namen aller Gruppen enthält, welchen der Host zugehört.
+
 
 
 
