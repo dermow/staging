@@ -9,7 +9,7 @@ categories: Ansible
 Moin Moin! Wie versprochen möchte ich euch in diesem Teil nun einige Beispiele zeigen, wie wir Conditionals in Ansible verwenden können. 
 Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem CentOS Betriebssystem erweitert:
 
-#### ansible-guide-4
+**ansible-guide-4**
 * OS: CentOS 8
 * IP: 192.168.0.14
 
@@ -26,11 +26,11 @@ ansible-guide-3 ansible_ssh_user=ansible ansible_host=192.168.0.13
 ansible-guide-4 ansible_ssh_user=ansible ansible_host=192.168.0.14
 
 ```
-
+<!-- excerpt-end -->
 Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem CentOS. Unsere beiden Webserver sind dabei identisch. Bei
 den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein. 
 
-<!-- excerpt-end -->
+
 
 ## Beispiel 1: Paketinstallation auf unterschiedlichen Distributionen
 
