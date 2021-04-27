@@ -87,7 +87,37 @@ Wie wir sehen können, wurde für beide Install-Tasks nun jeweils der Host geski
 
 ## Beispiel 2: Einen Task auf einem bestimmten Host einschränken
 
-Ab und an kommt es vor, dass wir einen Task im Playbook nur auf einem bestimmten Host ausführen möchten.
+Ab und an kommt es vor, dass wir einen Task im Playbook nur auf einem bestimmten Host ausführen möchten. Nehmen wir an, der 2. Webserver soll unser Entwicklungs- und Testsystem werden und wir wollen daher noch einen User für den Entwickler anlegen.
+
+Dafür springe ich etwas zurück und erweitere das Playbook aus Teil 4, in dem wir den Webserver installiert und gestartet haben:
+
+##### webservers.yml
+``` yaml
+ - name: webserver install 
+   hosts: webservers
+   tasks: 
+     - name: install apache2
+       apt:
+         name: apache2
+         state: present
+         update_cache: yes
+       become: true
+
+    - name: enable and start apache2 systemd service
+      systemd:
+        name: apache2
+        enabled: true
+        state: started
+    
+    - name: add dev user on second webserver
+      user: 
+        name: Herbert Reinsch
+        state: present
+      when: "inventory_hostname == 'ansible-guide-2'"
+```
+
+
+
 
 
 
