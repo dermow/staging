@@ -55,6 +55,36 @@ Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen
       when: "ansible_os_family == 'RedHat'"
 ```
 
+Dann führen wir unser Playbook mal aus:
+```bash
+ansible-playbook -i inventory.txt setup-postgres.yml
+```
+
+Die Ausgabe sollte dann in etwa so aussehen:
+```
+PLAY [db] ********************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [ansible-guide-3]
+ok: [ansible-guide-4]
+
+TASK [install postgresql on debian based systems (Ubuntu)] **************************************************************************************************************
+changed: [ansible-guide-3]
+skipping: [ansible-guide-4]
+
+TASK [install postgresql on Redhat based systems (CentOS)] **************************************************************************************************************
+skipping: [ansible-guide-3]
+changed: [ansible-guide-4]
+
+PLAY RECAP **************************************************************************************************************************************************************
+ansible-guide-3                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
+ansible-guide-4                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
+```
+
+Wie wir sehen können, wurde für beide Install-Tasks nun jeweils der Host geskipped, bei dem die Condition nicht zutreffend war. Wir können somit also Tasks vom eingesetzten Betriebssystem abhängig machen. Besonders für Umgebungen mit verschiedenen Distributionen, macht uns dies das Leben sehr viel einfacher!
+
+
+
 
 
 
