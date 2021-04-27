@@ -5,6 +5,7 @@ date:   2021-04-27 12:57:42 +0100
 categories: 
   - Ansilbe
   - Kubernetes
+  - k8s
 ---
 
 Tag zusammen! Seid ihr schonmal in den Genuss gekommen, ein Kubernetes Cluster mit mehreren Nodes per Hand aufzusetzen? Zwar ist auch das mittlerweile 
