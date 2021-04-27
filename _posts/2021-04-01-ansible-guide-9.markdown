@@ -30,6 +30,8 @@ ansible-guide-4 ansible_ssh_user=ansible ansible_host=192.168.0.14
 Wir möchten nun also 4 Hosts mit Ansible verwalten. Drei davon auf Ubuntu-Basis und eines mit einem CentOS. Unsere beiden Webserver sind dabei identisch. Bei
 den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein. 
 
+## Beispiel 1: Paketinstallation auf unterschiedlichen Distributionen
+
 Nehmen wir an, wir möchten nun auf beiden Datenbankservern den PostgreSQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. CentOS nutzt zum Verwalten von Paketen allerdings ein Tool mit dem Namen "yum". Glücklicherweise bringt Ansible auch hier bereites ein Modul von Haus aus mit:
 
 [https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html]
@@ -83,7 +85,9 @@ ansible-guide-4                  : ok=2    changed=1    unreachable=0    failed=
 
 Wie wir sehen können, wurde für beide Install-Tasks nun jeweils der Host geskipped, bei dem die Condition nicht zutreffend war. Wir können somit also Tasks vom eingesetzten Betriebssystem abhängig machen. Besonders für Umgebungen mit verschiedenen Distributionen, macht uns dies das Leben sehr viel einfacher!
 
+## Beispiel 2: Einen Task auf einem bestimmten Host einschränken
 
+Ab und an kommt es vor, dass wir einen Task im Playbook nur auf einem bestimmten Host ausführen möchten.
 
 
 
