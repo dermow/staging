@@ -23,7 +23,7 @@ Ich möchte euch noch kurz an einem Beispiel zeigen, wie einfach wir uns damit e
 * k8s-node2 (192.168.0.2) - Erste Node
 * k8s-node3 (192.168.0.3) - Zweite Node
 
-Für dieses Beispiel werden wir Ansible nutzen um das Cluster bereitzustellen.
+Für dieses Beispiel werden wir Ansible nutzen um das Cluster bereitzustellen. Dazu muss sichergestellt sein, dass unser Host auf die drei Nodes per SSH zugreifen kann.
 
 ## Schritt 1: kubespray Repository klonen
 ``` bash
@@ -92,6 +92,8 @@ k8s-node2   Ready    <none>   26h     v1.19.2
 k8s-node3   Ready    <none>   4h39m   v1.19.2
 
 ```
+
+Huh? So einfach? Jep, ich war ebenfalls erstaunt - wie einfach und zuverlässig das ganze funktioniert.
 
 ## Fazit
 
