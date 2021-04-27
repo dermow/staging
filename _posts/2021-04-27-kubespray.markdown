@@ -13,8 +13,6 @@ unkomplizierter als noch vor einigen Jahren - dennoch kann das noch immer sehr k
 
 Vor einiger Zeit wurde ich durch einen Kollegen auf das Projekt "kubespray" aufmerksam gemacht. Es handelt sich hier um ein Projekt, mit dem man per Ansible oder Vagrant produktionsreife Kubernetes-Cluster extrem einfach ausrollen kann. 
 
-<!-- excerpt-end -->
-
 Das Projekt inklusive Doku findet sich auf GitHub:
 
 [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)
@@ -26,6 +24,8 @@ Ich möchte euch noch kurz an einem Beispiel zeigen, wie einfach wir uns damit e
 * k8s-node3 (192.168.0.3) - Zweite Node
 
 Für dieses Beispiel werden wir Ansible nutzen um das Cluster bereitzustellen. Dazu muss sichergestellt sein, dass unser Host auf die drei Nodes per SSH zugreifen kann.
+
+<!-- excerpt-end -->
 
 ## Schritt 1: kubespray Repository klonen
 ``` bash
