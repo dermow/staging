@@ -7,7 +7,7 @@ categories: Ansible
 
 
 Moin Moin! Wie versprochen möchte ich euch in diesem Teil nun einige Beispiele zeigen, wie wir Conditionals in Ansible verwenden können. 
-Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem CentOS Betriebsystem erweitert:
+Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem CentOS Betriebssystem erweitert:
 
 #### ansible-guide-4
 * OS: CentOS 8
@@ -32,12 +32,12 @@ den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein.
 
 ## Beispiel 1: Paketinstallation auf unterschiedlichen Distributionen
 
-Nehmen wir an, wir möchten nun auf beiden Datenbankservern den PostgreSQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. CentOS nutzt zum Verwalten von Paketen allerdings ein Tool mit dem Namen "yum". Glücklicherweise bringt Ansible auch hier bereites ein Modul von Haus aus mit:
+Nehmen wir an, wir möchten nun auf beiden Datenbankservern den PostgreSQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. CentOS nutzt zum Verwalten von Paketen allerdings ein Tool mit dem Namen "yum". Glücklicherweise bringt Ansible auch hier bereits ein Modul von Haus aus mit:
 
 [https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html]
 
 Doch wie bringen wir Ansible nun dazu, für jeden Host das richtige Modul zu nutzen. Das machen wir mit (... Trommelwirbel ...) Conditionals!
-Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen benötigen wir Facts, denn diese enthalten die Informationen über das Host-Betriebssystem. Zum Anderen Conditionals, umm die Tasks von den Facts abhängitg zu machen.
+Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen benötigen wir Facts, denn diese enthalten die Informationen über das Host-Betriebssystem. Zum Anderen Conditionals, um die Tasks von den Facts abhängig zu machen.
 
 ##### setup-postgres.yml
 ```yaml
@@ -83,7 +83,7 @@ ansible-guide-3                  : ok=2    changed=1    unreachable=0    failed=
 ansible-guide-4                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
 ```
 
-Wie wir sehen können, wurde für beide Install-Tasks nun jeweils der Host geskipped, bei dem die Condition nicht zutreffend war. Wir können somit also Tasks vom eingesetzten Betriebssystem abhängig machen. Besonders für Umgebungen mit verschiedenen Distributionen, macht uns dies das Leben sehr viel einfacher!
+Wie wir sehen können, wurde für beide Install-Tasks nun jeweils der Host geskippt, bei dem die Condition nicht zutreffend war. Wir können somit Tasks vom eingesetzten Betriebssystem abhängig machen. Besonders für Umgebungen mit verschiedenen Distributionen, macht uns dies das Leben sehr viel einfacher!
 
 ## Beispiel 2: Einen Task auf einem bestimmten Host einschränken
 
@@ -116,7 +116,7 @@ Dafür springe ich etwas zurück und erweitere das Playbook aus Teil 4, in dem w
       when: "inventory_hostname == 'ansible-guide-2'"
 ```
 
-Wir machen uns hier die Ansible Variable "inventory_hostname" zu Nutze, die in jedem Play (auch mit deaktiviertem Fact-Gathering) existiert und den jeweils
+Wir machen uns hier die Ansible Variable "inventory_hostname" zunutze, die in jedem Play (auch mit deaktiviertem Fact-Gathering) existiert und den jeweils
 aktuellen Hostnamen enthält so wie er im Inventory definiert ist. Wichtig: Das muss nicht zwingend der tatsächliche Hostname des Systems sein. Diesen enthält der Fact (Gathering muss aktiviert sein) "ansible_hostname".
 
 Im obigen Beispiel-Playbook wird der Task also nur ausgeführt, wenn der Name des aktuellen Hosts exakt "ansible-guide-2" ist.
@@ -150,11 +150,11 @@ In diesem Beispiel führen wir den Play auf alle Hosts in unserem Inventory aus.
 
 # Zusammenfassung
 
-Mit der Kombination aus Facts und Conditions, können wir unsere Playbooks sehr flexibel gestalten und so z.B auch in heterogenen Infrastrukturen mit Ansible arbeiten. Bei Ansible gibt es sehr viele Wege, die zum selben Ziel führen, wichtig ist, hier ein Gefühl dafür zu bekommen, welche Wege am besten zu unserem jeweiligen Anwendungsfall passen. Nutze ich zum Beispiel ein Playbook und arbeite darin mit Conditions oder Teile ich mir die Tasks in seperate Playbooks auf. 
+Mit der Kombination aus Facts und Conditions, können wir unsere Playbooks sehr flexibel gestalten und so z.B. auch in heterogenen Infrastrukturen mit Ansible arbeiten. Bei Ansible gibt es sehr viele Wege, die zum selben Ziel führen, wichtig ist, hier ein Gefühl dafür zu bekommen, welche Wege am besten zu unserem jeweiligen Anwendungsfall passen. Nutze ich zum Beispiel ein Playbook und arbeite darin mit Conditions oder Teile ich mir die Tasks in separate Playbooks auf. 
 
-Ich werde im weiteren Verlauf dieses Guides versuchen, wann immer möglich Best-Practices und eigene Erfahrungen dazu mit einzubringen. 
+Ich werde im weiteren Verlauf dieses Guides versuchen, wann immer möglich Best Practices und eigene Erfahrungen dazu mit einzubringen. 
 
-Im näcshten Teil werden wir uns mit einer weiteren Kontrollstruktur in Ansible beschäftigen, den sogenannten Loops (Schleifen). Ich hoffe, die Pause zwischen den Beiträgen ist diesmal etwas kürzer. 
+Im nächsten Teil werden wir uns mit einer weiteren Kontrollstruktur in Ansible beschäftigen, den sogenannten Loops (Schleifen). Ich hoffe, die Pause zwischen den Beiträgen ist diesmal etwas kürzer. 
 
 Bis dahin!
 
