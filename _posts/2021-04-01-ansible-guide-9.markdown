@@ -9,9 +9,7 @@ categories: Ansible
 Moin Moin! Wie versprochen möchte ich euch in diesem Teil nun einige Beispiele zeigen, wie wir Conditionals in Ansible verwenden können. 
 Mein Test-Setup habe ich mir zu diesem Zweck um einen weiteren Host - diesmal mit einem CentOS Betriebssystem erweitert:
 
-**ansible-guide-4**
-* OS: CentOS 8
-* IP: 192.168.0.14
+ansible-guide-4 - 192.168.0.14
 
 Unser neues Inventory sieht dann so aus:
 
