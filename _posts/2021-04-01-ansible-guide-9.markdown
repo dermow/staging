@@ -57,6 +57,8 @@ Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen
       when: "ansible_os_family == 'RedHat'"
 ```
 
+Wir nutzen hier den Fact 'ansible_os_family', der den Basis-Typen der eingesetzten Distribution beinhaltet. Ubuntu basiert auf einem Debian, wogegen CentOS in der Basis ein RedHat-Betriebssystem ist. Weitere mögliche Werte wären hier z.B. "Suse" oder auch "Gentoo".
+
 Dann führen wir unser Playbook mal aus:
 ```bash
 ansible-playbook -i inventory.txt setup-postgres.yml
@@ -159,8 +161,6 @@ Im nächsten Teil werden wir uns mit einer weiteren Kontrollstruktur in Ansible 
 Bis dahin!
 
 Der mow
-
-
 
 
 
