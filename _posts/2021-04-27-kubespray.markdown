@@ -16,7 +16,7 @@ Das Projekt inklusive Doku findet sich auf GitHub:
 
 [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)
 
-Ich möchte euch noch kurz an einem Beispiel zeigen, wie einfach wir uns damit ein Kubernetes Cluster bauen können. IN diesem Szenario haben wir 3 VMs:
+Ich möchte euch noch kurz an einem Beispiel zeigen, wie einfach wir uns damit ein Kubernetes Cluster bauen können. In diesem Szenario haben wir 3 VMs:
 
 * k8s-node1 (192.168.0.1) - Control Plane
 * k8s-node2 (192.168.0.2) - Erste Node
