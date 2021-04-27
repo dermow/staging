@@ -45,15 +45,14 @@ Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen
   gather_facts: true
   tasks:
     - name: install postgresql on debian based systems (Ubuntu)
-      apt
+      apt:
         name: postgresql
         update_cache: true
       when: "ansible_os_family == 'Debian'"
       
     - name: install postgresql on Redhat based systems (CentOS)
-      apt:
+      yum:
         name: postgresql
-        update_cache: true
       when: "ansible_os_family == 'RedHat'"
 ```
 
@@ -135,7 +134,7 @@ Beispiel auf alle Hosts ausführen, können wir die Ausführung einzelner Tasks 
    hosts: all
    tasks: 
      - name: add default user to all systems
-       user
+       user:
          name: technik
          state: present
        become: true
