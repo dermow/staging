@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kubespray - Kubernetes Cluster im Easy-Mode aufsetzen" 
+title:  "Kubespray - Kubernetes Cluster im Easy-Mode" 
 date:   2021-04-27 12:57:42 +0100
 categories: 
   - Ansilbe
