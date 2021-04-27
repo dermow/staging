@@ -4,6 +4,7 @@ author:
   email: s.seibold@posteo.de
 
 show_excerpts: true # set to true to show excerpts on the homepage
+excerpt_separator: <!-- excerpt-end -->
 google_analytics: false
 
 disqus:
