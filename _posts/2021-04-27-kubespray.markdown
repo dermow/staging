@@ -13,6 +13,8 @@ unkomplizierter als noch vor einigen Jahren - dennoch kann das noch immer sehr k
 
 Vor einiger Zeit wurde ich durch einen Kollegen auf das Projekt "kubespray" aufmerksam gemacht. Es handelt sich hier um ein Projekt, mit dem man per Ansible oder Vagrant produktionsreife Kubernetes-Cluster extrem einfach ausrollen kann. 
 
+<!-- excerpt-end -->
+
 Das Projekt inklusive Doku findet sich auf GitHub:
 
 [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)
