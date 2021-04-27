@@ -34,7 +34,7 @@ den Datenbank-Servern dagegen setzen wir 2 unterschiedliche Betriebssysteme ein.
 
 Nehmen wir an, wir möchten nun auf beiden Datenbankservern den PostgreSQL-Server installieren. In den vorherigen Beispielen haben wir dazu das Modul "apt" genutzt. Bei unserem Server mit dem Ubuntu wird das auch weiterhin funktionieren. CentOS nutzt zum Verwalten von Paketen allerdings ein Tool mit dem Namen "yum". Glücklicherweise bringt Ansible auch hier bereits ein Modul von Haus aus mit:
 
-[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html]
+[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html)
 
 Doch wie bringen wir Ansible nun dazu, für jeden Host das richtige Modul zu nutzen. Das machen wir mit (... Trommelwirbel ...) Conditionals!
 Besser gesagt, nutzen wir hier zwei Werkzeuge, die wir bereits kennen. Zum einen benötigen wir Facts, denn diese enthalten die Informationen über das Host-Betriebssystem. Zum Anderen Conditionals, um die Tasks von den Facts abhängig zu machen.
