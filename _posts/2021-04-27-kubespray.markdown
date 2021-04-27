@@ -94,10 +94,11 @@ k8s-node3   Ready    <none>   4h39m   v1.19.2
 
 ## Fazit
 
-Bisher die komfortabelste Methode um Kubernetes Cluster bereit zu stellen. Im Beispiel haben wir die einfachste Variante eines Kubernetes-Clusters aufgesetzt. Natürlich lässt sich per Kubespray das Cluster nach den eigenen Bedürfnissen anpassen. Ich habs bisher nur für die Kubernetes-Testumgebung genutzt, werde es aber für künftige Prodcluster definitiv in Betracht ziehen!
+Bisher die komfortabelste Methode um Kubernetes Cluster bereitzustellen. Das Beispiel beschreibt natürlich eine sehr einfache Variante. Natürlich lässt sich per Kubespray das Cluster nach den eigenen Bedürfnissen anpassen. Ich habs bisher nur für miene k8s-Testumgebung genutzt, werde es aber für künftige Produktionscluster definitiv in Betracht ziehen!
 
 Bis denne!
 
+Mow
 
 
 
