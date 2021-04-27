@@ -111,7 +111,7 @@ Dafür springe ich etwas zurück und erweitere das Playbook aus Teil 4, in dem w
     
     - name: add dev user on second webserver
       user: 
-        name: Herbert Reinsch
+        name: herbert
         state: present
       when: "inventory_hostname == 'ansible-guide-2'"
 ```
