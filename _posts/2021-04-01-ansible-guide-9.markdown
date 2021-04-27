@@ -148,7 +148,17 @@ Beispiel auf alle Hosts ausführen, können wir die Ausführung einzelner Tasks 
 
 In diesem Beispiel führen wir den Play auf alle Hosts in unserem Inventory aus. Auf allen Systemen wird der User 'technik' angelegt. Für den User 'dbadmin' haben wir einen Condition definiert, die prüft, ob der String 'db' in der von Ansible bereitgestellten Liste 'group_names' enthalten ist. Das ist eine Liste, die für jeden Host im aktuellen Play existiert und die Namen aller Gruppen enthält, welchen der Host zugehört.
 
+# Zusammenfassung
 
+Mit der Kombination aus Facts und Conditions, können wir unsere Playbooks sehr flexibel gestalten und so z.B auch in heterogenen Infrastrukturen mit Ansible arbeiten. Bei Ansible gibt es sehr viele Wege, die zum selben Ziel führen, wichtig ist, hier ein Gefühl dafür zu bekommen, welche Wege am besten zu unserem jeweiligen Anwendungsfall passen. Nutze ich zum Beispiel ein Playbook und arbeite darin mit Conditions oder Teile ich mir die Tasks in seperate Playbooks auf. 
+
+Ich werde im weiteren Verlauf dieses Guides versuchen, wann immer möglich Best-Practices und eigene Erfahrungen dazu mit einzubringen. 
+
+Im näcshten Teil werden wir uns mit einer weiteren Kontrollstruktur in Ansible beschäftigen, den sogenannten Loops (Schleifen). Ich hoffe, die Pause zwischen den Beiträgen ist diesmal etwas kürzer. 
+
+Bis dahin!
+
+Der mow
 
 
 
