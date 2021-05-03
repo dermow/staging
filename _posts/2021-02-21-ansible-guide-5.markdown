@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #005 - Variablen" 
-date:   2021-02-20 16:57:42 +0100
-categories: Ansible
+date:   2021-02-21 12:20:42 +0100
+categories: 
+  - Ansible
 ---
 
 Heyho und willkommen zurück zur Ansible Starter-Guide. In diesem fünften Teil der Reihe möchte ich euch zeigen, wie Variablen funktionieren und wie wir
@@ -31,6 +32,8 @@ packe ich das Ganze in ein eigenes Playbook. Ihr könnt aber auch einfach das we
        dest: /var/www/html/style.css
      become: true
 ```
+
+<!-- excerpt-end -->
 
 Je weiter wir unser Playbook stricken, desto häufiger werden wir den Pfad "/var/www/html" verwenden müssen. Es wäre doch super, wenn wir diesen einfach in ein Variable packen können. Dann machen wir das doch:
 
@@ -78,7 +81,8 @@ Variablen können auch auf Taskebene definiert werden. Das sähe dann so aus:
        src: files/style.css
        dest: {% raw %}"{{ my_docroot }}/style.css" {% endraw %}
      become: true
-     my_docroot: /var/www/html
+     vars:     
+       my_docroot: /var/www/html
 ```
 
 Das macht aber nur in ganz speziellen Fällen Sinn, wenn tatsächlich nur ein bestimmter Task diese Variable benötigt.

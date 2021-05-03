@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kubespray - Kubernetes Cluster im Easy-Mode" 
-date:   2021-04-27 12:57:42 +0100
+date:   2021-04-27 14:45:42 +0100
 categories: 
   - Ansilbe
   - Kubernetes
@@ -79,7 +79,7 @@ Damit hätten wir das Basis-Setup für unser Cluster auch schon fertig. Also las
 
 ```bash
 cd ~/kubespray
-ansible-playbook -i inventory/mycluster/hosts.ini cluster.yml
+ansible-playbook -i inventory/mycluster/hosts.ini cluster.yml --become
 ```
 
 Das Playbook läuft nun los und dauert eine ganze Weile (bei mir so ca. 15 Minuten). Anschließend war das Cluster verfügbar:
@@ -99,7 +99,7 @@ Huh? So einfach? Jep, ich war ebenfalls erstaunt - wie einfach und zuverlässig 
 
 ## Fazit
 
-Das Beispiel beschreibt natürlich eine sehr einfache Variante. Natürlich lässt sich per Kubespray das Cluster nach den eigenen Bedürfnissen anpassen. Ich habs bisher nur für meine k8s-Testumgebung genutzt, werde es aber für künftige Produktionscluster definitiv in Betracht ziehen!
+Das Beispiel beschreibt eine sehr einfache Variante. Natürlich lässt sich per Kubespray das Cluster nach den eigenen Bedürfnissen anpassen. Ich habs bisher nur für meine k8s-Testumgebung genutzt, werde es aber für künftige Produktionscluster definitiv in Betracht ziehen!
 
 Bis denne!
 

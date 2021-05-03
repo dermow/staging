@@ -25,6 +25,8 @@ So fangen wir an:
 
 Der Ziel-User für alle drei Hosts ist "ansible". Dieser hat volle Sudo-Rechte, ist also selbst kein Root-User, kann aber über das Kommando 'sudo', kurz für "super user do" Befehle mit Root-Rechten ausführen. Diese Mechanik macht sich auch Ansible zu nutze. Dazu aber gleich mehr.
 
+<!-- excerpt-end -->
+
 ## SSH-Publickey-Authentifizierung einrichten
 
 Zwar kann Ansible in der Theorie auch eine Authentifizierung per Passwort durchführen, dies ist aber nicht wirklich sinnvoll und ab einer gewissen Anzahl Zielhosts auch sehr aufwändig. Die einfachste und gleichzeitig auch sicherste Variante ist die Nutzung von SSH-Keys. Wir erzeugen uns also ein Keypair, bestehend aus privatem und öffentlichem Schlüssel und hinterlegen den öffentlichen Teil (Public Key) auf den Zielsystemen.

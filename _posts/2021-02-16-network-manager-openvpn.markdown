@@ -25,6 +25,8 @@ dos2unix mow@meinefirma.ovpn
 apt install -y network-manager-openvpn
 ```
 
+<!-- excerpt-end -->
+
 ### Konfigurationsdatei importieren:
 ```bash
 nmcli connection import type openvpn file mow@meinefirma.ovpn

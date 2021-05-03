@@ -50,6 +50,7 @@ sudo zypper in ansible
 ansible --version
 ```
 
+<!-- excerpt-end -->
 
 ## Installation unter Windows (Linux Subsystem)
 

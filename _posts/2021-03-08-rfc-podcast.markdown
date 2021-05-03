@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Podcast-Empfehlung: RFC Podcast"
-date:   2021-03-08 11:30:42 +0100
+title:  "Podcast-Empfehlung: Request for Comments"
+date:   2021-03-08 11:50:42 +0100
 categories: Allgemein
 ---
 
@@ -15,3 +15,5 @@ Hier findet ihr den Podcast:
 Viele Grüße und bis dann!
 
 Der Mow
+
+<!-- excerpt-end -->

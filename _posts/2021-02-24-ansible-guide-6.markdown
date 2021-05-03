@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #006 - Facts" 
-date:   2021-02-24 16:57:42 +0100
+date:   2021-02-24 22:52:42 +0100
 categories: Ansible
 ---
 
@@ -17,13 +17,15 @@ ok: [ansible-guide-1]
 ```
 Dies ist ein Task, der von Ansible standardmäßig ausgeführt wird, wenn das Sammeln von Facts aktiviert ist. Facts sind Variablen, die von Ansible zum Start eines Playbooks automatisch gesetzt werden. Sie enthalten alle möglichen Informationen zum aktuellen Play, dessen Zielsystemen und der aktuellen Umgebung. 
 
+<!-- excerpt-end -->
+
 Ein paar kleine Beispiele:
 
 **ansible_hostname**: Enthält den von Ansible herausgefundenen Hostnamen des aktuellen Hosts
 
 **inventory_hostname**: Enthält den im Inventory definierten Hostname des aktuellen Hosts
 
-**ansible_default_ipv4**: Enthält die erste von Ansible gefundene, primäre IPv4-Adresse
+**ansible_default_ipv4.address**: Enthält die erste von Ansible gefundene, primäre IPv4-Adresse
 
 **ansible_distribution**: Enthält den Namen der OS-Distribution des Zielhosts, z.B. "Ubuntu", "Debian" oder "Suse".
 

@@ -20,6 +20,8 @@ Viele werden vor allem im Zusammenhang mit Config-Management davon gehört haben
 * Konfigurieren der oben genannten
 * Installation & Konfiguration von Anwendungen
 
+<!-- excerpt-end -->
+
 ## Wie funktioniert Ansible?
 
 Ansible arbeitet per SSH, sprich es wird keinerlei Agent-Software (außer natürlich dem ssh agent) auf den Zielsystemen benötigt. Vielmehr muss der Ansible-Controller (Kiste auf der Ansible ausgeführt wird) eine SSH-Verbindung zu den Ansible-Zielen aufbauen können. Zu erledigende Tasks werden dann als Python-Scripts vorbereitet, auf das Ziel kopiert und ausgeführt. Das Ergebnis erhält der Ansible-Controller dann wiederum zurück.

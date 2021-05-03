@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #004 - Playbooks, Tasks und Handler"
-date:   2021-02-17 10:01:42 +0100
+date:   2021-02-18 17:20:42 +0100
 categories: Ansible
 ---
 
@@ -31,6 +31,8 @@ Lasst uns versuchen, die Struktur eines Playbooks anhand des folgenden Beispiels
 15        state: started
 
 ```
+
+<!-- excerpt-end -->
 
 In den folgenden Zeilen möchte ich dieses Beispiel-Playbook mit euch durchgehen:
 
@@ -148,8 +150,6 @@ In Zeile 9 folgt hier nochmal die Definition eines Parameters auf Task-Ebene (Ac
 Zu Modul-Parametern ist wichtig zu wissen, dass es einige gibt die optional sind und einige die zwingend angegeben werden müssen. Hier hilft uns aber die Ansible-Dokumentation sehr zuverlässig weiter. Für unser Beispiel finden wir die Informationen auf diesen Seiten:
 
 * [Doku zum Modul apt](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
-
-
 * [Doku zum Modul systemd](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)
 
 ## Beispiel
@@ -470,7 +470,7 @@ Würden wir das ganze jetzt erneut ausführen, würde Ansible die apache2.conf w
       systemd:
         name: apache2
         state: restarted
-      become: trure
+      become: true
   tasks:
     - name: Apache2 Setup
       apt:

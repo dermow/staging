@@ -2,7 +2,7 @@
 layout: post
 title:  "Blog-Empfehlung: adminswerk.de"
 date:   2021-02-15 16:10:42 +0100
-categories: Empfehlungen
+categories: Allgemein
 ---
 
 Huhu! An dieser Stelle möchte ich gerne den Blog eines ehemaligen Kollegen empfehlen. Dieser nennt sich [adminswerk.de](https://adminswerk.de).
@@ -16,3 +16,5 @@ Schaut dort doch mal vorbei, es lohnt sich!
 Bis dann,
 
 Der Mow
+
+<!-- excerpt-end -->

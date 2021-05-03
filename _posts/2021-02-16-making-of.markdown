@@ -26,6 +26,8 @@ GitHub gehört mittlerweile zu Microsoft und wird auf amerikanischen Servern bet
 
 ---
 
+<!-- excerpt-end -->
+
 ### Jekyll (Content generator / Templating)
 
 Jekyll ist ein simpler Static-Webpage-Generator. Der Entwickler erstellt also Vorlagen in einer Templatesprache (Liquid) und Jekyll kompiliert daraus statische Webseiten.

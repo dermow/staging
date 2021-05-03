@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #007 - Rückgabewerte (Return Values)" 
-date:   2021-02-25 16:57:42 +0100
+date:   2021-02-28 16:53:42 +0100
 categories: Ansible
 ---
 
@@ -24,6 +24,8 @@ Wie immer möchte ich euch das mit einem kleinen Beispiel verdeutlichen. Nehmen 
         path: /etc/hosts
 
 ```
+
+<!-- excerpt-end -->
 
 Führen wir dieses Playbook nun aus, ist das Ergebnis erstmal sehr unspektakulär:
 
@@ -163,7 +165,7 @@ Die vollständige Liste findet ihr hier:
 [https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html](https://docs.ansible.com/ansible/2.5/reference_appendices/common_return_values.html)
 
 
-### Zusammenfassung
+### So geht's weiter 
 Im nächsten Teil möchte ich euch Conditionals zeigen, das sind Bedingungen, an die wir die Ausführung unserer Tasks knüpfen können. 
 
 Viele Grüße und bis dahin!

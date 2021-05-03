@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible Starter-Guide: #008 - Conditionals 1" 
-date:   2021-03-11 16:57:42 +0100
+date:   2021-03-11 15:57:42 +0100
 categories: Ansible
 ---
 
@@ -31,6 +31,8 @@ Lasst uns mit einem sehr einfachen Beispiel beginnen.
         msg: "Variable ist größer als 5!!"
       when: "my_number > 5"
 ```
+
+<!-- excerpt-end -->
 
 Conditionals werden im Parameter "when" definiert. Dieser ist ein Parameter auf Task-Ebene. Unter "when" kann dann eine, oder auch eine Liste mit Conditionals stehen. Die Conditions werden vor der Ausführung des Tasks geprüft. Sollten sie zutreffen, wird der Task ausgeführt, falls nicht wird er übersprungen und erhält den Status "skipped".
 

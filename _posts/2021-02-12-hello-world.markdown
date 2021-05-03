@@ -20,6 +20,8 @@ als - ja gute Frage, als was eigentlich? Ich  nenne es mal "Cloud und Automation
 
 So genau weiß ich das eigentlich noch gar nicht. Wie gesagt macht es mir viel Spaß, anderen etwas beizubringen und da dachte ich mir: Warum nicht öffentlich und mit Mehrwert für den einen oder anderen Interessierten. Im Zweifel auch als Dokumentation für mich selbst :)
 
+<!-- excerpt-end -->
+
 ## Wie geht es weiter?
 
 Ich werde mit einer kleinen (oder großen, mal schauen) Ansible-Starter-Guide beginnen. Eine Ankündigung und die ersten Artikel folgen hier in Kürze!
