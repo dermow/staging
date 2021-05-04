@@ -82,9 +82,9 @@ Die Variable "dirs_to_create" hat den Typ "list" und ist nun für alle Hosts in 
   tasks:
     - name: create directories
       file:
-        path: "{{ item }}"
+        path: "{%raw%}{{ item }}{%endraw%}"
         state: directory
-      loop: "{{ dirs_to_create }}"
+      loop: "{%raw%}{{ dirs_to_create }}{%endraw%}"
       
 ```
 
