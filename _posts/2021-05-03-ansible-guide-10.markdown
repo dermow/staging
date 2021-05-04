@@ -23,3 +23,35 @@ Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
         - "Noch ein Item"
 ```
 <!-- excerpt-end -->
+
+Wichtig sind hier vor Allem zwei Dinge. Zum einen der neue Parameter auf Task-Ebene "loop". Unter diesem können wir entweder (wie im Beispiel) direkt eine Liste mit Werten angeben, oder aber eine Variable nutzen. Dazu aber gleich mehr. Zum Anderen nutzen wir in der Message die Variable "{%raw%}{{ item }}{%endraw%}". Diese ist immer dann automatisch verfügbar, wenn wir einen Loop für unseren Task definieren und enthält dann je Durchlauf den entsprechenden Wert aus der Liste. 
+
+Die Ausgabe des obigen Beispiels würde dann in etwa so aussehen:
+
+```
+PLAY [localhost] ********************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [task mit loop] ****************************************************************************************************************************************************
+ok: [localhost] => (item=Loop-Item 1) => {
+    "msg": "Ich bin: Loop-Item 1"
+}
+ok: [localhost] => (item=Loop-Item 2) => {
+    "msg": "Ich bin: Loop-Item 2"
+}
+ok: [localhost] => (item=Item 3) => {
+    "msg": "Ich bin: Item 3"
+}
+ok: [localhost] => (item=Noch ein Item) => {
+    "msg": "Ich bin: Noch ein Item"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+
+Wir haben also einen Task definiert, der pro Item unter "loop" einmal ausgefürt wird. Und zwar jedes mal mit dem entsprechenden Wert aus dem Loop in der Variable "item".
+
+Bevor wir noch zu einigen Besonderheiten von Loops kommen, schauen wir uns das ganze an einem praktischen Beispiel an.
