@@ -54,4 +54,38 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 Wir haben also einen Task definiert, der pro Item unter "loop" einmal ausgefürt wird. Und zwar jedes mal mit dem entsprechenden Wert aus dem Loop in der Variable "item".
 
-Bevor wir noch zu einigen Besonderheiten von Loops kommen, schauen wir uns das ganze an einem praktischen Beispiel an.
+Bevor wir noch zu einigen Besonderheiten von Loops kommen, schauen wir uns das ganze an einem praktischen Beispiel an. Nehmen wir an, wir möchten auf unseren Webservern mehrere Verzeichnisse anlegen: 
+
+* /var/www/html/my_icons
+* /var/www/html/my_documents
+* /var/www/html/my_other_stuff
+
+Die 3 Werte möchten wir in diesem Beispiel nicht direkt unter dem Parameter "loop" definieren, sondern vorher in einer Variable definieren. So können wir den Inhalt z.B über die Host- und Groupvars variieren. 
+
+Wir legen uns also zunächst eine Variable in den Groupvars für "webservers" an:
+
+##### ~/ansible-guide/group_vars/webservers/main.yml
+```yaml
+---
+dirs_to_create: 
+  - "/var/www/html/my_icons"
+  - "/var/www/html/my_documents"
+  - "/var/www/html/my_other_stuff"
+```
+
+Die Variable "dirs_to_create" hat den Typ "list" und ist nun für alle Hosts in der Gruppe "webservers" verfügbar. Nun erstellen wir uns noch ein passendes Playbook:
+
+##### ~/ansible-guide/loops1.yml
+``` yaml
+---
+- hosts: webservers
+  tasks:
+    - name: create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop: "{{ dirs_to_create }}"
+      
+```
+
+Wir erstellen also einen Task mit dem Modul "file". Mit diesem können wir Dateien und Verzeichnisse verwalten. Unter "loop" geben wir in diesem Fall ncicht die Auflistung direkt, sondern die Variable "dirs_to_create" an. Ansilbe erkennt, das es sich hierbei um eine Liste handelt und wendet "loop" darauf an. Die Liste enthält alle Pfade, die wir anlgen möchten. Wir geben im Modul-Parameter "path" also die Loop-Variable "item" an und definieren mit "state: directory", dass Ansible ein Verzeichnis anlegen soll.
