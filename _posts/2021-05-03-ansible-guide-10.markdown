@@ -85,7 +85,32 @@ Die Variable "dirs_to_create" hat den Typ "list" und ist nun für alle Hosts in 
         path: "{%raw%}{{ item }}{%endraw%}"
         state: directory
       loop: "{%raw%}{{ dirs_to_create }}{%endraw%}"
+      become: true
       
 ```
 
 Wir erstellen also einen Task mit dem Modul "file". Mit diesem können wir Dateien und Verzeichnisse verwalten. Unter "loop" geben wir in diesem Fall ncicht die Auflistung direkt, sondern die Variable "dirs_to_create" an. Ansilbe erkennt, das es sich hierbei um eine Liste handelt und wendet "loop" darauf an. Die Liste enthält alle Pfade, die wir anlgen möchten. Wir geben im Modul-Parameter "path" also die Loop-Variable "item" an und definieren mit "state: directory", dass Ansible ein Verzeichnis anlegen soll.
+
+Dann fürhren wir das Playbook mal aus:
+```bash
+ansible-playbook -i inventory.txt loops1.yml
+```
+```
+PLAY [webservers] ********************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [ansible-guide-1]
+ok: [ansible-guide-2]
+
+TASK [create directories] ***********************************************************************************************************************************************
+changed: [ansible-guide-1] => (item=/var/www/html/my_icons)
+changed: [ansible-guide-1] => (item=/var/www/html/my_documents)
+changed: [ansible-guide-1] => (item=/var/www/html/my_other_stuff)
+changed: [ansible-guide-2] => (item=/var/www/html/my_icons)
+changed: [ansible-guide-2] => (item=/var/www/html/my_documents)
+changed: [ansible-guide-2] => (item=/var/www/html/my_other_stuff)
+
+PLAY RECAP **************************************************************************************************************************************************************
+ansible-guide-1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-guide-2                 : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
