@@ -114,3 +114,20 @@ PLAY RECAP *********************************************************************
 ansible-guide-1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ansible-guide-2                 : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+
+Der Vollständigkeit halber prüfen wir noch, ob die Verzeichnisse auf den Server auch tatsächlich angelegt wurden:
+
+```bash
+ssh ansible-guide-1
+ls -rtl /var/www/html
+```
+```
+sseibold@sseibold-t470p:~/blog$ ls -rtl /var/www/html/
+insgesamt 16
+-rw-r--r-- 1 root root   22 Feb 21 10:33 index.html
+drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_icons
+drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_documents
+drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_other_stuff
+```
+
+Sieht gut aus! :)
