@@ -1,12 +1,13 @@
 ---
 layout: post
-title:  "Ansible Starter-Guide: #010 - Loops"
+title:  "Ansible Starter-Guide: #010 - Loops 1"
 date:   2021-05-03 14:30:42 +0100
 categories: Ansible
 ---
 
-Heyho! In diesem Teil des Ansible Tutorials beschäftigen wir uns mit Loops (Schleifen). Einen Loop setzten wir immer dann ein, wenn wir einen bestimmten Task
-mehrfach wiederholen möchsten. Ein klassisches Beispiel wäre hier zum Beispiel das setzen von Dateiberechtigungen auf eine Liste von Dateien und Verzeichnissen. Bei zehn verschiedenen Pfaden bräuchten wir dafür schon 10 verschiedene Tasks, also ein ganz schöner Overhead an Code. Mit der Hilfe von Loops können wir das in einer einzigen Task-Definition lösen. Auch ermöglichen uns Loops die Ausführung von Tasks auf Listen, die wir uns während der Laufzeit erstellen.
+Heyho! In diesem Teil des Ansible Tutorials beschäftigen wir uns mit Loops (Schleifen). Da es auch zu diesem Thema einiges zu erzählen gibt, werde ich den Themenblock wieder in (mindestens) zwei Teile splitten. In diesem Teil beginnen wir mit den Basics und der einfachen Verwendung von Loops, in den folgenden Teilen zeige ich euch dann noch einige weitere Details und Besonderheiten dazu.
+
+Einen Loop setzten wir immer dann ein, wenn wir einen bestimmten Task mehrfach wiederholen möchsten. Ein klassisches Beispiel wäre hier zum Beispiel das setzen von Dateiberechtigungen auf eine Liste von Dateien und Verzeichnissen. Bei zehn verschiedenen Pfaden bräuchten wir dafür schon 10 verschiedene Tasks, also ein ganz schöner Overhead an Code. Mit der Hilfe von Loops können wir das in einer einzigen Task-Definition lösen. Auch ermöglichen uns Loops die Ausführung von Tasks auf Listen, die wir uns während der Laufzeit erstellen.
 
 Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
 
@@ -54,7 +55,7 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 Wir haben also einen Task definiert, der pro Item unter "loop" einmal ausgefürt wird. Und zwar jedes mal mit dem entsprechenden Wert aus dem Loop in der Variable "item".
 
-Bevor wir noch zu einigen Besonderheiten von Loops kommen, schauen wir uns das ganze an einem praktischen Beispiel an. Nehmen wir an, wir möchten auf unseren Webservern mehrere Verzeichnisse anlegen: 
+Schauen wir uns das ganze an einem praktischen Beispiel an. Nehmen wir an, wir möchten auf unseren Webservern mehrere Verzeichnisse anlegen: 
 
 * /var/www/html/my_icons
 * /var/www/html/my_documents
@@ -131,3 +132,7 @@ drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_other_stuff
 ```
 
 Sieht gut aus! :)
+
+
+
+
