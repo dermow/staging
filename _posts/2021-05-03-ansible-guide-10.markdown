@@ -131,7 +131,15 @@ drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_documents
 drwxr-xr-x 2 root root 4096 Mai  4 17:02 my_other_stuff
 ```
 
-Sieht gut aus! :)
+Sieht gut aus! Damit hättet ihr auch schon die Basis um weiter mit Loops zu arbeiten. Ihr könnt diese natürlich nicht nur im Modul "file" und "debug" nutzen, sondern mit so gut wie jedem Modul! 
+
+Das soll es für diesen Teil auch schon wieder gewesen sein. Im nächsten Beitrag zeige ich euch dann noch einige Besonderheiten und fortgeschrittene Anwendungen für Loops.
+
+Wie immer freue ich mich über jegliche Art von konstruktivem Feedback! 
+
+Bis denne
+
+Mow
 
 
 
