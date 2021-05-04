@@ -15,7 +15,7 @@ Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
   tasks:
     - name: task mit loop
       debug: 
-        msg: "Ich bin: {{ item }}"
+        msg: "Ich bin: {%raw%}{{ item }}{%endraw%}"
       loop:
         - Loop-Item 1
         - Loop-Item 2
