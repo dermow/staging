@@ -7,7 +7,7 @@ categories: Ansible
 
 Heyho! In diesem Teil des Ansible Tutorials beschäftigen wir uns mit Loops (Schleifen). Da es auch zu diesem Thema einiges zu erzählen gibt, werde ich den Themenblock wieder in (mindestens) zwei Teile splitten. In diesem Teil beginnen wir mit den Basics und der einfachen Verwendung von Loops, in den folgenden Teilen zeige ich euch dann noch einige weitere Details und Besonderheiten dazu.
 
-Einen Loop setzten wir immer dann ein, wenn wir einen bestimmten Task mehrfach wiederholen möchsten. Ein klassisches Beispiel wäre hier zum Beispiel das setzen von Dateiberechtigungen auf eine Liste von Dateien und Verzeichnissen. Bei zehn verschiedenen Pfaden bräuchten wir dafür schon 10 verschiedene Tasks, also ein ganz schöner Overhead an Code. Mit der Hilfe von Loops können wir das in einer einzigen Task-Definition lösen. Auch ermöglichen uns Loops die Ausführung von Tasks auf Listen, die wir uns während der Laufzeit erstellen.
+Einen Loop setzten wir immer dann ein, wenn wir einen bestimmten Task mehrfach wiederholen möchten. Ein klassisches Beispiel wäre hier zum Beispiel das Setzen von Dateiberechtigungen auf eine Liste von Dateien und Verzeichnissen. Bei zehn verschiedenen Pfaden bräuchten wir dafür schon 10 verschiedene Tasks, also ein ganz schöner Overhead an Code. Mit der Hilfe von Loops können wir das in einer einzigen Task-Definition lösen. Auch ermöglichen uns Loops die Ausführung von Tasks auf Listen, die wir uns während der Laufzeit erstellen.
 
 Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
 
@@ -25,7 +25,7 @@ Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
 ```
 <!-- excerpt-end -->
 
-Wichtig sind hier vor Allem zwei Dinge. Zum einen der neue Parameter auf Task-Ebene "loop". Unter diesem können wir entweder (wie im Beispiel) direkt eine Liste mit Werten angeben, oder aber eine Variable nutzen. Dazu aber gleich mehr. Zum Anderen nutzen wir in der Message die Variable "{%raw%}{{ item }}{%endraw%}". Diese ist immer dann automatisch verfügbar, wenn wir einen Loop für unseren Task definieren und enthält dann je Durchlauf den entsprechenden Wert aus der Liste. 
+Wichtig sind hier vor allem zwei Dinge. Zum einen der neue Parameter auf Task-Ebene “loop”. Unter diesem können wir entweder (wie im Beispiel) direkt eine Liste mit Werten angeben, oder aber eine Variable nutzen. Dazu aber gleich mehr. Zum Anderen nutzen wir in der Message die Variable “{{ item }}”. Diese ist immer dann automatisch verfügbar, wenn wir einen Loop für unseren Task definieren und enthält dann je Durchlauf den entsprechenden Wert aus der Liste.
 
 Die Ausgabe des obigen Beispiels würde dann in etwa so aussehen:
 
@@ -53,9 +53,9 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
 ```
 
-Wir haben also einen Task definiert, der pro Item unter "loop" einmal ausgefürt wird. Und zwar jedes mal mit dem entsprechenden Wert aus dem Loop in der Variable "item".
+Wir haben also einen Task definiert, der pro Item unter "loop" einmal ausgeführt wird. Und zwar jedes Mal mit dem entsprechenden Wert aus dem Loop in der Variable "item".
 
-Schauen wir uns das ganze an einem praktischen Beispiel an. Nehmen wir an, wir möchten auf unseren Webservern mehrere Verzeichnisse anlegen: 
+Schauen wir uns das Ganze an einem praktischen Beispiel an. Nehmen wir an, wir möchten auf unseren Webservern mehrere Verzeichnisse anlegen: 
 
 * /var/www/html/my_icons
 * /var/www/html/my_documents
@@ -90,9 +90,9 @@ Die Variable "dirs_to_create" hat den Typ "list" und ist nun für alle Hosts in 
       
 ```
 
-Wir erstellen also einen Task mit dem Modul "file". Mit diesem können wir Dateien und Verzeichnisse verwalten. Unter "loop" geben wir in diesem Fall ncicht die Auflistung direkt, sondern die Variable "dirs_to_create" an. Ansilbe erkennt, das es sich hierbei um eine Liste handelt und wendet "loop" darauf an. Die Liste enthält alle Pfade, die wir anlgen möchten. Wir geben im Modul-Parameter "path" also die Loop-Variable "item" an und definieren mit "state: directory", dass Ansible ein Verzeichnis anlegen soll.
+Wir erstellen also einen Task mit dem Modul “file”. Mit diesem können wir Dateien und Verzeichnisse verwalten. Unter “loop” geben wir in diesem Fall nicht die Auflistung direkt, sondern die Variable “dirs_to_create” an. Ansible erkennt, dass es sich hierbei um eine Liste handelt und wendet “loop” darauf an. Die Liste enthält alle Pfade, die wir anlegen möchten. Wir geben im Modul-Parameter “path” also die Loop-Variable “item” an und definieren mit “state: directory”, dass Ansible ein Verzeichnis anlegen soll.
 
-Dann fürhren wir das Playbook mal aus:
+Dann führen wir das Playbook mal aus:
 ```bash
 ansible-playbook -i inventory.txt loops1.yml
 ```
