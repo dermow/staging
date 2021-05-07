@@ -25,7 +25,7 @@ Schauen wir uns mal einen Task an, für den ein simpler Loop definiert ist:
 ```
 <!-- excerpt-end -->
 
-Wichtig sind hier vor allem zwei Dinge. Zum einen der neue Parameter auf Task-Ebene “loop”. Unter diesem können wir entweder (wie im Beispiel) direkt eine Liste mit Werten angeben, oder aber eine Variable nutzen. Dazu aber gleich mehr. Zum Anderen nutzen wir in der Message die Variable “{{ item }}”. Diese ist immer dann automatisch verfügbar, wenn wir einen Loop für unseren Task definieren und enthält dann je Durchlauf den entsprechenden Wert aus der Liste.
+Wichtig sind hier vor allem zwei Dinge. Zum einen der neue Parameter auf Task-Ebene “loop”. Unter diesem können wir entweder (wie im Beispiel) direkt eine Liste mit Werten angeben, oder aber eine Variable nutzen. Dazu aber gleich mehr. Zum Anderen nutzen wir in der Message die Variable “{%raw%}{{ item }}{%endraw%}”. Diese ist immer dann automatisch verfügbar, wenn wir einen Loop für unseren Task definieren und enthält dann je Durchlauf den entsprechenden Wert aus der Liste.
 
 Die Ausgabe des obigen Beispiels würde dann in etwa so aussehen:
 
