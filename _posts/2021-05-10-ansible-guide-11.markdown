@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Ansible Starter-Guide: #011 - Check Mode"
+title:  "Ansible Starter-Guide: #011 - check & diff"
 date:   2021-05-10 12:44:42 +0100
 categories: Ansible
 ---
 
 Servus! Ich hab gerade nochmal die bisherigen Beiträge der Ansible-Guide durchgelesen und dabei mit Schrecken festgestellt, dass ich vergessen habe,
-ein wichtiges Ansible-Feature zu erwähnen. Es handelt sich um den Checkmode, mit dem wir Playbooks in einem Testmodus starten können. Dabei werden etwaige Änderungen nur in der Ausgabe angezeigt, aber nicht tatsächlich durchgeführt. vor allem während dem Erstellen eines Playbooks kann das sehr hilfreich sein.
+zwei wichtige Ansible-Features zu erwähnen. Es handelt sich zum Einen um den Checkmode, mit dem wir Playbooks in einem Testmodus starten können. Dabei werden etwaige Änderungen nur in der Ausgabe angezeigt, aber nicht tatsächlich durchgeführt. Zum Anderen gibt es noch den "diff mode", in welchem uns in der Ausgabe die Änderungen im "Vorher- Nachhermodus" angezeigt werden.
+
+### Check Mode
 
 Um den Checkmode zu nutzen, müssen wir einfach ein "--check" an unser Command anhängen. Hier am Beispiel unseres Playbooks setup-postgres.yml aus dem letzten
 Teil:
@@ -60,6 +62,10 @@ Für solche Fälle können wir einzelne Tasks im Checkmode überspringen:
 ```
 
 Mit dem Task-Parameter "check_mode: no" teilen wir Ansible mit, dass es den entsprechenden Task im Checkmode nicht ausführen soll.
+
+### Diff Mode
+
+
 
 Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Loops!
 
