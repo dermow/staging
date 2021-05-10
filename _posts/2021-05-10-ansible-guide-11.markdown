@@ -6,8 +6,7 @@ categories: Ansible
 ---
 
 Servus! Ich hab gerade nochmal die bisherigen Beiträge der Ansible-Guide durchgelesen und dabei mit Schrecken festgestellt, dass ich vergessen habe,
-ein wichtiges Ansible-Feature zu erwähnen. Es handelt sich um den Checkmode, mit dem wir Playbooks in einem Testmodus starten können. Dabei werden etwaige Änderungen nur 
-in der Ausgabe angezeigt, aber nicht tatsächlich durchgeführt, was vor Allem während dem Erstellen eines Playbooks extrem hilfreich sein kann.
+ein wichtiges Ansible-Feature zu erwähnen. Es handelt sich um den Checkmode, mit dem wir Playbooks in einem Testmodus starten können. Dabei werden etwaige Änderungen nur in der Ausgabe angezeigt, aber nicht tatsächlich durchgeführt. vor allem während dem Erstellen eines Playbooks kann das sehr hilfreich sein.
 
 Um den Checkmode zu nutzen, müssen wir einfach ein "--check" an unser Command anhängen. Hier am Beispiel unseres Playbooks setup-postgres.yml aus dem letzten
 Teil:
