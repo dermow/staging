@@ -35,6 +35,8 @@ ansible-guide-3                  : ok=2    changed=1    unreachable=0    failed=
 ansible-guide-4                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
 ```       
 
+<!-- excerpt-end -->
+
 Die Ausgabe ist identisch zu der ohne Checkmode, jedoch wurden die Änderungen nicht auf den Hosts durchgeführt. 
 
 Das Ganze funktioniert im Prinzip mit jedem Playbook, es gibt jedoch einige Besonderheiten:
