@@ -40,11 +40,11 @@ Die Ausgabe ist identisch zu der ohne Checkmode, jedoch wurden die Änderungen n
 
 Das Ganze funktioniert im Prinzip mit jedem Playbook, es gibt jedoch einige Besonderheiten:
 
-### Abähngigkeiten
+#### Abhängigkeiten
 Hängt ein Task von einem vorherigen ab, zum Beispiel weil ein Paket installiert wird und im Anschluss der entsprechende Service gestartet, wird der folgende Task im Checkmode 
 vermutlich fehlschlagen, da das entsprechende Paket nicht wirklich installiert wurde. 
 
-### Shell Commands
+#### Shell Commands
 Die Module "command" bzw. "shell" werden zwar, wie auch im normalen Modus den Status "changed" zurück liefern, die tatsächliche Auswirkung, kann aber nicht geprüft werden,
 da das Ergebnis des Shellcommands unabhängig von Ansible ist.
 
