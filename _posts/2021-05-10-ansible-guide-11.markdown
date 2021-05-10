@@ -65,6 +65,12 @@ Mit dem Task-Parameter "check_mode: no" teilen wir Ansible mit, dass es den ents
 
 ### Diff Mode
 
+Der Diff Mode ist unabhängig vom Check mode, kann aber mit diesem zusammen genutzt werden. Im Diff Mode zeigt ansible alle Änderungen im Vergleich zum 
+Ursprungszustand an. Hier ein kleines Beispiel mit dem Modul "lineinfile":
+
+```yaml
+
+```
 
 
 Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Loops!
