@@ -59,7 +59,7 @@ Für solche Fälle können wir einzelne Tasks im Check-Mode überspringen:
 
 Mit dem Task-Parameter “check_mode: no” teilen wir Ansible mit, dass es den entsprechenden Task im Checkmode nicht ausführen soll.
 
-### Diff Mode
+### Diff-Mode
 Der Diff-Mode ist unabhängig vom Check-Mode, kann aber mit diesem zusammen genutzt werden. Im Diff-Mode zeigt Ansible alle Änderungen im Vergleich zum Ursprungszustand an. Hier ein kleines Beispiel mit dem Modul “lineinfile”:
 
 ```yaml
