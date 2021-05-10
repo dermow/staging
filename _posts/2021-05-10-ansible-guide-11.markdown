@@ -64,6 +64,7 @@ Mit dem Task-Parameter "check_mode: no" teilen wir Ansible mit, dass es den ents
 Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Loops!
 
 Viele Grüße
+
 Mow
 
  
