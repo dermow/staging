@@ -7,7 +7,7 @@ categories: Ansible
 
 Servus! Ich hab gerade nochmal die bisherigen Beiträge der Ansible-Guide durchgelesen und dabei mit Schrecken festgestellt, dass ich vergessen habe, zwei wichtige Ansible-Features zu erwähnen. Es handelt sich zum einen um den Check-Mode, mit dem wir Playbooks in einem Testmodus starten können. Dabei werden etwaige Änderungen nur in der Ausgabe angezeigt, aber nicht tatsächlich durchgeführt. Zum Anderen gibt es noch den Diff-Mode, in welchem uns in der Ausgabe die Änderungen im “Vorher-Nachher Modus” angezeigt werden.
 
-### Check Mode
+### Check-Mode
 
 Um den Check-Mode zu nutzen, müssen wir einfach ein "--check" an unser Command anhängen. Hier am Beispiel unseres Playbooks setup-postgres.yml aus dem letzten
 Teil:
