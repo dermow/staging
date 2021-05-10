@@ -79,7 +79,7 @@ Ursprungszustand an. Hier ein kleines Beispiel mit dem Modul "lineinfile":
       become: true
 ```
 
-Das Playbook starten wir nun im Diff Modus:
+Das Playbook starten wir nun im Check- und Diff-Modus:
 ```bash
 ansible-playbook -i inventory.txt lineinfile_diff.yml --check --diff
 ```
@@ -104,6 +104,8 @@ changed: [ansible-guide-1]
 PLAY RECAP ************************************************************************************************************************
 ansible-guide-1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
+
+Wenn das Ergebnis für uns ok ist, können wir das Command erneut aufrufen und diesmal das "--check" weglassen.
 
 Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Loops!
 
