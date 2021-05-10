@@ -69,9 +69,41 @@ Der Diff Mode ist unabhängig vom Check mode, kann aber mit diesem zusammen genu
 Ursprungszustand an. Hier ein kleines Beispiel mit dem Modul "lineinfile":
 
 ```yaml
-
+- hosts: ansible-guide-1
+  tasks:
+    - name: add entry to /etc/hosts
+      lineinfile:
+         path: /etc/hosts
+         line: "192.168.0.3  ansible-guide-3"
+         regexp: "^192.168.0.3"
+      become: true
 ```
 
+Das Playbook starten wir nun im Diff Modus:
+```bash
+ansible-playbook -i inventory.txt lineinfile_diff.yml --check --diff
+```
+Ausgabe:
+```
+PLAY [ansible-guide-1] ******************************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************************
+cok: [ansible-guide-1]
+
+TASK [add entry to /etc/hosts] ****************************************************************************************************
+--- before: /etc/hosts (content)
++++ after: /etc/hosts (content)
+@@ -8,3 +8,4 @@
+ ff00::0 ip6-mcastprefix
+ ff02::1 ip6-allnodes
+ ff02::2 ip6-allrouters
++192.168.0.3  ansible-guide-3
+
+changed: [ansible-guide-1]
+
+PLAY RECAP ************************************************************************************************************************
+ansible-guide-1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
 
 Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Loops!
 
