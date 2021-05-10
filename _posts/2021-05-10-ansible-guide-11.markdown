@@ -61,7 +61,7 @@ Für solche Fälle können wir einzelne Tasks im Checkmode überspringen:
 
 Mit dem Task-Parameter "check_mode: no" teilen wir Ansible mit, dass es den entsprechenden Task im Checkmode nicht ausführen soll.
 
-Das wärs auch schon :)
+Das wärs auch schon! Im nächsten Teil machen wir dann weiter mit Teil 2 der Conditionals!
 
 Viele Grüße
 Mow
