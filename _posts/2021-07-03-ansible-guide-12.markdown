@@ -30,6 +30,7 @@ Auch dictionaries können wir in Loops verwenden. Möchten wir zum Beispiel die 
 
 ##### print_dictionary.yml 
 ``` yaml
+{%raw%}
 - hosts: localhost
   vars:
     people:
@@ -48,7 +49,7 @@ Auch dictionaries können wir in Loops verwenden. Möchten wir zum Beispiel die 
       debug:
         msg: "Vorname: {{ item.name }}, Nachname: {{ item.nachname }}, Alter: {{ item.alter }}"
       loop: "{{ people }}"
-    
+{%endraw%}
 ```
 
 
