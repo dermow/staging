@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Ansible Starter-Guide: #012 - Loops 2 & Dictionaries"
+title:  "Ansible Starter-Guide: #012 - Loops 2"
 date:   2021-07-03 14:30:42 +0100
 categories: Ansible
 ---
 
 Heyho! Nach etwas längerer Pause bin ich nun endlich mal wieder zum bloggen gekommen. Wie versprochen also hier der nächste Teil des Ansible Starter-Guide,
 der euch weitere Informationen zur Verwendung von Loops näher bringen wird.
+
+## Dictionaries
 
 Bevor wir aber zu unseren Loops zurückkehren möchte ich euch noch kurz Dictionaries vorstellen, die bisher nur in Teil 5 kurz erwähnt wurden. Dictionaries sind
 einfach ausgedrückt Listen, dren Items mehrere Felder besitzen können. Ein einfaches Beispiel:
@@ -51,5 +53,16 @@ Auch dictionaries können wir in Loops verwenden. Möchten wir zum Beispiel die 
       loop: "{{ people }}"
 {%endraw%}
 ```
+
+Ausgabe:
+```
+TODO
+```
+
+Wenn wir ein Dictionary als Loop-Variable verwenden, können wir innerhalb des Tasks also mit "{{ item.FELDNAME }}" auf die einzelnen Felder
+zugreifen.
+
+## Loops und Conditionals
+
 
 
