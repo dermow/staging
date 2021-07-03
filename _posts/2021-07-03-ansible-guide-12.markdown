@@ -29,7 +29,7 @@ Wie in einer simplen "list" markiert der Bindestrich den Beginn eines neuen Item
 Auch dictionaries können wir in Loops verwenden. Möchten wir zum Beispiel die in userem Beispiel definierten Informationen ausgeben, sähe das Playbook so aus:
 
 ##### print_dictionary.yml 
-``` 
+``` yaml
 - hosts: localhost
   vars:
     people:
